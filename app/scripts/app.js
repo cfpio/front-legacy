@@ -53,6 +53,7 @@ angular.module('CallForPaper', [
         cfpLoadingBarProvider.includeSpinner = false;
     }])
     .config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
@@ -68,7 +69,7 @@ angular.module('CallForPaper', [
 
             .when('/admin', '/admin/sessions')
             .when('/admin/', '/admin/sessions')
-            
+
             .when('/owner', '/owner/config')
             .when('/owner/', '/owner/config')
 
