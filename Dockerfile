@@ -19,4 +19,7 @@ RUN ls -al node_modules
 RUN ls -al app/bower_components
 RUN /work/node_modules/.bin/gulp build
 
-VOLUME /work/dist
+RUN mkdir /www
+RUN mv /work/dist /www/front-legacy
+
+VOLUME /www/front-legacy
