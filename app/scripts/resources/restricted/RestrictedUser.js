@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper').factory('RestrictedUser', ['$resource', function($resource) {
-    return $resource('/v0/users/me', null, {
+    return $resource('https://api.cfp.io/v0/users/me', null, {
         query: {method: 'GET', isArray: false},
         update: {method: 'PUT'}
     });

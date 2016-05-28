@@ -21,18 +21,18 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminUser', ['$resource', function($resource) {
-    return $resource('/v0/adminUser/:id', null, {
+    return $resource('https://api.cfp.io/v0/adminUser/:id', null, {
         getCurrentUser: {
-            url: '/v0/adminUser/currentUser',
+            url: 'https://api.cfp.io/v0/adminUser/currentUser',
             method: 'GET'
         },
         getLoginUrl: {
-            url: '/v0/adminUser/login',
+            url: 'https://api.cfp.io/v0/adminUser/login',
             method: 'POST'
         },
 
         getLogoutUrl: {
-            url: '/v0/adminUser/logout',
+            url: 'https://api.cfp.io/v0/adminUser/logout',
             method: 'POST'
         }
     });

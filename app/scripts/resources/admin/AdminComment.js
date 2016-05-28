@@ -21,19 +21,19 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminComment', ['$resource', function($resource) {
-    return $resource('/v0/admin/sessions/:rowId/comments', {},
+    return $resource('https://api.cfp.io/v0/admin/sessions/:rowId/comments', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             getByRowId: {
-                url: '/v0/admin/sessions/:rowId/comments',
+                url: 'https://api.cfp.io/v0/admin/sessions/:rowId/comments',
                 method: 'GET',
                 isArray: true
             },
-            update: {method: 'PUT',url: '/v0/admin/sessions/:rowId/comments/:id'},
-            delete: {method: 'DELETE',url: '/v0/admin/sessions/:rowId/comments/:id'}
+            update: {method: 'PUT',url: 'https://api.cfp.io/v0/admin/sessions/:rowId/comments/:id'},
+            delete: {method: 'DELETE',url: 'https://api.cfp.io/v0/admin/sessions/:rowId/comments/:id'}
 
         });
 }]);

@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper').factory('RestrictedProfilImage', ['resourceRetries', function(resourceRetries) {
-    return resourceRetries('/v0/restricted/upload/:id', null, {
-        getUploadUri: {method: 'GET', url: '/v0/profil/image/user/url/:id'},
+    return resourceRetries('https://api.cfp.io/v0/restricted/upload/:id', null, {
+        getUploadUri: {method: 'GET', url: 'https://api.cfp.io/v0/profil/image/user/url/:id'},
     });
 }]);

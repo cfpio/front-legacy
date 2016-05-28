@@ -21,10 +21,10 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminStats', ['resourceRetries', function(resourceRetries) {
-    return resourceRetries('/v0/admin/stats', null,
+    return resourceRetries('https://api.cfp.io/v0/admin/stats', null,
         {
             meter: {
-                url: '/v0/admin/stats/meter',
+                url: 'https://api.cfp.io/v0/admin/stats/meter',
                 method: 'GET',
                 isArray: false
             },

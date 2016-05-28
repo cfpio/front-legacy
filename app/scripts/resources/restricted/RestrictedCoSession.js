@@ -21,8 +21,8 @@
 'use strict';
 
 angular.module('CallForPaper').factory('RestrictedCoSession', ['resourceRetries', function(resourceRetries) {
-    return resourceRetries('/v0/cosessions/:id', null,
+    return resourceRetries('https://api.cfp.io/v0/cosessions/:id', null,
         {
-            update: {method: 'PUT', url: '/v0/cosessions/:id'},
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/cosessions/:id'},
         });
 }]);

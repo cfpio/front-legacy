@@ -21,5 +21,5 @@
 'use strict';
 
 angular.module('CallForPaper').factory('Application', ['$resource', function($resource) {
-    return $resource('/v0/application/:id', null, {});
+    return $resource('https://api.cfp.io/v0/application/:id', null, {});
 }]);

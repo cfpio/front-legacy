@@ -22,19 +22,19 @@
 
 angular.module('CallForPaper').service('TalkService', ['resourceRetries', function(resourceRetries) {
 
-    var tracks = resourceRetries('/v0/tracks', null,
+    var tracks = resourceRetries('https://api.cfp.io/v0/tracks', null,
         {
             findAll: {
-                url: '/v0/tracks',
+                url: 'https://api.cfp.io/v0/tracks',
                 method: 'GET',
                 isArray: true
             }
         });
 
-    var formats = resourceRetries('/v0/formats', null,
+    var formats = resourceRetries('https://api.cfp.io/v0/formats', null,
         {
             findAll: {
-                url: '/v0/formats',
+                url: 'https://api.cfp.io/v0/formats',
                 method: 'GET',
                 isArray: true
             }

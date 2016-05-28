@@ -21,16 +21,16 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminRate', ['$resource', function($resource) {
-    return $resource('/v0/rates', null,
+    return $resource('https://api.cfp.io/v0/rates', null,
         {
-            update: {method: 'PUT', url: '/v0/rates/:id'},
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/rates/:id'},
             getByRowIdAndUserId: {
                 method: 'GET',
-                url: '/v0/rates/proposals/:rowId/me'
+                url: 'https://api.cfp.io/v0/rates/proposals/:rowId/me'
             },
             getByRowId: {
                 method: 'GET',
-                url: '/v0/rates/proposals/:rowId',
+                url: 'https://api.cfp.io/v0/rates/proposals/:rowId',
                 isArray: true
             }
         });
