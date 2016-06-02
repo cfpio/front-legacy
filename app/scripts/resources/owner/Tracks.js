@@ -21,15 +21,15 @@
 'use strict';
 
 angular.module('CallForPaper').factory('Tracks', ['$resource', function($resource) {
-    return $resource('api/tracks', {},
+    return $resource('https://api.cfp.io/v0/tracks', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             add: {method: 'POST'},
-            update: {method: 'PUT', url: 'api/tracks/:id'},
-            remove: {method: 'DELETE',url: 'api/tracks/:id'}
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/tracks/:id'},
+            remove: {method: 'DELETE',url: 'https://api.cfp.io/v0/tracks/:id'}
 
         });
 }]);

@@ -21,14 +21,14 @@
 'use strict';
 
 angular.module('CallForPaper').factory('OwnerAdmins', ['$resource', function($resource) {
-    return $resource('api/admins', {},
+    return $resource('https://api.cfp.io/v0/admins', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             add: {method: 'POST'},
-            remove: {method: 'DELETE',url: 'api/admins/:email'}
+            remove: {method: 'DELETE',url: 'https://api.cfp.io/v0/admins/:email'}
 
         });
 }]);

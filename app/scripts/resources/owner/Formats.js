@@ -21,15 +21,15 @@
 'use strict';
 
 angular.module('CallForPaper').factory('Formats', ['$resource', function($resource) {
-    return $resource('api/formats', {},
+    return $resource('https://api.cfp.io/v0/formats', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             add: {method: 'POST'},
-            update: {method: 'PUT', url: 'api/formats/:id'},
-            remove: {method: 'DELETE',url: 'api/formats/:id'}
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/formats/:id'},
+            remove: {method: 'DELETE',url: 'https://api.cfp.io/v0/formats/:id'}
 
         });
 }]);
