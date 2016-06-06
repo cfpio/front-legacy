@@ -59,7 +59,7 @@ angular.module('CallForPaper', [
     }])
     .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, AppConfigProvider, RestangularProvider, ProfileValidatorProvider) {
 
-        RestangularProvider.setBaseUrl('/api');
+        RestangularProvider.setBaseUrl('https://api.cfp.io/v0');
 
         $urlRouterProvider
             .when('', '/dashboard')
