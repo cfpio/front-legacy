@@ -329,8 +329,7 @@ angular.module('CallForPaper')
             },
             'error': {
                 'backendcommunication': 'Désolé, il y a eu un problème avec le serveur distant',
-                'noInternet': 'Désolé, il y a eu une problème de connexion, êtes vous connecté à internet ?',
-                'authentication_required': 'Authentication required'
+                'noInternet': 'Désolé, il y a eu une problème de connexion, êtes vous connecté à internet ?'
             },
             'just_now': 'à l\'instant',
             'seconds_ago': 'il y a {{time}} secondes',
@@ -544,7 +543,7 @@ angular.module('CallForPaper')
                 'confirmDelete': 'Delete',
                 'cancel': 'Cancel',
                 'textDeleteFormat': 'Do you really want to delete this format?',
-                'textDeleteTrack': 'Do you really want to delete this track?'         	
+                'textDeleteTrack': 'Do you really want to delete this track?'
             },
             'previewModal': {
                 'title': 'Preview',

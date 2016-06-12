@@ -22,6 +22,8 @@
 
 angular.module('CallForPaper')
     .factory('AuthService', ['$q', 'AdminUser', '$window', '$location', 'Application', function($q, AdminUser, $window, $location, Application) {
+
+        var deferred = $q.defer();
         var authService = {};
         authService.user = null;
         authService.server = null;
@@ -31,13 +33,13 @@ angular.module('CallForPaper')
          * @return {void}
          */
         authService.init = function() {
-        	Application.get(function(config) {
-        		authService.server = config.authServer;
-        		AdminUser.getCurrentUser(function(userInfo) {
-                	authService.user = userInfo;
-                	if (!authService.isAuthenticated()) {
-                		authService.login();
-                	}
+            Application.get(function(config) {
+                authService.server = config.authServer;
+                AdminUser.getCurrentUser(function(userInfo) {
+                    authService.user = userInfo;
+                    if (!authService.isAuthenticated()) {
+                        authService.login();
+                    }
                 });
             });
         };
@@ -48,7 +50,7 @@ angular.module('CallForPaper')
         authService.isAuthenticated = function() {
             return authService.user && authService.user.connected;
         };
-        
+
         /**
          * Verify if the user is currently admin
          */
@@ -60,14 +62,16 @@ angular.module('CallForPaper')
          * Login the user and redirect to the given state
          */
         authService.login = function() {
-        	$window.location = authService.server;
+            if (authService.server) {
+                $window.location = authService.server + '/?target=' + escape($location.absUrl());
+            }
         };
 
         /**
          * Logout the user and redirect to the given state
          */
         authService.logout = function() {
-        	$window.location = authService.server + '/logout';
+            $window.location = authService.server + '/logout';
         };
 
         /**
@@ -79,8 +83,8 @@ angular.module('CallForPaper')
             AdminUser.getCurrentUser(function(userInfo) {
                 authService.user = userInfo;
                 if (!authService.isAuthenticated()) {
-            		authService.login();
-            	}
+                    authService.login();
+                }
                 promise.resolve(userInfo);
             }, function() {
                 promise.reject();

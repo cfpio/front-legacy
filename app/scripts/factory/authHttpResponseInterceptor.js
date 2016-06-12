@@ -41,13 +41,6 @@ angular.module('CallForPaper')
             });
         }, 3000);
 
-        var authenticationRequired = _.throttle(function() {
-            $injector.get('Notification').error({
-                message: $filter('translate')('error.authentication_required'),
-                delay: 3000
-            });
-        }, 3000);
-
         return {
             response: function(response) {
                 return response || $q.when(response);
@@ -59,7 +52,6 @@ angular.module('CallForPaper')
                     var locationHeader = rejection.headers('Location');
                     console.warn('Receive '+rejection.status+', redirecting to '+ locationHeader);
                     $window.location.href = locationHeader;
-                    authenticationRequired();
 
                 } else if (rejection.status === 403) {
                     $injector.get('$state').go('403');
