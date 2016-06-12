@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .factory('authHttpResponseInterceptor', function($q, $injector, $filter, $window, AuthService) {
+    .factory('authHttpResponseInterceptor', function($q, $injector, $filter, $window, AppConfig, $location) {
         /**
          * Intercep every request and popup a notification if error
          */
@@ -49,7 +49,8 @@ angular.module('CallForPaper')
                 if (rejection.status === 0) {
                     noInternet();
                 } else if (rejection.status === 401) {
-                    AuthService.login();
+                    // we should use AuthService.login() here, but AuthService is a mess and circular dependency error occurs
+                    $window.location = AppConfig.authServer + '/?target=' + encodeURIComponent($location.absUrl());
                     return; // keep this!
                 } else if (rejection.status === 403) {
                     $injector.get('$state').go('403');
