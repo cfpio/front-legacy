@@ -20,8 +20,8 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedCoDraft', ['resourceRetries', function(resourceRetries) {
-    return resourceRetries('https://api.cfp.io/v0/codrafts/:id', null, {
-        update: {method: 'PUT', url: 'https://api.cfp.io/v0/codrafts/:id'}
+angular.module('CallForPaper').factory('RestrictedCoDraft', function(resourceRetries, AppConfig) {
+    return resourceRetries(AppConfig.apiBaseUrl + '/codrafts/:id', null, {
+        update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/codrafts/:id'}
     });
-}]);
+});

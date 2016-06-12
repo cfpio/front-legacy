@@ -20,12 +20,12 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedDraft', ['resourceRetries', function(resourceRetries) {
-    return resourceRetries('https://api.cfp.io/v0/drafts/:id', null, {
-        update: {method: 'PUT', url: 'https://api.cfp.io/v0/drafts/:id'},
+angular.module('CallForPaper').factory('RestrictedDraft', function(resourceRetries, AppConfig) {
+    return resourceRetries(AppConfig.apiBaseUrl + '/drafts/:id', null, {
+        update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/drafts/:id'},
         delete: {
             method: 'DELETE',
-            url: 'https://api.cfp.io/v0/drafts/:id'
+            url: AppConfig.apiBaseUrl + '/drafts/:id'
         }
     });
-}]);
+});
