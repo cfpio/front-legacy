@@ -20,21 +20,21 @@
 
 'use strict';
 
-angular.module('CallForPaper').service('TalkService', ['resourceRetries', function(resourceRetries) {
+angular.module('CallForPaper').service('TalkService', function(resourceRetries, AppConfig) {
 
-    var tracks = resourceRetries('https://api.cfp.io/v0/tracks', null,
+    var tracks = resourceRetries(AppConfig.apiBaseUrl + '/tracks', null,
         {
             findAll: {
-                url: 'https://api.cfp.io/v0/tracks',
+                url: AppConfig.apiBaseUrl + '/tracks',
                 method: 'GET',
                 isArray: true
             }
         });
 
-    var formats = resourceRetries('https://api.cfp.io/v0/formats', null,
+    var formats = resourceRetries(AppConfig.apiBaseUrl + '/formats', null,
         {
             findAll: {
-                url: 'https://api.cfp.io/v0/formats',
+                url: AppConfig.apiBaseUrl + '/formats',
                 method: 'GET',
                 isArray: true
             }
@@ -44,4 +44,4 @@ angular.module('CallForPaper').service('TalkService', ['resourceRetries', functi
         tracks: tracks,
         formats: formats
     };
-}]);
+});
