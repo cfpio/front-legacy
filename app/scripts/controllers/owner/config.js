@@ -21,21 +21,19 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('OwnerConfigCtrl', ['$scope','$filter', '$http', 'Application',
-        function($scope,$filter, $http, Application) {
+    .controller('OwnerConfigCtrl',
+        function($scope, $filter, $http, AppConfig) {
 
             $scope.submission = false;
-            Application.get(function(config) {
-                $scope.submission = config.open;
-                $scope.config = config;
-                $scope.config.start = $scope.toDate(config.date);
-                $scope.config.release = $scope.toDate(config.releaseDate);
-                $scope.config.decision = $scope.toDate(config.decisionDate);
-            });
+            $scope.submission = AppConfig.open;
+            $scope.config = AppConfig;
+            $scope.config.start = $scope.toDate(AppConfig.date);
+            $scope.config.release = $scope.toDate(AppConfig.releaseDate);
+            $scope.config.decision = $scope.toDate(AppConfig.decisionDate);
 
-            $scope.toDate = function(stringDate){
-                 var datePartials = stringDate.split('/');
-                 return new Date(datePartials[2], datePartials[1] - 1, datePartials[0]);
+            $scope.toDate = function(stringDate) {
+                var datePartials = stringDate.split('/');
+                return new Date(datePartials[2], datePartials[1] - 1, datePartials[0]);
             };
 
             /**
@@ -44,7 +42,7 @@ angular.module('CallForPaper')
              * @return {void}
              */
             $scope.toggleSubmit = function(value) {
-                $http.post('https://api.cfp.io/v0/config/enableSubmissions', {
+                $http.post(AppConfig.apiBaseUrl + '/config/enableSubmissions', {
                     key: value
                 }).then(function() {
                 }, function() {
@@ -53,14 +51,14 @@ angular.module('CallForPaper')
             };
 
 
-            $scope.saveConfig = function(){
-                $scope.config.date = $filter('date')($scope.config.start,'dd/MM/yyyy');
-                $scope.config.releaseDate = $filter('date')($scope.config.release,'dd/MM/yyyy');
-                $scope.config.decisionDate = $filter('date')($scope.config.decision,'dd/MM/yyyy');
-                $http.post('https://api.cfp.io/v0/application', $scope.config).then(function() {
+            $scope.saveConfig = function() {
+                $scope.config.date = $filter('date')($scope.config.start, 'dd/MM/yyyy');
+                $scope.config.releaseDate = $filter('date')($scope.config.release, 'dd/MM/yyyy');
+                $scope.config.decisionDate = $filter('date')($scope.config.decision, 'dd/MM/yyyy');
+                $http.post(AppConfig.apiBaseUrl + '/application', $scope.config).then(function() {
                 }, function() {
                 });
 
             };
         }
-    ]);
+    );

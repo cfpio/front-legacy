@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
 </head>
-<body ng-app="CallForPaper">
+<body>
     <!--[if lt IE 7]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -103,13 +103,13 @@
     <script src="scripts/controllers/admin/sessions.js"></script>
     <script src="scripts/controllers/admin/session.js"></script>
     <script src="scripts/controllers/admin/menu.js"></script>
-    
+
     <script src="scripts/controllers/owner/owner.js"></script>
     <script src="scripts/controllers/owner/config.js"></script>
     <script src="scripts/controllers/owner/admins.js"></script>
     <script src="scripts/controllers/owner/tracksAndFormats.js"></script>
     <script src="scripts/controllers/owner/menu.js"></script>
-    
+
     <script src="scripts/controllers/header.js"></script>
     <script src="scripts/controllers/restricted/menu.js"></script>
     <script src="scripts/controllers/restricted/dashboard.js"></script>
@@ -118,7 +118,6 @@
     <script src="scripts/controllers/restricted/session.js"></script>
 
     <!-- Resources -->
-    <script src="scripts/resources/Application.js"></script>
     <script src="scripts/resources/admin/AdminUser.js"></script>
     <script src="scripts/resources/admin/AdminSession.js"></script>
     <script src="scripts/resources/admin/AdminComment.js"></script>
@@ -148,10 +147,11 @@
 
     <script src="scripts/factory/authHttpResponseInterceptor.js"></script>
     <script src="scripts/factory/authService.js"></script>
-    <script src="scripts/factory/appConfigService.js"></script>
     <script src="scripts/factory/nextPreviousSessionService.js"></script>
     <script src="scripts/factory/ProfileValidator.js"></script>
 
+    <!-- Application bootstrap -->
+    <script src="scripts/bootstrapper.js"></script>
     <!-- endbuild -->
     <script>
       (function(i, s, o, g, r, a, m) {
