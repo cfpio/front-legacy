@@ -21,26 +21,22 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .factory('AuthService', ['$q', 'AdminUser', '$window', '$location', 'Application', function($q, AdminUser, $window, $location, Application) {
+    .factory('AuthService', function($q, AdminUser, $window, $location, AppConfig) {
 
-        var deferred = $q.defer();
         var authService = {};
         authService.user = null;
-        authService.server = null;
+        authService.server = AppConfig.authServer;
 
         /**
          * Initialise user
          * @return {void}
          */
         authService.init = function() {
-            Application.get(function(config) {
-                authService.server = config.authServer;
-                AdminUser.getCurrentUser(function(userInfo) {
-                    authService.user = userInfo;
-                    if (!authService.isAuthenticated()) {
-                        authService.login();
-                    }
-                });
+            AdminUser.getCurrentUser(function(userInfo) {
+                authService.user = userInfo;
+                if (!authService.isAuthenticated()) {
+                    authService.login();
+                }
             });
         };
 
@@ -63,7 +59,7 @@ angular.module('CallForPaper')
          */
         authService.login = function() {
             if (authService.server) {
-                $window.location = authService.server + '/?target=' + escape($location.absUrl());
+                $window.location = authService.server + '/?target=' + encodeURIComponent($location.absUrl());
             }
         };
 
@@ -92,4 +88,4 @@ angular.module('CallForPaper')
             return promise.promise;
         };
         return authService;
-    }]);
+    });

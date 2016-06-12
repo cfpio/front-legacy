@@ -21,18 +21,18 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .factory('authHttpResponseInterceptor', ['$q', '$injector', '$filter', '$window', function($q, $injector, $filter, $window) {
+    .factory('authHttpResponseInterceptor', function($q, $injector, $filter, $window, AuthService) {
         /**
          * Intercep every request and popup a notification if error
          */
 
-        // Debounce error notifications
+            // Debounce error notifications
         var backendcommunication = _.throttle(function() {
-            $injector.get('Notification').error({
-                message: $filter('translate')('error.backendcommunication'),
-                delay: 3000
-            });
-        }, 3000);
+                $injector.get('Notification').error({
+                    message: $filter('translate')('error.backendcommunication'),
+                    delay: 3000
+                });
+            }, 3000);
 
         var noInternet = _.throttle(function() {
             $injector.get('Notification').error({
@@ -49,10 +49,8 @@ angular.module('CallForPaper')
                 if (rejection.status === 0) {
                     noInternet();
                 } else if (rejection.status === 401) {
-                    var locationHeader = rejection.headers('Location');
-                    console.warn('Receive '+rejection.status+', redirecting to '+ locationHeader);
-                    $window.location.href = locationHeader;
-
+                    AuthService.login();
+                    return; // keep this!
                 } else if (rejection.status === 403) {
                     $injector.get('$state').go('403');
                 } else if (rejection.status === 404) {
@@ -67,4 +65,4 @@ angular.module('CallForPaper')
                 return $q.reject(rejection);
             }
         };
-    }]);
+    });

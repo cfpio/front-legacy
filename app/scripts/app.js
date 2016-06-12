@@ -57,9 +57,9 @@ angular.module('CallForPaper', [
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
-    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, AppConfigProvider, RestangularProvider, ProfileValidatorProvider) {
+    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, AppConfigProvider, RestangularProvider, ProfileValidatorProvider, AppConfig) {
 
-        RestangularProvider.setBaseUrl('https://api.cfp.io/v0');
+        RestangularProvider.setBaseUrl(AppConfig.apiBaseUrl);
 
         $urlRouterProvider
             .when('', '/dashboard')
