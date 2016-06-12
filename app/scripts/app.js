@@ -21,34 +21,34 @@
 'use strict';
 
 angular.module('CallForPaper', [
-    'ngCookies',
-    'ngResource',
-    'ngResourceRetries',
-    'ngSanitize',
-    'ui.router',
-    'ngAnimate',
-    'ui.bootstrap',
-    'ngTagsInput',
-    'internationalPhoneNumber',
-    'bs-has',
-    'pascalprecht.translate',
-    'k8LanguagePicker',
-    'ngTable',
-    'ui-notification',
-    'customFilters',
-    'relativeDate',
-    'matchMedia',
-    'angular-loading-bar',
-    'ngFx',
-    'offClick',
-    'hc.marked',
-    'mdPreview',
-    'LocalStorageModule',
-    'cfp.hotkeys',
-    'ngAria',
-    'restangular',
-    'dialogs.main'
-])
+        'ngCookies',
+        'ngResource',
+        'ngResourceRetries',
+        'ngSanitize',
+        'ui.router',
+        'ngAnimate',
+        'ui.bootstrap',
+        'ngTagsInput',
+        'internationalPhoneNumber',
+        'bs-has',
+        'pascalprecht.translate',
+        'k8LanguagePicker',
+        'ngTable',
+        'ui-notification',
+        'customFilters',
+        'relativeDate',
+        'matchMedia',
+        'angular-loading-bar',
+        'ngFx',
+        'offClick',
+        'hc.marked',
+        'mdPreview',
+        'LocalStorageModule',
+        'cfp.hotkeys',
+        'ngAria',
+        'restangular',
+        'dialogs.main'
+    ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
     }])
@@ -57,9 +57,9 @@ angular.module('CallForPaper', [
         //Http Intercpetor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
-    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, RestangularProvider, ProfileValidatorProvider, AppConfig) {
+    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, AppConfigProvider, RestangularProvider, ProfileValidatorProvider) {
 
-        RestangularProvider.setBaseUrl(AppConfig.apiBaseUrl);
+        RestangularProvider.setBaseUrl('https://api.cfp.io/v0');
 
         $urlRouterProvider
             .when('', '/dashboard')
@@ -80,8 +80,8 @@ angular.module('CallForPaper', [
                 abstract: true,
                 templateUrl: 'views/header.html',
                 resolve: {
-                    config: function(AppConfig) {
-                        return AppConfig;
+                    config: function(Application) {
+                        return Application.get().$promise;
                     }
                 },
                 controller: 'HeaderCtrl',
@@ -111,7 +111,8 @@ angular.module('CallForPaper', [
                         templateUrl: 'views/admin/admin.html',
                         controller: 'AdminCtrl',
                         resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
+                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin,
+                            isConfigured: AppConfigProvider.$get().isConfigured
                         }
                     }
                 }
@@ -140,7 +141,8 @@ angular.module('CallForPaper', [
                         templateUrl: 'views/owner/owner.html',
                         controller: 'OwnerCtrl',
                         resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
+                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin,
+                            isConfigured: AppConfigProvider.$get().isConfigured
                         }
                     }
                 }
@@ -326,7 +328,7 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/talks/talks.html',
                 abstract: true,
                 resolve: {
-                    isOpen: AppConfig.isOpen
+                    isOpen: AppConfigProvider.$get().isOpen
                 }
             })
             .state('app.talks.new', {
@@ -354,7 +356,7 @@ angular.module('CallForPaper', [
                 abstract: true,
                 templateUrl: 'views/restricted/talks/talks.html',
                 resolve: {
-                    isOpen: AppConfig.isOpen
+                    isOpen: AppConfigProvider.$get().isOpen
                 }
             })
             .state('app.drafts.edit', {

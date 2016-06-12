@@ -20,13 +20,13 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedStats', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/stats', null,
+angular.module('CallForPaper').factory('RestrictedStats', ['resourceRetries', function(resourceRetries) {
+    return resourceRetries('https://api.cfp.io/v0/stats', null,
         {
             meter: {
-                url: AppConfig.apiBaseUrl + '/stats/meter',
+                url: 'https://api.cfp.io/v0/stats/meter',
                 method: 'GET',
                 isArray: false
             },
         });
-});
+}]);

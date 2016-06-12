@@ -20,8 +20,8 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedProfilImage', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/restricted/upload/:id', null, {
-        getUploadUri: {method: 'GET', url: AppConfig.apiBaseUrl + '/profil/image/user/url/:id'},
+angular.module('CallForPaper').factory('RestrictedProfilImage', ['resourceRetries', function(resourceRetries) {
+    return resourceRetries('https://api.cfp.io/v0/restricted/upload/:id', null, {
+        getUploadUri: {method: 'GET', url: 'https://api.cfp.io/v0/profil/image/user/url/:id'},
     });
-});
+}]);

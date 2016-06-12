@@ -20,9 +20,9 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedSession', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/proposals/:id', null,
+angular.module('CallForPaper').factory('RestrictedSession', ['resourceRetries', function(resourceRetries) {
+    return resourceRetries('https://api.cfp.io/v0/proposals/:id', null,
         {
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/proposals/:id'},
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/proposals/:id'},
         });
-});
+}]);

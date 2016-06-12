@@ -20,8 +20,8 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminDraft', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/admin/drafts/:id', null, {
-        update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/admin/drafts/:id'}
+angular.module('CallForPaper').factory('AdminDraft', ['resourceRetries', function(resourceRetries) {
+    return resourceRetries('https://api.cfp.io/v0/admin/drafts/:id', null, {
+        update: {method: 'PUT', url: 'https://api.cfp.io/v0/admin/drafts/:id'}
     });
-});
+}]);

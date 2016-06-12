@@ -20,18 +20,18 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminRate', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/rates', null,
+angular.module('CallForPaper').factory('AdminRate', ['$resource', function($resource) {
+    return $resource('https://api.cfp.io/v0/rates', null,
         {
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/rates/:id'},
+            update: {method: 'PUT', url: 'https://api.cfp.io/v0/rates/:id'},
             getByRowIdAndUserId: {
                 method: 'GET',
-                url: AppConfig.apiBaseUrl + '/rates/proposals/:rowId/me'
+                url: 'https://api.cfp.io/v0/rates/proposals/:rowId/me'
             },
             getByRowId: {
                 method: 'GET',
-                url: AppConfig.apiBaseUrl + '/rates/proposals/:rowId',
+                url: 'https://api.cfp.io/v0/rates/proposals/:rowId',
                 isArray: true
             }
         });
-});
+}]);

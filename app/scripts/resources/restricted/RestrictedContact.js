@@ -20,17 +20,16 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedContact', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/proposals/:rowId/contacts', {},
+angular.module('CallForPaper').factory('RestrictedContact', ['$resource', function($resource) {
+    return $resource('https://api.cfp.io/v0/proposals/:rowId/contacts', {},
         {
             getByRowId: {
-                url: AppConfig.apiBaseUrl + '/proposals/:rowId/contacts',
+                url: 'https://api.cfp.io/v0/proposals/:rowId/contacts',
                 method: 'GET',
                 isArray: true
             },
-            update: {
-                method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/proposals/:rowId/contacts/:id'
-            }
+            update: {method: 'PUT',
+             url: 'https://api.cfp.io/v0/proposals/:rowId/contacts/:id'
+             }
         });
-});
+}]);

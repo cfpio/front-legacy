@@ -20,20 +20,20 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminUser', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/adminUser/:id', null, {
+angular.module('CallForPaper').factory('AdminUser', ['$resource', function($resource) {
+    return $resource('https://api.cfp.io/v0/adminUser/:id', null, {
         getCurrentUser: {
-            url: AppConfig.apiBaseUrl + '/adminUser/currentUser',
+            url: 'https://api.cfp.io/v0/adminUser/currentUser',
             method: 'GET'
         },
         getLoginUrl: {
-            url: AppConfig.apiBaseUrl + '/adminUser/login',
+            url: 'https://api.cfp.io/v0/adminUser/login',
             method: 'POST'
         },
 
         getLogoutUrl: {
-            url: AppConfig.apiBaseUrl + '/adminUser/logout',
+            url: 'https://api.cfp.io/v0/adminUser/logout',
             method: 'POST'
         }
     });
-});
+}]);

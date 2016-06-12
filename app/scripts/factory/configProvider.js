@@ -20,17 +20,22 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminContact', ['$resource', function($resource) {
-    return $resource('https://api.cfp.io/v0/admin/sessions/:rowId/contacts', {},
-        {
-            getByRowId: {
-                url: 'https://api.cfp.io/v0/admin/sessions/:rowId/contacts',
-                method: 'GET',
-                isArray: true
-            },
-            update: {
-                method: 'PUT',
-                url: 'https://api.cfp.io/v0/admin/sessions/:rowId/contacts/:id'
-            }
-        });
-}]);
+angular.module('CallForPaper')
+    .provider('$appConfig', function() {
+        this.$get = function() {
+            var $appConfig = {};
+            $appConfig.isConfigured = ['Application', '$q', '$state', function(Application, $q, $state) {
+                var deferred = $q.defer();
+                Application.get(function(config) {
+                    if (config.configured === true) {
+                        deferred.reject();
+                        $state.go('config');
+                    } else {
+                        deferred.resolve();
+                    }
+                });
+                return deferred.promise;
+            }];
+            return $appConfig;
+        };
+    });

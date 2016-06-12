@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, RestrictedSession, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', ['$scope', '$filter', 'RestrictedSession', 'RestrictedCoSession', 'RestrictedDraft','RestrictedCoDraft', 'AuthService', 'Application', 'RestrictedStats', 'talkformats', 'tracks', function($scope, $filter, RestrictedSession,RestrictedCoSession, RestrictedDraft,RestrictedCoDraft, AuthService, Application, RestrictedStats, talkformats, tracks) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
@@ -34,7 +34,7 @@ angular.module('CallForPaper')
         function querySession() {
             RestrictedSession.query(function(sessionsTmp) {
                 $scope.sessions = sessionsTmp.map(function(session) {
-                    session.fullname = session.firstname;
+                    session.fullname =  session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];
                     return session;
                 });
@@ -64,7 +64,7 @@ angular.module('CallForPaper')
         function queryCoDrafts() {
             RestrictedCoDraft.query(function(sessionsTmp) {
                 $scope.coDrafts = sessionsTmp.map(function(session) {
-                    session.fullname = session.firstname;
+                    session.fullname =  session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];
                     return session;
                 });
@@ -82,7 +82,7 @@ angular.module('CallForPaper')
         function queryCoTalks() {
             RestrictedCoSession.query(function(sessionsTmp) {
                 $scope.coTalks = sessionsTmp.map(function(session) {
-                    session.fullname = session.firstname;
+                    session.fullname =  session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];
                     return session;
                 });
@@ -116,5 +116,7 @@ angular.module('CallForPaper')
         queryMeter();
         queryCoTalks();
 
-        $scope.submission = AppConfig.open;
-    });
+        Application.get(function(config) {
+            $scope.submission = config.open;
+        });
+    }]);

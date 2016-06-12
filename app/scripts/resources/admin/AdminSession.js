@@ -20,24 +20,24 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminSession', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/admin/sessions/:id', null,
+angular.module('CallForPaper').factory('AdminSession', ['resourceRetries', function(resourceRetries) {
+    return resourceRetries('https://api.cfp.io/v0/admin/sessions/:id', null,
         {
             update: {
                 method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:id'
+                url: 'https://api.cfp.io/v0/admin/sessions/:id'
             },
             delete: {
                 method: 'DELETE',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:id'
+                url: 'https://api.cfp.io/v0/admin/sessions/:id'
             },
             setViewed: {
                 method: 'POST',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/viewed/:id',
+                url: 'https://api.cfp.io/v0/admin/sessions/viewed/:id',
             },
             changeTrack: {
                 method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/track/:id'
+                url: 'https://api.cfp.io/v0/admin/sessions/track/:id'
             }
         });
-});
+}]);

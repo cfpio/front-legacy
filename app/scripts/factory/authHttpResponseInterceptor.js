@@ -21,22 +21,29 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .factory('authHttpResponseInterceptor', function($q, $injector, $filter, $window, AppConfig, $location) {
+    .factory('authHttpResponseInterceptor', ['$q', '$injector', '$filter', '$window', function($q, $injector, $filter, $window) {
         /**
          * Intercep every request and popup a notification if error
          */
 
-            // Debounce error notifications
+        // Debounce error notifications
         var backendcommunication = _.throttle(function() {
-                $injector.get('Notification').error({
-                    message: $filter('translate')('error.backendcommunication'),
-                    delay: 3000
-                });
-            }, 3000);
+            $injector.get('Notification').error({
+                message: $filter('translate')('error.backendcommunication'),
+                delay: 3000
+            });
+        }, 3000);
 
         var noInternet = _.throttle(function() {
             $injector.get('Notification').error({
                 message: $filter('translate')('error.noInternet'),
+                delay: 3000
+            });
+        }, 3000);
+
+        var authenticationRequired = _.throttle(function() {
+            $injector.get('Notification').error({
+                message: $filter('translate')('error.authentication_required'),
                 delay: 3000
             });
         }, 3000);
@@ -49,9 +56,11 @@ angular.module('CallForPaper')
                 if (rejection.status === 0) {
                     noInternet();
                 } else if (rejection.status === 401) {
-                    // we should use AuthService.login() here, but AuthService is a mess and circular dependency error occurs
-                    $window.location = AppConfig.authServer + '/?target=' + encodeURIComponent($location.absUrl());
-                    return; // keep this!
+                    var locationHeader = rejection.headers('Location');
+                    console.warn('Receive '+rejection.status+', redirecting to '+ locationHeader);
+                    $window.location.href = locationHeader;
+                    authenticationRequired();
+
                 } else if (rejection.status === 403) {
                     $injector.get('$state').go('403');
                 } else if (rejection.status === 404) {
@@ -66,4 +75,4 @@ angular.module('CallForPaper')
                 return $q.reject(rejection);
             }
         };
-    });
+    }]);
