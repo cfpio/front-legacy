@@ -24,17 +24,17 @@ angular.module('CallForPaper')
     .controller('OwnerConfigCtrl',
         function($scope, $filter, $http, AppConfig) {
 
+            $scope.toDate = function(stringDate) {
+                var datePartials = stringDate.split('/');
+                return new Date(datePartials[2], datePartials[1] - 1, datePartials[0]);
+            };
+
             $scope.submission = false;
             $scope.submission = AppConfig.open;
             $scope.config = AppConfig;
             $scope.config.start = $scope.toDate(AppConfig.date);
             $scope.config.release = $scope.toDate(AppConfig.releaseDate);
             $scope.config.decision = $scope.toDate(AppConfig.decisionDate);
-
-            $scope.toDate = function(stringDate) {
-                var datePartials = stringDate.split('/');
-                return new Date(datePartials[2], datePartials[1] - 1, datePartials[0]);
-            };
 
             /**
              * Enable or disable submission of new talks
