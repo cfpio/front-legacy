@@ -326,7 +326,7 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/talks/talks.html',
                 abstract: true,
                 resolve: {
-                    isOpen: AppConfig.isOpen
+                    isOpen: function() { return AppConfig.isOpen; }
                 }
             })
             .state('app.talks.new', {
@@ -354,7 +354,7 @@ angular.module('CallForPaper', [
                 abstract: true,
                 templateUrl: 'views/restricted/talks/talks.html',
                 resolve: {
-                    isOpen: AppConfig.isOpen
+                    isOpen: function() { return AppConfig.isOpen; }
                 }
             })
             .state('app.drafts.edit', {
