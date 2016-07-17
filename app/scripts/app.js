@@ -442,6 +442,25 @@ angular.module('CallForPaper', [
             positionY: 'top'
         });
     })
+    .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+        $scope.ok = function() {
+            $modalInstance.close();
+        };
+
+        $scope.cancel = function() {
+            $modalInstance.dismiss();
+        };
+    }])
+    .controller('EditModalInstanceCtrl', ['$scope', '$modalInstance', 'comment', function($scope, $modalInstance, comment) {
+        $scope.commentMsg = comment;
+        $scope.ok = function() {
+            $modalInstance.close($scope.commentMsg);
+        };
+
+        $scope.cancel = function() {
+            $modalInstance.dismiss();
+        };
+    }])
     .run(function(AuthService, $http, $rootScope, $state) {
         AuthService.init();
         $.material.init();
