@@ -79,6 +79,7 @@ angular.module('CallForPaper')
                 'success': 'Profil sauvegardé',
                 'error': 'Erreur lors de l\'enregistrement',
                 'avatar': 'Image de profil :',
+                'hintAvatar': 'Mettre ici l\'URL d\'une image pour le site web (au moins 360x360 et 5MB max)',
                 'dropImage': 'Déposer l\'image ici',
                 'selectImage': 'Parcourir'
             },
@@ -418,7 +419,7 @@ angular.module('CallForPaper')
                 'success': 'Profil saved',
                 'error': 'Error saving the profil',
                 'avatar': 'Profil picture :',
-                'hintAvatar': 'Select a picture for the website (least 360x360 and 5MB max)',
+                'hintAvatar': 'Select the URL of a picture for the website (at least 360x360 and 5MB max)',
                 'dropImage': 'Drop image here',
                 'selectImage': 'Browse'
             },
