@@ -31,3 +31,17 @@ task bowerInstall(type: NodeTask, dependsOn: 'npm_install') {
     inputs.files file('bower.json')
     outputs.files file("${bowerComponentsDir}")
 }
+
+task gulpDist(type: NodeTask, dependsOn: 'bowerInstall') {
+    script = file('node_modules/gulp/bin/gulp.js')
+    args = ["build"]
+    workingDir = file("${project.projectDir}")
+    inputs.files fileTree('app')
+    outputs.files fileTree('dist')
+}
+
+task clean << {
+    delete(file('app/bower_components'))
+    delete(file('dist'))
+}
+
