@@ -43,8 +43,6 @@ angular.module('CallForPaper', [
     'offClick',
     'hc.marked',
     'mdPreview',
-    'LocalStorageModule',
-    'cfp.hotkeys',
     'ngAria',
     'restangular',
     'dialogs.main'

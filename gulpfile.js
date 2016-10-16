@@ -88,11 +88,11 @@ gulp.task('tdd', function() {
 
 gulp.task('copy', function() {
     return gulp.src([
-            yeoman.app + '*.{ico,png,txt}',
-            yeoman.app + '{403,404}.html',
-            yeoman.app + 'images/{,*/}*.{gif,webp,png,jpg}',
-            yeoman.app + 'lib/**/*'
-        ], {base: yeoman.app})
+        yeoman.app + '*.{ico,png,txt}',
+        yeoman.app + '{403,404}.html',
+        yeoman.app + 'images/{,*/}*.{gif,webp,png,jpg}',
+        yeoman.app + 'lib/**/*'
+    ], {base: yeoman.app})
         .pipe(gulp.dest(yeoman.dist));
 });
 
@@ -110,10 +110,8 @@ gulp.task('less', function() {
 
 gulp.task('lint', function() {
     return gulp.src([
-            yeoman.app + 'scripts/**/*.js',
-            '!' + yeoman.app + 'scripts/directives/angular-language-picker.templates.js',
-            '!' + yeoman.app + 'scripts/directives/tags-input.js',
-            '!' + yeoman.app + 'scripts/modules/satellizer*.js'])
+        yeoman.app + 'scripts/**/*.js',
+        '!' + yeoman.app + 'scripts/directives/angular-language-picker.templates.js'])
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
 });
