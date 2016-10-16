@@ -79,6 +79,20 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         });
     };
 
+    function processError(error) {
+        $scope.sending = false;
+        if (error.status === 400) {
+            if (error.data.errorCode === 1) {
+                Notification.error(translateFilter('step2.cospeakerNotFound', {value: error.data.errorCodeBody.email}));
+            } else {
+                Notification.error(translateFilter('verify.notVerified'));
+            }
+
+            return;
+        }
+        $scope.sendError = true;
+    }
+
     var updateTalk = function(session) {
         $scope.sending = true;
 
@@ -113,21 +127,6 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             $scope.talkInvalid = true;
             return $q.reject();
         }
-    }
-
-
-    function processError(error) {
-        $scope.sending = false;
-        if (error.status === 400) {
-            if (error.data.errorCode === 1) {
-                Notification.error(translateFilter('step2.cospeakerNotFound', {value: error.data.errorCodeBody.email}));
-            } else {
-                Notification.error(translateFilter('verify.notVerified'));
-            }
-
-            return;
-        }
-        $scope.sendError = true;
     }
 
     $scope.submit = function submit(talk) {

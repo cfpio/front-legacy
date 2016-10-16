@@ -20,6 +20,6 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('OwnerMenuCtrl', function(currentUser) {
+angular.module('CallForPaper').controller('OwnerMenuCtrl', function() {
 
 });

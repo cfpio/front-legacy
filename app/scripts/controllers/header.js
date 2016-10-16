@@ -36,8 +36,8 @@ angular.module('CallForPaper').controller('HeaderCtrl', function($scope, $rootSc
     $rootScope.$on('$translateChangeEnd', function(event, args) {
         this.language = args.language;
     }.bind(this));
-    
+
     $scope.logout = function() {
     	AuthService.logout();
-    }
+    };
 });

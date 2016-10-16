@@ -20,6 +20,6 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminMenuCtrl', function(currentUser) {
+angular.module('CallForPaper').controller('AdminMenuCtrl', function() {
 
 });

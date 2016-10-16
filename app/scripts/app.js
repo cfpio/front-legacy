@@ -480,7 +480,7 @@ angular.module('CallForPaper', [
                 rule();
             }
 
-            event.preventDefault()
+            event.preventDefault();
         });
     })
     .run(function($templateCache) {
