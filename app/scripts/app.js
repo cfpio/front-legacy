@@ -43,8 +43,6 @@ angular.module('CallForPaper', [
     'offClick',
     'hc.marked',
     'mdPreview',
-    'LocalStorageModule',
-    'cfp.hotkeys',
     'ngAria',
     'restangular',
     'dialogs.main'
@@ -480,7 +478,7 @@ angular.module('CallForPaper', [
                 rule();
             }
 
-            event.preventDefault()
+            event.preventDefault();
         });
     })
     .run(function($templateCache) {

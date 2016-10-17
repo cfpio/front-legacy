@@ -23,10 +23,10 @@
 angular.module('CallForPaper')
     .controller('OwnerAdminsCtrl', ['$scope', 'OwnerAdmins', 'translateFilter', 'Notification',
         function($scope, OwnerAdmins, translateFilter, Notification) {
-    	
+
     		$scope.emails = [];
     		$scope.admins = [];
-    		
+
     		OwnerAdmins.getAll(function(emails) {
     			$scope.emails = emails;
     			$scope.admins = emails.map(function(email) { return {text: email}; });
@@ -34,19 +34,19 @@ angular.module('CallForPaper')
 
             $scope.saveAdmins = function() {
             	var emails = $scope.admins.map(function(admin) { return admin.text; });
-            	
+
             	// added emails
             	angular.forEach($(emails).not($scope.emails), function(email) {
             		OwnerAdmins.add(email);
             	});
-            	
+
             	// removed emails
             	angular.forEach($($scope.emails).not(emails), function(email) {
-            		OwnerAdmins.remove({email: email})
+            		OwnerAdmins.remove({email: email});
             	});
-            	
+
             	Notification.success(translateFilter('owner.adminsSuccess'));
-            	
+
             	$scope.emails = emails;
             };
         }

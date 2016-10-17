@@ -26,7 +26,7 @@ No ng-app attribute in index.html. Config is retrieved from backend then Angular
     var config = {
         apiBaseUrl: 'https://api.cfp.io/v0',
         authServer: 'https://auth.cfp.io'
-    }
+    };
     window.deferredBootstrapper.bootstrap({
         element: document.body,
         module: 'CallForPaper',

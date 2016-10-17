@@ -1,9 +1,8 @@
-FROM node:4.2.2
+FROM node:6.8.0
 
 MAINTAINER team@breizhcamp.org
 
 WORKDIR /work
-RUN npm install bower gulp
 
 ADD package.json /work/
 RUN npm install

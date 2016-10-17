@@ -24,44 +24,43 @@ angular.module('CallForPaper')
     .controller('OwnerTracksAndFormatsCtrl', ['$scope', 'dialogs', 'translateFilter', 'Tracks', 'Formats',
         function($scope, dialogs, translateFilter, Tracks, Formats) {
 
-    		$scope.tracks = Tracks.getAll();
-    		$scope.formats = Formats.getAll();
-    		
-    		$scope.addTrack = function() {
-    			Tracks.add({ libelle:'new name', description:'new description'}, function(track) {
-    				$scope.tracks.push(track);
-    			});
-    		}
-    		
-    		$scope.removeTrack = function(index) {
-    			var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteTrack'));
-    	        dlg.result.then(function(btn){
-    	        	var track = $scope.tracks.splice(index, 1)[0];
-        			Tracks.remove({id: track.id});
-    	        });
-    		}
-    		
-    		$scope.saveTrack = function(track) {
-    			Tracks.update({id: track.id}, track);
-    		}
-    		
-    		$scope.addFormat = function() {
-    			Formats.add({ name:'new name', duration:60, description:'new description'}, function(format) {
-    				$scope.formats.push(format);
-    			});
-    		}
-    		
-    		$scope.removeFormat = function(index) {
-    			var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteFormat'));
-    	        dlg.result.then(function(btn){
-    	        	var format = $scope.formats.splice(index, 1)[0];
-    	        	Formats.remove({id: format.id});
-    	        });
-    		}
-    		
-    		$scope.saveFormat = function(format) {
-    			Formats.update({id: format.id}, format);
-    		}
-            
+            $scope.tracks = Tracks.getAll();
+            $scope.formats = Formats.getAll();
+
+            $scope.addTrack = function() {
+                Tracks.add({libelle: 'new name', description: 'new description'}, function(track) {
+                    $scope.tracks.push(track);
+                });
+            };
+
+            $scope.removeTrack = function(index) {
+                var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteTrack'));
+                dlg.result.then(function() {
+                    var track = $scope.tracks.splice(index, 1)[0];
+                    Tracks.remove({id: track.id});
+                });
+            };
+
+            $scope.saveTrack = function(track) {
+                Tracks.update({id: track.id}, track);
+            };
+
+            $scope.addFormat = function() {
+                Formats.add({name: 'new name', duration: 60, description: 'new description'}, function(format) {
+                    $scope.formats.push(format);
+                });
+            };
+
+            $scope.removeFormat = function(index) {
+                var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteFormat'));
+                dlg.result.then(function() {
+                    var format = $scope.formats.splice(index, 1)[0];
+                    Formats.remove({id: format.id});
+                });
+            };
+
+            $scope.saveFormat = function(format) {
+                Formats.update({id: format.id}, format);
+            };
         }
     ]);
