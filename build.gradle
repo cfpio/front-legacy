@@ -3,8 +3,8 @@ plugins {
 }
 
 node {
-  version = '4.6.0'
-  npmVersion = '2.15.9'
+  version = '6.9.1'
+  npmVersion = '3.10.9'
   download = true
   // Set the work directory for unpacking node
   workDir = file("${project.buildDir}/nodejs")
