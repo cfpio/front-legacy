@@ -21,18 +21,19 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, RestrictedSession,RestrictedCoSession, RestrictedContact, $modal, talkformats, isCoSession) {
+    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, RestrictedSession,RestrictedCoSession, RestrictedContact, $modal, talkformats, isCoSession, tracks) {
         $scope.tab = $stateParams.tab;
 
         $scope.session = null;
 
-        $scope.talkformats=talkformats;
-        
+        $scope.talkformats=_.indexBy(talkformats, 'id');
+        $scope.tracks = _.indexBy(tracks, 'id');
+
         $scope.cospeakers = [];
 
 
-        
-        
+
+
         /**
          * Get talk
          * @return {RestrictedSession}
@@ -43,7 +44,7 @@ angular.module('CallForPaper')
                 id: $stateParams.id
             }).$promise.then(function(sessionTmp) {
                 $scope.session = sessionTmp;
-    
+
                 // Add link to social
                 $scope.session.socialLinks = [];
                 if (sessionTmp.speaker.social !== null) {
@@ -62,23 +63,23 @@ angular.module('CallForPaper')
                     $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
                 }
                 $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
-    
-    
+
+
                 $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
-                
+
                 $scope.cospeakers = $scope.session.cospeakers.map(function(speaker) {
                     return speaker.email;
                 });
           });
-                
-                
+
+
         }
         else {
             RestrictedSession.get({
                 id: $stateParams.id
             }).$promise.then(function(sessionTmp) {
                 $scope.session = sessionTmp;
-    
+
                 // Add link to social
                 $scope.session.socialLinks = [];
                 if (sessionTmp.speaker.social !== null) {
@@ -97,18 +98,18 @@ angular.module('CallForPaper')
                     $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
                 }
                 $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
-    
-    
+
+
                 $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
-                
+
                 $scope.cospeakers = $scope.session.cospeakers.map(function(speaker) {
                     return speaker.email;
                 });
             });
-                
-               
+
+
         }
-        
+
 
         /**
          * CONTACT

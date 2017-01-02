@@ -386,6 +386,9 @@ angular.module('CallForPaper', [
                     talkformats: function(TalkService) {
                         return TalkService.formats.findAll().$promise;
                     },
+                    tracks: function(TalkService) {
+                        return TalkService.tracks.findAll().$promise;
+                    },
                     isCoSession: function() {
                         return false;
                     }
@@ -398,6 +401,9 @@ angular.module('CallForPaper', [
                 resolve: {
                     talkformats: function(TalkService) {
                         return TalkService.formats.findAll().$promise;
+                    },
+                    tracks: function(TalkService) {
+                        return TalkService.tracks.findAll().$promise;
                     },
                     isCoSession: function() {
                         return true;
