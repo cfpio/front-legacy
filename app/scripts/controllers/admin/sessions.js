@@ -27,7 +27,15 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
 
     $scope.stats = stats;
 
-    $scope.sessions = sessions;
+    var tracksMap = _.indexBy(tracks, 'id');
+
+    $scope.sessions = sessions.map(function(session) {
+        var track = tracksMap[session.trackId];
+        if (track) {
+            session.trackLabel = track.libelle;
+        }
+        return session;
+    });
 
     $scope.difficulties = [{id: '', title: ''}].concat(_.map(_.range(1, 4), function(difficulty) {
         return {
