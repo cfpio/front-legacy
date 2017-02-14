@@ -47,7 +47,8 @@ angular.module('CallForPaper', [
     'cfp.hotkeys',
     'ngAria',
     'restangular',
-    'dialogs.main'
+    'dialogs.main',
+    'ui.gravatar'
 ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
