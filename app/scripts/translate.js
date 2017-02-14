@@ -72,7 +72,7 @@ angular.module('CallForPaper')
                 'verification': 'Vérification',
                 'verificationNeeded': 'Un e-mail a été envoyé à votre adresse, cliquez sur le lien présent dans celui-ci pour valider votre compte.',
                 'submittedTalks': 'Nombre de talks soumis : ',
-                'sendedCoTalks' :  'Talks (en tant que cospeaker) envoyés'
+                'sendedCoTalks': 'Talks (en tant que cospeaker) envoyés'
             },
             'profil': {
                 'save': 'Sauvegarder',
@@ -112,9 +112,9 @@ angular.module('CallForPaper')
                 'alreadyExists': 'Il existe déjà un utilisateur associé à cette adresse e-mail'
             },
             'talkInfo': {
-              'intro': 'Voici quelques informations sur les formats et catégories des talks :',
-              'formats': 'Formats',
-              'categories': 'Catégories'
+                'intro': 'Voici quelques informations sur les formats et catégories des talks :',
+                'formats': 'Formats',
+                'categories': 'Catégories'
             },
             'verify': {
                 'title': 'Verification de l\'email',
@@ -153,8 +153,8 @@ angular.module('CallForPaper')
                 'googleplus': 'Profil Google Plus :',
                 'github': 'Profil Github :',
                 'hintSocial': 'Donnez les liens de vos réseaux sociaux (pour le site web) : Twitter / G+ / Github / Blog.',
-                'gender':'Sexe t-shirt',
-                'tshirtSize':'Taille t-shirt'
+                'gender': 'Sexe t-shirt',
+                'tshirtSize': 'Taille t-shirt'
             },
             'step2': {
                 'name': 'Nom de la conférence * :',
@@ -167,7 +167,7 @@ angular.module('CallForPaper')
                 'track': 'Catégorie * :',
                 'cospeaker': 'Co-conférenciers :',
                 'hintCospeaker': 'Si vous n\'êtes pas seul lors de la présentation, donnez l\'email des autres conférenciers. ATTENTION, ceux-ci doivent être préalablement inscrit sur le CFP avec cette même adresse.',
-                'cospeakerNotFound' : 'Le cospeaker avec l\'adresse {{value}} n\'existe pas.',
+                'cospeakerNotFound': 'Le cospeaker avec l\'adresse {{value}} n\'existe pas.',
                 'beginner': 'Débutant',
                 'confirmed': 'Confirmé',
                 'expert': 'Expert',
@@ -298,25 +298,26 @@ angular.module('CallForPaper')
                 'releaseDate': 'Date de fin des soumissions',
                 'startDate': 'Date du début de l\'événement',
                 'configCfp': 'Configuration du CFP',
-                'btn.save': 'Sauvegarder'
+                'btn.save': 'Sauvegarder',
+                showAllSessions: 'Tous'
             },
             'owner': {
-            	'admins': 'Admins',
-            	'config': 'Configuration',
-            	'hintAdmins': 'Ajouter les emails des admins',
-            	'adminsSuccess': 'La liste des admins a été mise à jour',
-            	'tracksAndFormats': 'Thèmes et formats',
-            	'tracks': 'Thèmes',
-            	'trackName': 'Libellé',
-            	'trackDescription': 'Description',
-            	'trackNew': 'Nouveau thème',
-            	'trackDelete': 'Supprimer',
-            	'formats': 'Formats',
-            	'formatName': 'Libellé',
-            	'formatDuration': 'Durée en minutes',
-            	'formatDescription': 'Description',
-            	'formatNew': 'Nouveau format',
-            	'formatDelete': 'Supprimer'
+                'admins': 'Admins',
+                'config': 'Configuration',
+                'hintAdmins': 'Ajouter les emails des admins',
+                'adminsSuccess': 'La liste des admins a été mise à jour',
+                'tracksAndFormats': 'Thèmes et formats',
+                'tracks': 'Thèmes',
+                'trackName': 'Libellé',
+                'trackDescription': 'Description',
+                'trackNew': 'Nouveau thème',
+                'trackDelete': 'Supprimer',
+                'formats': 'Formats',
+                'formatName': 'Libellé',
+                'formatDuration': 'Durée en minutes',
+                'formatDescription': 'Description',
+                'formatNew': 'Nouveau format',
+                'formatDelete': 'Supprimer'
             },
             'config': {
                 'logout': 'Se déconnecter',
@@ -412,7 +413,7 @@ angular.module('CallForPaper')
                 'verification': 'Verification',
                 'verificationNeeded': 'An email has been sent to your address, click the link in it to confirm your account.',
                 'submittedTalks': 'Submitted talks count: ',
-                'sendedCoTalks' : 'Submitted cospeaker talks'
+                'sendedCoTalks': 'Submitted cospeaker talks'
             },
             'profil': {
                 'save': 'Save',
@@ -457,9 +458,9 @@ angular.module('CallForPaper')
                 'notVerified': 'Errror during verification'
             },
             'talkInfo': {
-              'intro': 'Here some information on talk\'s format and talk\'s categories :',
-              'formats': 'Formats',
-              'categories': 'Categories'
+                'intro': 'Here some information on talk\'s format and talk\'s categories :',
+                'formats': 'Formats',
+                'categories': 'Categories'
             },
             talk: {
                 edit: {
@@ -505,7 +506,7 @@ angular.module('CallForPaper')
                 'track': 'Track *:',
                 'cospeaker': 'Co-speaker:',
                 'hintCospeaker': 'If you are not alone on stage, give the co-speaker email. WARNING : cospeakers must have create an account with this email before.',
-                'cospeakerNotFound' : 'The cospeaker with email {{value}} doesn\'t exist.',
+                'cospeakerNotFound': 'The cospeaker with email {{value}} doesn\'t exist.',
                 'beginner': 'Beginner',
                 'confirmed': 'Confirmed',
                 'expert': 'Expert',
@@ -629,21 +630,22 @@ angular.module('CallForPaper')
                 'delete': 'Delete',
                 'allType': 'All',
                 'newMessages': 'New messages',
-                nextToRate: 'Next talk to rate'
+                nextToRate: 'Next talk to rate',
+                showAllSessions: 'All'
             },
             'owner': {
-            	'admins': 'Admins',
-            	'config': 'Configuration',
-            	'hintAdmins': 'Enter admins email',
-            	'adminsSuccess': 'Admin list updated',
-            	'tracksAndFormats': 'Tracks and formats',
-            	'tracks': 'Tracks',
-            	'trackName': 'Name',
-            	'trackDescription': 'Description',
-            	'formats': 'Formats',
-            	'formatName': 'Name',
-            	'formatDuration': 'Duration in minutes',
-            	'formatDescription': 'Description'
+                'admins': 'Admins',
+                'config': 'Configuration',
+                'hintAdmins': 'Enter admins email',
+                'adminsSuccess': 'Admin list updated',
+                'tracksAndFormats': 'Tracks and formats',
+                'tracks': 'Tracks',
+                'trackName': 'Name',
+                'trackDescription': 'Description',
+                'formats': 'Formats',
+                'formatName': 'Name',
+                'formatDuration': 'Duration in minutes',
+                'formatDescription': 'Description'
             },
             'config': {
                 'login': 'Login',

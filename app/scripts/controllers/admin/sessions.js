@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats) {
+angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache) {
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
@@ -51,11 +51,20 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
         };
     }));
 
+    var sessionCount = sessions.length;
+    var counts = [10, 25, 50, 100].filter(function(count) {
+        return count < sessionCount;
+    });
+    if (counts.length > 0) {
+        counts.push(sessionCount);
+    }
+
     $scope.tableParams = new NgTableParams({
         count: 10,
         sorting: {added: 'desc'}
     }, {
-        data: sessions
+        data: sessions,
+        counts: counts
     });
 
     /**
@@ -69,4 +78,6 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
             $scope.tableParams.filter().reviewed = '';
         }
     };
+
+    $templateCache.put('ng-table/pager.html', '<div class="ng-cloak ng-table-pager" ng-if="params.data.length"> <div ng-if="params.settings().counts.length" class="ng-table-counts btn-group pull-right"> <button ng-repeat="count in params.settings().counts" type="button" ng-class="{\'active\':params.count()==count}" ng-click="params.count(count)" class="btn btn-default"> <ng-switch on="$last"> <span ng-switch-when="true" translate>admin.showAllSessions</span> <span ng-switch-default ng-bind="count"></span> </ng-switch> </button> </div> <ul class="pagination ng-table-pagination"> <li ng-class="{\'disabled\': !page.active && !page.current, \'active\': page.current}" ng-repeat="page in pages" ng-switch="page.type"> <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo;</a> <a ng-switch-when="first" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="page" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="more" ng-click="params.page(page.number)" href="">&#8230;</a> <a ng-switch-when="last" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="next" ng-click="params.page(page.number)" href="">&raquo;</a> </li> </ul> </div> ');
 });
