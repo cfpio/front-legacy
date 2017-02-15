@@ -248,9 +248,11 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
                     return y.rate + x;
                 }, 0) / (votedCount === 0 ? 1 : votedCount);
 
+            /*
             $scope.rates = ratesTmp.filter(function(element) {
                 return element.user.email !== AuthService.user.email;
             });
+            */
         });
     };
     updateRates();
