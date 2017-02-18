@@ -243,6 +243,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
                 var i = y.rate !== 0 ? 1 : 0;
                 return i + x;
             }, 0);
+            $scope.rates = ratesTmp;
             // average
             $scope.mean = ratesTmp.reduce(function(x, y) {
                     return y.rate + x;
