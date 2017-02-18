@@ -1,6 +1,5 @@
 <div class="row">
-    <div class="col-sm-7">
-        <h3>Talk</h3>
+    <div class="col-sm-7 left-separator noPadding">
         <div class="row">
             <div class="col-sm-6">
                 <label class="control-label">Type</label>
@@ -44,14 +43,49 @@
             </div>
         </div>
     </div>
-    <!--
     <div class="col-sm-5">
-        <h3>Conférencier</h3>
         <div class="row">
-            <div class="col-sm-12">
-                <label class="control-label"
+            <div class="col-sm-12"><h3>{{talk.speaker.firstname}}&nbsp;{{talk.speaker.lastname}}</h3></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-push-8">
+                <img ng-src="https://avatars.io/gravatar/{{talk.speaker.email}}/Large"
+                     class="center-block img-thumbnail" width="200" height="200">
+                <div class="text-center" ng-if="talk.speaker.twitter">
+                    <span class="ion-social-twitter"></span>
+                    <a ng-href="{{socialURL(talk.speaker.twitter, 'https://twitter.com/')}}"
+                       target="_blank">{{socialLabel(talk.speaker.twitter, 'https://twitter.com/')}}</a>
+                </div>
+                <div class="text-center" ng-if="talk.speaker.github">
+                    <span class="ion-social-github"></span>
+                    <a ng-href="{{socialURL(talk.speaker.github, 'https://github.com/')}}"
+                       target="_blank">{{socialLabel(talk.speaker.github, 'https://github.com/')}}</a>
+                </div>
+            </div>
+            <div class="col-sm-8 col-sm-pull-4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="control-label">Entreprise</label>
+                        <p class="form-control-static">{{talk.speaker.company}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label class="control-label">Bio</label>
+                        <p class="form-control-static" marked="talk.speaker.bio"></p>
+                    </div>
+                </div>
+                <div class="row" ng-if="talk.cospeakers.length > 0">
+                    <div class="col-sm-12">
+                        <label class="control-label">Co-speakers</label>
+                        <ul class="list-unstyled">
+                            <li class="form-control-static" ng-repeat="cospeaker in talk.cospeakers">
+                                {{cospeaker.email}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    -->
 </div>

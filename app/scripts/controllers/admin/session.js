@@ -518,4 +518,21 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             // cancel
         });
     };
+
+    $scope.socialURL = function(social, base) {
+        if (/https?:\/\//.test(social)) {
+            return social;
+        } else {
+            return base + social;
+        }
+    };
+
+    $scope.socialLabel = function(social, base) {
+        var index = social.indexOf(base);
+        if (index !== -1) {
+            return social.substring(index + base.length);
+        } else {
+            return social;
+        }
+    };
 });
