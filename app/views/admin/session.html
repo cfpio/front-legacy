@@ -31,7 +31,8 @@
 			<a style="color:inherit" tooltip="{{'admin.previous' | translate}}" ng-if="previous" ui-sref="admin.session({ id: previous })" class="pull-left">
 				<span class="mdi-navigation-chevron-left arrow"></span>
 			</a>
-			<h1>{{::session.sessionName}} -
+			<h1>
+                {{::talk.name}}
 				<span style="font-size: 0.7em">
 					<span>{{'admin.mean' | translate}}&nbsp;:&nbsp;</span>
 					<span ng-if="mean === 0">{{'admin.none' | translate}}</span>
@@ -40,11 +41,11 @@
 			</h1>
 			<div role="tabpanel">
 				<ul id="tab" class="nav nav-tabs" role="tablist">
-					<li role="presentation"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false">{{'admin.deliberation' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab == 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false">{{'admin.contact' | translate}}</button></li>
-					<li role="presentation" class=""><button href="#schedule" role="tab" id="vote-schedule" data-toggle="tab" aria-controls="schedule" aria-expanded="false">{{'admin.schedule' | translate}}</button></li>
+                    <li role="presentation"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true"> <i class="ion-person"></i> {{'admin.speaker' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false"><i class="ion-ios-mic"></i> {{'admin.session' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-ios-speedometer"></i> {{'admin.deliberation' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab == 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false"><i class="ion-android-chat"></i> {{'admin.contact' | translate}}</button></li>
+					<li role="presentation" class=""><button href="#schedule" role="tab" id="vote-schedule" data-toggle="tab" aria-controls="schedule" aria-expanded="false"><i class="ion-clock"></i> {{'admin.schedule' | translate}}</button></li>
 				</ul>
 				<div id="tabContent" class="tab-content tile">
 					<br>
