@@ -43,7 +43,8 @@
 				<ul id="tab" class="nav nav-tabs" role="tablist">
                     <li role="presentation"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true"> <i class="ion-person"></i> {{'admin.speaker' | translate}}</button></li>
 					<li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false"><i class="ion-ios-mic"></i> {{'admin.session' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-ios-speedometer"></i> {{'admin.deliberation' | translate}}</button></li>
+                    <li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-university"></i> {{'admin.deliberation' | translate}}</button></li>
+                    <li role="presentation" ng-class="{active : tab == 'allvotes'}"><button href="#allvotes" role="tab" id="allvotes-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-ios-speedometer"></i> Votes</button></li>
 					<li role="presentation" ng-class="{active : tab == 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false"><i class="ion-android-chat"></i> {{'admin.contact' | translate}}</button></li>
 					<li role="presentation" class=""><button href="#schedule" role="tab" id="vote-schedule" data-toggle="tab" aria-controls="schedule" aria-expanded="false"><i class="ion-clock"></i> {{'admin.schedule' | translate}}</button></li>
 				</ul>
@@ -242,16 +243,23 @@
 									</div>
 									<div ng-if="!$last" class="col-xs-12"><hr></div>
 								</div>
-
-								<div ng-if="rates.length > 0" class="col-xs-12"><strong><hr></strong></div>
-								<div class="col-xs-12">
-									<strong>{{'admin.mean' | translate}}&nbsp;:&nbsp;</strong>
-									<span ng-if="mean === 0">{{'admin.none' | translate}}</span>
-									<span ng-if="mean !== 0">{{mean | number:2}}</span>
-								</div>
 							</div>
 						</div>
 					</div>
+                    <div role="tabpanel" ng-class="{active : tab === 'allvotes', in : tab === 'allvotes'}" class="tab-pane fade" id="allvotes" aria-labelledby="allvotes-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Votes et moyenne</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <strong>{{'admin.mean' | translate}}&nbsp;:&nbsp;</strong>
+                                <span ng-if="mean === 0">{{'admin.none' | translate}}</span>
+                                <span ng-if="mean !== 0">{{mean | number:2}}</span>
+                            </div>
+                        </div>
+                    </div>
 					<div role="tabpanel" ng-class="{active : tab === 'contact', in : tab === 'contact'}" class="tab-pane fade" id="contact" aria-labelledby="contact-tab">
 						<div class="row">
 							<div class="col-md-8 col-md-offset-2 noPadding">
