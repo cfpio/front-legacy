@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-7">
+        <h3>Talk</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Type</label>
+                <p class="form-control-static">{{talkFormats[talk.format-1].description}}</p>
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">Track</label>
+                <p class="form-control-static" ng-bind="selectedTrack.libelle"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="control-label">Langue</label>
+                <p class="form-control-static">{{talk.language}}</p>
+            </div>
+            <div class="col-sm-6">
+                <label class="control-label">Difficultés</label>
+                <div>
+                    <span required rating ng-model="talk.difficulty" max="3" readonly="true"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="control-label">Nom</label>
+                <p class="form-control-static">{{talk.name}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="control-label">Description</label>
+                <p class="form-control-static" marked="talk.description"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="control-label">Références ou compléments d'informations</label>
+                <p class="form-control-static" marked="talk.references"></p>
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="col-sm-5">
+        <h3>Conférencier</h3>
+        <div class="row">
+            <div class="col-sm-12">
+                <label class="control-label"
+            </div>
+        </div>
+    </div>
+    -->
+</div>

@@ -32,9 +32,9 @@
 			</h1>
 			<div role="tabpanel">
 				<ul id="tab" class="nav nav-tabs" role="tablist">
-                    <li role="presentation"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true"> <i class="ion-person"></i> {{'admin.speaker' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false"><i class="ion-ios-mic"></i> {{'admin.session' | translate}}</button></li>
                     <li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-university"></i> {{'admin.deliberation' | translate}}</button></li>
+                    <li role="presentation"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true"> <i class="ion-person"></i> {{'admin.speaker' | translate}}</button></li>
+                    <li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false"><i class="ion-ios-mic"></i> {{'admin.session' | translate}}</button></li>
                     <li role="presentation" ng-class="{active : tab == 'allvotes'}"><button href="#allvotes" role="tab" id="allvotes-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-ios-speedometer"></i> Votes</button></li>
 					<li role="presentation" ng-class="{active : tab == 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false"><i class="ion-android-chat"></i> {{'admin.contact' | translate}}</button></li>
                     <li role="presentation" ng-class="{active : tab == 'danger'}"><button href="#danger" role="tab" id="danger-tab" data-toggle="tab" aria-controls="danger" aria-expanded="false"><i class="ion-ios-flame"></i> {{'admin.danger' | translate}}</button></li>
@@ -122,6 +122,12 @@
 						</div>
 					</div>
 					<div role="tabpanel" ng-class="{active : tab == 'vote', in : tab == 'vote'}" class="tab-pane fade" id="vote" aria-labelledby="vote-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div ng-include src="'views/restricted/talks/view.html'"></div>
+                            </div>
+                        </div>
+                        <hr>
 						<div class="row">
 							<div class="col-md-6 left-separator noPadding">
 								<div class="col-xs-12">
