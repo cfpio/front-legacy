@@ -158,8 +158,8 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             combo: 'right',
             description: $filter('translate')('admin.next'),
             callback: function() {
-                if ($scope.next) {
-                    $state.go('admin.session', {id: $scope.next});
+                if (nextToRate) {
+                    $state.go('admin.session', {id: nextToRate.id});
                 }
             }
         })

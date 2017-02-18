@@ -21,7 +21,7 @@
 <div class="row">
 	<div class="panel">
 		<div class="panel-body">
-			<a tooltip="{{'admin.nextToRate' | translate}}" ng-if="nextToRate" ui-sref="admin.session({id: nextToRate.id})" class="btn btn-xs btn-default pull-right">
+			<a tooltip-placement="left" tooltip="{{'admin.nextToRate' | translate}}" ng-if="nextToRate" ui-sref="admin.session({id: nextToRate.id})" class="btn btn-xs btn-default pull-right">
 				<span class="mdi-navigation-chevron-right arrow"></span>
 			</a>
 			<a style="color:inherit" tooltip="{{'admin.previous' | translate}}" ng-if="previous" ui-sref="admin.session({ id: previous })" class="pull-left">
