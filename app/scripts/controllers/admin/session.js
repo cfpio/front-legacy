@@ -34,7 +34,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     $scope.session = talk;
     $scope.talk = talk;
     $scope.tracks = tracks;
-    $scope.talkFormats = talkformats;
+    $scope.talkFormats = _.indexBy(talkformats, 'id');
     $scope.cospeakers = [];
 
     if (talk) {
@@ -319,9 +319,9 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
 
     $scope.postRateAndNext = function() {
         $scope.postRate();
-        $state.go("admin.session", {id: $scope.nextToRate.id});
-    }
-        /**
+        $state.go('admin.session', {id: $scope.nextToRate.id});
+    };
+    /**
      * Delete current session
      * @return {void}
      */

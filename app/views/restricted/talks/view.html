@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <label class="control-label">Type</label>
-                <p class="form-control-static">{{talkFormats[talk.format-1].description}}</p>
+                <p class="form-control-static">{{talkFormats[talk.format + ''].description}}</p>
             </div>
             <div class="col-sm-6">
                 <label class="control-label">Track</label>
@@ -17,18 +17,20 @@
                 <p class="form-control-static">{{talk.language}}</p>
             </div>
             <div class="col-sm-6">
-                <label class="control-label">Difficultés</label>
+                <label class="control-label">Difficulté</label>
                 <div>
                     <span required rating ng-model="talk.difficulty" max="3" readonly="true"></span>
                 </div>
             </div>
         </div>
+        <!--
         <div class="row">
             <div class="col-sm-12">
                 <label class="control-label">Nom</label>
                 <p class="form-control-static">{{talk.name}}</p>
             </div>
         </div>
+        -->
         <div class="row">
             <div class="col-sm-12">
                 <label class="control-label">Description</label>
