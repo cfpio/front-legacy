@@ -269,6 +269,7 @@ angular.module('CallForPaper')
                 'date': 'Date',
                 'deliberation': 'Délibération',
                 'contact': 'Contact',
+                'danger': 'Danger zone',
                 'commentaries': 'Commentaires',
                 'message': 'Message',
                 'votes': 'Votes',
