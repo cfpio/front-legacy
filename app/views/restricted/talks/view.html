@@ -49,8 +49,11 @@
         </div>
         <div class="row">
             <div class="col-sm-4 col-sm-push-8">
-                <img ng-src="https://avatars.io/gravatar/{{talk.speaker.email}}/Large"
-                     class="center-block img-thumbnail" width="200" height="200">
+                <a ng-if="session.speaker.imageProfilURL" target="_blank" ng-href="{{session.speaker.imageProfilURL}}">
+                    <img class="center-block avatar" ng-src="{{session.speaker.imageProfilURL}}" alt="avatar">
+                </a>
+                <img ng-if="!session.speaker.imageProfilURL" class="center-block avatar" src="/lib/images/placeholder.png" alt="avatar">
+
                 <div class="text-center" ng-if="talk.speaker.twitter">
                     <span class="ion-social-twitter"></span>
                     <a ng-href="{{socialURL(talk.speaker.twitter, 'https://twitter.com/')}}"
