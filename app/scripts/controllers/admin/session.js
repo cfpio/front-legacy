@@ -317,7 +317,11 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         }
     };
 
-    /**
+    $scope.postRateAndNext = function() {
+        $scope.postRate();
+        $state.go("admin.session", {id: $scope.nextToRate.id});
+    }
+        /**
      * Delete current session
      * @return {void}
      */
