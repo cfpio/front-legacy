@@ -99,7 +99,7 @@
                                         <td sortable="'mean'" data-title="'admin.mean' | translate"
                                             filter="{mean: 'number'}"
                                             ng-bind="::session.mean | number:2"></td>
-                                        <td data-title="'admin.votes' | translate">
+                                        <td data-title="'admin.votes' | translate" style="min-width: 100px;">
                                             <img tooltip="{{user}}" ng-repeat="user in session.voteUsersEmail"
                                                  class="pull-left mini-avatar" gravatar-src="user" gravatar-size="20">
                                         </td>
