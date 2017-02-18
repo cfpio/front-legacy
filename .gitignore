@@ -3,6 +3,7 @@
 target
 dist
 target-grunt
+build/
 
 **/node_modules
 **/npm-debug.log
