@@ -3,11 +3,12 @@
         <div class="row">
             <div class="col-sm-6">
                 <label class="control-label">Type</label>
-                <p class="form-control-static">{{talkFormats[talk.format + ''].description}}</p>
+                <p class="form-control-static" title="{{::talkFormats[talk.format + ''].description}}">
+                    {{::talkFormats[talk.format + ''].name}}</p>
             </div>
             <div class="col-sm-6">
                 <label class="control-label">Track</label>
-                <p class="form-control-static" ng-bind="selectedTrack.libelle"></p>
+                <p class="form-control-static" title="{{selectedTrack.description}}" ng-bind="selectedTrack.libelle"></p>
             </div>
         </div>
         <div class="row">
