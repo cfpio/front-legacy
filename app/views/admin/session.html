@@ -29,11 +29,6 @@
 			</a>
 			<h1>
                 {{::talk.name}}
-				<span style="font-size: 0.7em">
-					<span>{{'admin.mean' | translate}}&nbsp;:&nbsp;</span>
-					<span ng-if="mean === 0">{{'admin.none' | translate}}</span>
-					<span ng-if="mean !== 0">{{mean | number:2}}</span>
-				</span >
 			</h1>
 			<div role="tabpanel">
 				<ul id="tab" class="nav nav-tabs" role="tablist">
