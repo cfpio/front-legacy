@@ -2,35 +2,25 @@
     <div class="col-sm-7 left-separator noPadding">
         <div class="row">
             <div class="col-sm-6">
-                <label class="control-label">Type</label>
-                <p class="form-control-static" title="{{::talkFormats[talk.format + ''].description}}">
-                    {{::talkFormats[talk.format + ''].name}}</p>
+                <label class="control-label">Type</label> &nbsp;
+                <span class="form-control-static" title="{{::talkFormats[talk.format + ''].description}}">
+                    {{::talkFormats[talk.format + ''].name}}</span>
             </div>
             <div class="col-sm-6">
-                <label class="control-label">Track</label>
-                <p class="form-control-static" title="{{selectedTrack.description}}" ng-bind="selectedTrack.libelle"></p>
+                <label class="control-label">Track</label> &nbsp;
+                <span class="form-control-static" title="{{selectedTrack.description}}" ng-bind="selectedTrack.libelle"></span>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <label class="control-label">Langue</label>
-                <p class="form-control-static">{{talk.language}}</p>
+                <label class="control-label">Langue</label> &nbsp;
+                <span class="form-control-static">{{talk.language}}</span>
             </div>
             <div class="col-sm-6">
-                <label class="control-label">Difficulté</label>
-                <div>
-                    <span required rating ng-model="talk.difficulty" max="3" readonly="true"></span>
-                </div>
+                <label class="control-label">Difficulté</label> &nbsp;
+                <span required rating ng-model="talk.difficulty" max="3" readonly="true"></span>
             </div>
         </div>
-        <!--
-        <div class="row">
-            <div class="col-sm-12">
-                <label class="control-label">Nom</label>
-                <p class="form-control-static">{{talk.name}}</p>
-            </div>
-        </div>
-        -->
         <div class="row">
             <div class="col-sm-12">
                 <label class="control-label">Description</label>
