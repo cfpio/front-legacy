@@ -232,12 +232,11 @@
 
                             <div ng-repeat="rate in rates" class="col-xs-12 noPadding">
                                 <div class="col-xs-4 col-sm-2 col-md-2">
-                                    <img class="img-responsive" ng-gravatar="rate.user.email" gravatar-size="200">
+                                    <img tooltip="{{user}}"
+                                         class="mini-avatar" gravatar-src="rate.user.email" gravatar-size="20">
+                                    <strong>{{::rate.user.name}}</strong>
                                 </div>
                                 <div class="col-xs-8 col-sm-10 col-md-10">
-                                    <div class="col-xs-12">
-                                        <strong>{{::rate.user.name}}</strong>
-                                    </div>
                                     <div class="col-xs-12">
 											<span ng-if="rate.rate !== 0" ng-repeat="n in [].constructor(rate.rate) track by $index">
 												<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -245,11 +244,11 @@
                                         <span ng-if="rate.rate !== 0" ng-repeat="n in [].constructor(5-rate.rate) track by $index">
 												<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 											</span>
-                                        <span ng-if="rate.love">&nbsp;{{'admin.love' | translate}}</span>
-                                        <span ng-if="rate.hate">&nbsp;{{'admin.hate' | translate}}</span>
+                                        <i ng-if="rate.love"class="ion-heart" title="{{'admin.love' | translate}}"></i>
+                                        <i ng-if="rate.hate"class="ion-heart-broken" title="{{'admin.hate' | translate}}"></i>
                                         <span ng-if="rate.rate === 0">
-												{{'admin.noVote' | translate}}
-											</span>
+                                            <i class="ion-android-microphone-off"></i> {{'admin.noVote' | translate}}
+  									    </span>
                                     </div>
                                 </div>
                                 <div ng-if="$last" class="col-xs-12"><hr></div>
