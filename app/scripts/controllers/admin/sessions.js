@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache) {
+angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache, currentUser) {
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
@@ -58,6 +58,10 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     if (counts.length > 0) {
         counts.push(sessionCount);
     }
+
+    $scope.remaining = sessions.filter(function(session) {
+        return session.voteUsersEmail == null || !session.voteUsersEmail.includes(currentUser.email);
+    }).length;
 
     $scope.tableParams = new NgTableParams({
         count: 10,
