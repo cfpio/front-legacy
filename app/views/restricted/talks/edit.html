@@ -31,11 +31,10 @@
             <div class="form-group"
                  ng-class="{'has-success': talkForm.formatInput.$valid && talkForm.formatInput.$dirty, 'has-error': talkForm.formatInput.$invalid && (talkForm.formatInput.$dirty || talkInvalid)}">
                 <label class="control-label">{{'step2.type' | translate}}</label>
-                <div>{{talkFormats[talk.format-1].description}}</div>
+                <div>{{talkFormats[talk.format + ''].description}}</div>
                 <div>
                     <select ng-model="talk.format" name="formatInput" required class="form-control"
-                            ng-options="format.id as (format.name +' ('+format.duration+' min)') for format in talkFormats">
-
+                            ng-options="format.id as (format.name +' ('+format.duration+' min)') for (formatId, format) in talkFormats">
                     </select>
                 </div>
             </div>

@@ -24,7 +24,7 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
 
     $scope.talk = talk;
     $scope.tracks = tracks;
-    $scope.talkFormats = talkformats;
+    $scope.talkFormats = _.indexBy(talkformats, 'id');
     $scope.cospeakers = [];
 
     if (talk) {
