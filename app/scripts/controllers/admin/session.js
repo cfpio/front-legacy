@@ -34,7 +34,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     $scope.session = talk;
     $scope.talk = talk;
     $scope.tracks = tracks;
-    $scope.talkFormats = talkformats;
+    $scope.talkFormats = _.indexBy(talkformats, 'id');
     $scope.cospeakers = [];
 
     if (talk) {
