@@ -60,7 +60,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     }
 
     $scope.remaining = sessions.filter(function(session) {
-        return session.voteUsersEmail == null || !session.voteUsersEmail.includes(currentUser.email);
+        return !session.voteUsersEmail || !session.voteUsersEmail.includes(currentUser.email);
     }).length;
 
     $scope.tableParams = new NgTableParams({
