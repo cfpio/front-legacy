@@ -39,5 +39,7 @@ angular.module('CallForPaper').factory('AdminSession', function(resourceRetries,
                 method: 'PUT',
                 url: AppConfig.apiBaseUrl + '/admin/sessions/track/:id'
             }
+
+
         });
 });

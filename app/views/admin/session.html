@@ -29,7 +29,9 @@
 			</a>
 			<h1>
                 {{::talk.name}}
-			</h1>
+                <button ng-if="session.state == 'ACCEPTED'" class="btn btn-success status"><i class="ion-checkmark-circled"></i> Accepted</button>
+                <button ng-if="session.state == 'REFUSED'" class="btn btn-danger status"><i class="ion-checkmark-circled"></i> Rejected</button>
+            </h1>
 			<div role="tabpanel">
 				<ul id="tab" class="nav nav-tabs" role="tablist">
                     <li role="presentation" ng-class="{active : tab == 'vote'}"><button href="#vote" role="tab" id="vote-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-university"></i> {{'admin.deliberation' | translate}}</button></li>

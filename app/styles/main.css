@@ -573,7 +573,7 @@ tags-input .tags.focused {
     border: 0!important;
 }
 
-.status {
+button.status {
     margin: 1px;
     width: 120px;
 }

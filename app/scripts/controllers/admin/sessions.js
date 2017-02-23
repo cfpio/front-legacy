@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, $http, AppConfig, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache, currentUser, AdminSession) {
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
@@ -81,6 +81,38 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
         } else {
             $scope.tableParams.filter().reviewed = '';
         }
+    };
+
+
+    $scope.accept = function(talkId) {
+        $http({
+            method: 'PUT',
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/accept'
+        }).then(function successCallback(response) {
+            var talk = sessions.filter( function( s ) { return s.id == talkId; });
+            talk.state = 'ACCEPTED';
+        });
+
+    };
+
+    $scope.reject = function(talkId) {
+        $http({
+            method: 'PUT',
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/reject'
+        }).then(function successCallback(response) {
+            var talk = sessions.filter( function( s ) { return s.id == talkId; });
+            talk.state = 'REFUSED';
+        });
+    };
+
+    $scope.rectract = function(talkId) {
+        $http({
+            method: 'PUT',
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/retract'
+        }).then(function successCallback(response) {
+            var talk = sessions.filter( function( s ) { return s.id == talkId; });
+            talk.state = 'CONFIRMED';
+        });
     };
 
     $templateCache.put('ng-table/pager.html', '<div class="ng-cloak ng-table-pager" ng-if="params.data.length"> <div ng-if="params.settings().counts.length" class="ng-table-counts btn-group pull-right"> <button ng-repeat="count in params.settings().counts" type="button" ng-class="{\'active\':params.count()==count}" ng-click="params.count(count)" class="btn btn-default"> <ng-switch on="$last"> <span ng-switch-when="true" translate>admin.showAllSessions</span> <span ng-switch-default ng-bind="count"></span> </ng-switch> </button> </div> <ul class="pagination ng-table-pagination"> <li ng-class="{\'disabled\': !page.active && !page.current, \'active\': page.current}" ng-repeat="page in pages" ng-switch="page.type"> <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">&laquo;</a> <a ng-switch-when="first" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="page" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="more" ng-click="params.page(page.number)" href="">&#8230;</a> <a ng-switch-when="last" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a> <a ng-switch-when="next" ng-click="params.page(page.number)" href="">&raquo;</a> </li> </ul> </div> ');

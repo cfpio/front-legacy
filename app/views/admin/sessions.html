@@ -107,8 +107,11 @@
                                                  class="pull-left mini-avatar" gravatar-src="user" gravatar-size="20">
                                         </td>
                                         <td data-title="'status'">
-                                            <button class="btn btn-success status"><i class="ion-checkmark-circled"></i> Accept</button>
-                                            <button class="btn btn-danger status"><i class="ion-close-circled"></i> Reject</button>
+                                            <button ng-if="session.state == 'ACCEPTED'" class="btn btn-secondary status"><i class="ion-checkmark-circled"></i> Accepted</button>
+                                            <button ng-if="session.state == 'REFUSED'" class="btn btn-secondary status"><i class="ion-checkmark-circled"></i> Rejected</button>
+                                            <button ng-if="session.state == 'ACCEPTED' || session.state == 'REFUSED'" ng-click="rectract(session.id)"  class="btn btn-primary status"><i class="ion-refresh"></i> Retract</button>
+                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED'" ng-click="accept(session.id)" class="btn btn-success status"><i class="ion-checkmark-circled"></i> Accept</button>
+                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED'" ng-click="reject(session.id)" class="btn btn-danger status"><i class="ion-close-circled"></i> Reject</button>
                                         </td>
                                     </tr>
                                 </table>
