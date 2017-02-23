@@ -572,3 +572,8 @@ tags-input .tags.focused {
     border-radius: 2px!important;
     border: 0!important;
 }
+
+.status {
+    margin: 1px;
+    width: 120px;
+}

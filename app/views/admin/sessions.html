@@ -106,6 +106,10 @@
                                             <img tooltip="{{user}}" ng-repeat="user in session.voteUsersEmail"
                                                  class="pull-left mini-avatar" gravatar-src="user" gravatar-size="20">
                                         </td>
+                                        <td data-title="'status'">
+                                            <button class="btn btn-success status"><i class="ion-checkmark-circled"></i> Accept</button>
+                                            <button class="btn btn-danger status"><i class="ion-close-circled"></i> Reject</button>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
