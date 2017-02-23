@@ -575,5 +575,6 @@ tags-input .tags.focused {
 
 button.status {
     margin: 1px;
-    width: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
