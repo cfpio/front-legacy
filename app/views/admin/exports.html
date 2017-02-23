@@ -18,11 +18,10 @@
   ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<ul class="nav navbar-nav">
-    <li ui-sref-active="active">
-        <a ui-sref="admin.sessions">{{'admin.sessions' | translate}}</a>
-    </li>
-    <li ui-sref-active="active">
-        <a ui-sref="admin.exports">{{'admin.export' | translate}}</a>
-    </li>
-</ul>
+<div class="row">
+    <div class="col-md-10 col-md-offset-2">
+        <a ng-href="{{config.apiBaseUrl}}/admin/sessions/cards.pdf" class="btn btn-primary" target="_blank">
+            <i class="ion-ios-browsers-outline"></i> Exporter sous forme de cartes PDF
+        </a>
+    </div>
+</div>

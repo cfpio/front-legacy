@@ -67,6 +67,7 @@ angular.module('CallForPaper', [
             .when('/', '/dashboard')
 
             .when('/admin/sessions/', '/admin/sessions')
+            .when('/admin/exports/', '/admin/exports')
 
             .when('/admin', '/admin/sessions')
             .when('/admin/', '/admin/sessions')
@@ -253,6 +254,11 @@ angular.module('CallForPaper', [
                         $state.go('admin.sessions');
                     }
                 }
+            })
+            .state('admin.exports', {
+                url: '/exports',
+                parent: 'admin.loading',
+                templateUrl: 'views/admin/exports.html'
             })
 
             // Restricted
@@ -468,9 +474,10 @@ angular.module('CallForPaper', [
             $modalInstance.dismiss();
         };
     }])
-    .run(function(AuthService, $http, $rootScope, $state) {
+    .run(function(AuthService, $http, $rootScope, $state, AppConfig) {
         AuthService.init();
         $.material.init();
+        $rootScope.config = AppConfig;
 
         $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
 
