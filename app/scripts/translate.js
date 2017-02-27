@@ -298,6 +298,7 @@ angular.module('CallForPaper')
                 'decisionDate': 'Date de fin des votes',
                 'releaseDate': 'Date de fin des soumissions',
                 'startDate': 'Date du début de l\'événement',
+                'duration': 'Durée (en jours)',
                 'configCfp': 'Configuration du CFP',
                 'btn.save': 'Sauvegarder',
                 showAllSessions: 'Tous'

@@ -46,6 +46,12 @@
                 </label>
             </div>
             <div class="form-group" bs-has verify="verify">
+                <label  for="duration">{{'admin.duration' | translate}}
+                    <input required  type="number" name="duration" ng-class="{'ng-verify' : verify}" class="form-control" id="duration" value="{{ config.duration }}" ng-model="config.duration">
+                </label>
+            </div>
+
+            <div class="form-group" bs-has verify="verify">
                 <label  for="decision">{{'admin.decisionDate' | translate}}
                     <input required type="date" name="decision" ng-class="{'ng-verify' : verify}" class="form-control" id="decision" value="{{ config.decision | date: 'yyyy-MM-dd' }}" ng-model="config.decision">
                 </label>
