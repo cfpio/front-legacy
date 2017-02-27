@@ -7,7 +7,6 @@ WORKDIR /work
 ADD package.json /work/
 RUN npm install
 
-CMD mkdir app/bower_components
 ADD .bowerrc /work/
 ADD bower.json /work/
 RUN /work/node_modules/.bin/bower --allow-root install
@@ -22,3 +21,4 @@ RUN mkdir /www
 RUN mv /work/dist /www/front-legacy
 
 VOLUME /www/front-legacy
+CMD /bin/true
