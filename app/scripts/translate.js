@@ -319,7 +319,11 @@ angular.module('CallForPaper')
                 'formatDuration': 'Durée en minutes',
                 'formatDescription': 'Description',
                 'formatNew': 'Nouveau format',
-                'formatDelete': 'Supprimer'
+                'formatDelete': 'Supprimer',
+                'rooms': 'Salles',
+                'roomName': 'Nom',
+                'roomNew': 'Nouvelle salle',
+                'roomDelete': 'Supprimer'
             },
             'config': {
                 'logout': 'Se déconnecter',
@@ -547,7 +551,8 @@ angular.module('CallForPaper')
                 'confirmDelete': 'Delete',
                 'cancel': 'Cancel',
                 'textDeleteFormat': 'Do you really want to delete this format?',
-                'textDeleteTrack': 'Do you really want to delete this track?'
+                'textDeleteTrack': 'Do you really want to delete this track?',
+                'textDeleteRoom': 'Do you really want to delete this room?'
             },
             'previewModal': {
                 'title': 'Preview',

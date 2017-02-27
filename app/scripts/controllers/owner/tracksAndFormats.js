@@ -21,11 +21,12 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('OwnerTracksAndFormatsCtrl', ['$scope', 'dialogs', 'translateFilter', 'Tracks', 'Formats',
-        function($scope, dialogs, translateFilter, Tracks, Formats) {
+    .controller('OwnerTracksAndFormatsCtrl', ['$scope', 'dialogs', 'translateFilter', 'Tracks', 'Formats', 'Rooms',
+        function($scope, dialogs, translateFilter, Tracks, Formats, Rooms) {
 
             $scope.tracks = Tracks.getAll();
             $scope.formats = Formats.getAll();
+            $scope.rooms = Rooms.getAll();
 
             $scope.addTrack = function() {
                 Tracks.add({libelle: 'new name', description: 'new description'}, function(track) {
@@ -59,8 +60,27 @@ angular.module('CallForPaper')
                 });
             };
 
-            $scope.saveFormat = function(format) {
-                Formats.update({id: format.id}, format);
+
+            $scope.saveRoom = function(room) {
+                Rooms.update({id: room.id}, room);
+            };
+
+            $scope.addRoom = function() {
+                Rooms.add({name: 'new name'}, function(room) {
+                    $scope.rooms.push(room);
+                });
+            };
+
+            $scope.removeFormat = function(index) {
+                var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteRoom'));
+                dlg.result.then(function() {
+                    var room = $scope.rooms.splice(index, 1)[0];
+                    Rooms.remove({id: room.id});
+                });
+            };
+
+            $scope.saveRoom = function(room) {
+                Rooms.update({id: room.id}, room);
             };
         }
     ]);
