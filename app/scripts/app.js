@@ -260,6 +260,11 @@ angular.module('CallForPaper', [
                 parent: 'admin.loading',
                 templateUrl: 'views/admin/exports.html'
             })
+            .state('admin.stats', {
+                url: '/stats',
+                parent: 'admin.loading',
+                templateUrl: 'views/admin/stats.html'
+            })
 
             // Restricted
             .state('app', {

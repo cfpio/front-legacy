@@ -20,9 +20,16 @@
 
 <ul class="nav navbar-nav">
     <li ui-sref-active="active">
-        <a ui-sref="admin.sessions">{{'admin.sessions' | translate}}</a>
+        <a ui-sref="admin.sessions"><i class="ion-document"></i> {{'admin.sessions' | translate}}</a>
     </li>
     <li ui-sref-active="active">
-        <a ui-sref="admin.exports">{{'admin.export' | translate}}</a>
+        <a ui-sref="admin.stats"><i class="ion-stats-bars"></i> Statistics</a>
     </li>
+    <li ui-sref-active="active">
+        <a ui-sref="admin.exports"><i class="ion-share"></i> {{'admin.export' | translate}}</a>
+    </li>
+    <li ui-sref-active="active">
+        <a href="/scheduler"><i class="ion-calendar"></i> Scheduler</a>
+    </li>
+
 </ul>
