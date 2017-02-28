@@ -48,7 +48,8 @@ angular.module('CallForPaper', [
     'ngAria',
     'restangular',
     'dialogs.main',
-    'ui.gravatar'
+    'ui.gravatar',
+    'googlechart'
 ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
@@ -263,7 +264,8 @@ angular.module('CallForPaper', [
             .state('admin.stats', {
                 url: '/stats',
                 parent: 'admin.loading',
-                templateUrl: 'views/admin/stats.html'
+                templateUrl: 'views/admin/stats.html',
+                controller: 'AdminStatsCtrl',
             })
 
             // Restricted
