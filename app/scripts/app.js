@@ -49,7 +49,7 @@ angular.module('CallForPaper', [
     'restangular',
     'dialogs.main',
     'ui.gravatar',
-    'googlechart'
+    'chart.js'
 ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

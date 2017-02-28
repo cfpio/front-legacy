@@ -22,35 +22,22 @@
 
 angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $http) {
 
-    $scope.myChartObject = {};
-
-    $scope.myChartObject.type = "BarChart";
-
     $http({
         method: 'GET',
         url: 'https://api.cfp.io/api/rates/stats'
     }).then(function successCallback(response) {
 
-        var data = []
+        var users = []
+        var rated = []
         Object.keys(response.data).forEach(function(key) {
-            data.push({c: [
-                {v: key},
-                {v: response.data[key]}
-            ]});
+            users.push(key)
+            rated.push(response.data[key])
         });
 
-        console.log(data)
-        $scope.myChartObject.data = {
-        "cols": [
-            {id: "t", label: "User", type: "string"},
-            {id: "s", label: "Reviewed", type: "number"}
-        ],
-        "rows": data
-        };
+        $scope.labels = users;
+        $scope.series = ['Rated'];
 
-        $scope.myChartObject.options = {
-            'title': 'Reviewers in action'
-        };
+        $scope.data = [rated];
     });
 
 
