@@ -34,10 +34,27 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
             rated.push(response.data[key])
         });
 
-        $scope.labels = users;
-        $scope.series = ['Rated'];
+        $scope.rates_labels = users;
+        $scope.rates_series = ['Rated'];
+        $scope.rates_data = [rated];
+    });
 
-        $scope.data = [rated];
+
+    $http({
+        method: 'GET',
+        url: 'https://api.cfp.io/api/tracks/stats'
+    }).then(function successCallback(response) {
+
+        var tracks = []
+        var counts = []
+        Object.keys(response.data).forEach(function(key) {
+            tracks.push(key)
+            counts.push(response.data[key])
+        });
+
+        $scope.tracks_labels = tracks;
+        $scope.tracks_series = ['Tracks'];
+        $scope.tracks_data = [counts];
     });
 
 
