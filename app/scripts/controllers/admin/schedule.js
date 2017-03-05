@@ -35,7 +35,7 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
     $scope.upload = function(file) {
         console.log(file)
         Upload.upload({
-            url: 'http://localhost:8080/api' + '/schedule',
+            url: AppConfig.apiBaseUrl + '/schedule',
             method: 'POST',
             data: {file: file}
         }).then(function (resp) {
