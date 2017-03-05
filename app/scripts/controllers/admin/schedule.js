@@ -55,6 +55,13 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
       });
     };
 
+    $scope.notifySpeakers = function() {
+        $http({
+            method: 'POST',
+            url:  AppConfig.apiBaseUrl + '/schedule/notification'
+        });
+    };
+
     queryMeter();
 
 });
