@@ -51,7 +51,7 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
     $scope.rejectOthers = function() {
       $http({
           method: 'PUT',
-          url:  AppConfig.apiBaseUrl + '/sessions/rejectOthers'
+          url:  AppConfig.apiBaseUrl + '/admin/sessions/rejectOthers'
       });
     };
 
