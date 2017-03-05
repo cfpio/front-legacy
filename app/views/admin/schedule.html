@@ -1,0 +1,57 @@
+<!--
+  ~ Copyright (c) 2016 BreizhCamp
+  ~ [http://breizhcamp.org]
+  ~
+  ~ This file is part of CFP.io.
+  ~
+  ~ CFP.io is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as
+  ~ published by the Free Software Foundation, either version 3 of the
+  ~ License, or (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-2">
+        <h1>Schedule</h1>
+
+        <h2>Current state of your Call for paper</h2>
+
+        <p>
+        Submission is <span ng-if="submission"><strong>still open</strong>, you should wait for CFP to close before looking at this page.</span>
+                      <span ng-if="!submission">closed, time to review and schedule your event.</span>
+        </p>
+        <p>
+            You received {{stats.meter.sumbmitted}} proposals from {{stats.meter.speakers}} speakers.<br/>
+            {{stats.meter.drafts}} draft proposals where not confirmed by speakers.<br/>
+            You accepted {{stats.meter.accepted}} proposals and rejected {{stats.meter.rejected}} of them.
+        </p>
+
+        <button ng-click="rejectOthers()" class="btn btn-primary">Reject remaining proposals</button>
+        <br/>
+        <a href="/scheduler/" class="btn btn-primary">Schedule accepted proposals using online scheduler</a>
+
+        <h2>Import</h2>
+
+        If you use our <a href="/#/admin/exports">PDF cards</a> for IRL debate and already have a schedule set, you can import schedule as JSON.
+        Format :
+        <pre>
+    [
+      {
+          "id": talkID,
+          "event_start" : ISO-8601_DATE_TIME
+      },
+          ...
+    ]</pre>
+
+        <div class="btn btn-primary" ngf-select="upload($file)">Upload a JSON shedule file</div>
+
+    </div>
+</div>

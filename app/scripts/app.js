@@ -49,7 +49,8 @@ angular.module('CallForPaper', [
     'restangular',
     'dialogs.main',
     'ui.gravatar',
-    'chart.js'
+    'chart.js',
+    'ngFileUpload'
 ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
@@ -266,6 +267,17 @@ angular.module('CallForPaper', [
                 parent: 'admin.loading',
                 templateUrl: 'views/admin/stats.html',
                 controller: 'AdminStatsCtrl',
+            })
+            .state('admin.schedule', {
+                url: '/schedule',
+                parent: 'admin.loading',
+                templateUrl: 'views/admin/schedule.html',
+                controller: 'AdminScheduleCtrl',
+                resolve: {
+                    stats: function(AdminStats) {
+                        return AdminStats.meter().$promise;
+                    }
+                }
             })
 
             // Restricted
