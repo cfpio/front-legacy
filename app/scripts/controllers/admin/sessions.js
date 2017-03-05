@@ -95,6 +95,17 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
 
     };
 
+    $scope.backup = function(talkId) {
+        $http({
+            method: 'PUT',
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/backup'
+        }).then(function successCallback(response) {
+            var talk = sessions.filter( function( s ) { return s.id == talkId; });
+            talk.state = 'BACKUP';
+        });
+
+    };
+
     $scope.reject = function(talkId) {
         $http({
             method: 'PUT',
