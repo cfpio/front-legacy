@@ -71,7 +71,7 @@ angular.module('CallForPaper')
                 });
             };
 
-            $scope.removeFormat = function(index) {
+            $scope.removeRoom = function(index) {
                 var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteRoom'));
                 dlg.result.then(function() {
                     var room = $scope.rooms.splice(index, 1)[0];
