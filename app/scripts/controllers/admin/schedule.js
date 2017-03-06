@@ -26,14 +26,11 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
 
     function queryMeter() {
         AdminStats.meter().$promise.then(function(statsTmp) {
-            console.log("state = "+statsTmp)
-            console.log(statsTmp)
             $scope.stats = statsTmp;
         });
     }
 
     $scope.upload = function(file) {
-        console.log(file)
         Upload.upload({
             url: AppConfig.apiBaseUrl + '/schedule',
             method: 'POST',
