@@ -167,6 +167,12 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/owner/admins.html',
                 controller: 'OwnerAdminsCtrl'
             })
+            // Reviewers
+            .state('owner.reviewers', {
+                url: '/reviewers',
+                templateUrl: 'views/owner/reviewers.html',
+                controller: 'OwnerReviewersCtrl'
+            })
             // Session
             .state('admin.loading', {
                 abstract: true,

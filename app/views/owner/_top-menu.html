@@ -20,12 +20,15 @@
 
 <ul class="nav navbar-nav">
     <li ui-sref-active="active">
-        <a ui-sref="owner.config">{{'owner.config' | translate}}</a>
+        <a ui-sref="owner.config"><i class="ion-ios-gear"></i> {{'owner.config' | translate}}</a>
     </li>
     <li ui-sref-active="active">
-        <a ui-sref="owner.admins">{{'owner.admins' | translate}}</a>
+        <a ui-sref="owner.reviewers"><i class="ion-person"></i> Reviewers</a>
     </li>
     <li ui-sref-active="active">
-        <a ui-sref="owner.tracksAndFormats">{{'owner.tracksAndFormats' | translate}}</a>
+        <a ui-sref="owner.admins"><i class="ion-person-add"></i> {{'owner.admins' | translate}}</a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="owner.tracksAndFormats"><i class="ion-clipboard"></i> {{'owner.tracksAndFormats' | translate}}</a>
     </li>
 </ul>
