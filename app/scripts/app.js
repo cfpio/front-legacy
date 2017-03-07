@@ -50,7 +50,8 @@ angular.module('CallForPaper', [
     'dialogs.main',
     'ui.gravatar',
     'chart.js',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ui.calendar'
 ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
