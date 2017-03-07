@@ -123,14 +123,25 @@ gulp.task('fonts', function() {
 });
 
 gulp.task('serve', ['watch', 'tdd', 'lint'], function() {
-    connect.server(
-        {
-            root: [yeoman.app, yeoman.dist],
+    connect.server({
+        root: [yeoman.app, yeoman.dist],
             port: devPort,
             livereload: true,
             middleware: middlewareDef
-        }
-    );
+        });
+});
+
+gulp.task('serveLocal', ['watch', 'tdd', 'lint'], function() {
+    gulp.src(yeoman.app + 'scripts/bootstrapper.js')
+        .pipe(replace("apiBaseUrl: 'https://api.cfp.io/v0'", "apiBaseUrl: 'http://localhost:8080/v0'"))
+        .pipe(gulp.dest(yeoman.dist + 'scripts'));
+
+    connect.server({
+        root: [yeoman.dist, yeoman.app],
+        port: devPort,
+        livereload: true,
+        middleware: middlewareDef
+    });
 });
 
 gulp.task('watch', ['fonts', 'less'], function() {

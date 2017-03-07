@@ -50,3 +50,9 @@ task gulpServe(type: NodeTask, dependsOn: 'bowerInstall') {
     args = ["serve"]
     workingDir = file("${project.projectDir}")
 }
+
+task gulpServeLocal(type: NodeTask, dependsOn: 'bowerInstall') {
+    script = file('node_modules/gulp/bin/gulp.js')
+    args = ["serveLocal"]
+    workingDir = file("${project.projectDir}")
+}
