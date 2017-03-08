@@ -39,6 +39,7 @@
                     <li role="presentation" ng-class="{active : tab == 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false"><i class="ion-ios-mic"></i> {{'admin.session' | translate}}</button></li>
                     <li role="presentation" ng-class="{active : tab == 'votes'}"><button href="#votes" role="tab" id="votes-tab" data-toggle="tab" aria-controls="vote" aria-expanded="false"><i class="ion-ios-speedometer"></i> Votes</button></li>
 					<li role="presentation" ng-class="{active : tab == 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false"><i class="ion-android-chat"></i> {{'admin.contact' | translate}}</button></li>
+                    <li role="presentation" ng-class="{active : tab == 'schedule'}"><button href="#schedule" role="tab" id="schedule-tab" data-toggle="tab" aria-controls="schedule" aria-expanded="false"><i class="ion-ios-calendar-outline"></i> Schedule</button></li>
                     <li role="presentation" ng-class="{active : tab == 'danger'}"><button href="#danger" role="tab" id="danger-tab" data-toggle="tab" aria-controls="danger" aria-expanded="false"><i class="ion-ios-flame"></i> {{'admin.danger' | translate}}</button></li>
 				</ul>
 				<div id="tabContent" class="tab-content tile">
@@ -302,6 +303,36 @@
 							</div>
 						</div>
 					</div>
+
+                    <div role="tabpanel" ng-class="{active : tab == 'schedule', in : tab == 'schedule'}" class="tab-pane fade" id="schedule" aria-labelledby="schedule-tab">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form name="scheduleForm" class="form-horizontal" role="form" novalidate>
+                                    <div class="form-group">
+                                        <label class="control-label">When</label>
+                                        <div>
+                                            <input required type="datetime" name="startInput" class="form-control" ng-model="talk.schedule" placeholder="yyyy-mm-ddTHH:MM:SS">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Where</label>
+                                        <div>
+                                            <select ng-model="talk.room" name="roomInput" required class="form-control"
+                                                    ng-options="room.id as room.name for (roomId, room) in rooms">
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button ng-click="submit(talk)" class="btn btn-block btn-primary" ng-disabled="sending">
+                                            Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <div role="tabpanel" ng-class="{active : tab === 'danger', in : tab === 'danger'}" class="tab-pane fade" id="danger" aria-labelledby="danger-tab">
                         <div class="row">

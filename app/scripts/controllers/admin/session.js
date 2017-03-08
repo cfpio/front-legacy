@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, AdminSession, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, AdminSession, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms) {
     $scope.tab = $stateParams.tab;
     $scope.saveDraftButtonHidden = true;
 
@@ -34,6 +34,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     $scope.session = talk;
     $scope.talk = talk;
     $scope.tracks = tracks;
+    $scope.rooms = Rooms.getAll();
     $scope.talkFormats = _.indexBy(talkformats, 'id');
     $scope.cospeakers = [];
 
