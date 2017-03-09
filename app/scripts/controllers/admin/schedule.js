@@ -59,58 +59,6 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
         });
     };
 
-    $scope.calendarConfig = {
-        defaultDate: '2017-04-19',
-        defaultView: 'agendaDay',
-        slotEventOverlap: false,
-        slotDuration: '00:15:00',
-        editable: false,
-        header: {
-            left: '',
-            center: '',
-            right: 'prev,next'
-        },
-        titleFormat: {
-            day: ''
-        },
-        columnFormat: {
-            day: ''
-        },
-        allDaySlot: false,
-        minTime: '08:30:00',
-        maxTime: '21:00:00',
-        axisFormat: 'HH:mm',
-        contentHeight: 1125,
-        height: 1125,
-        timeFormat: {
-            agenda: 'HH:mm'
-        }
-    };
-
-    $scope.agenda = { events: []};
-    $http.get('https://api.cfp.io/api/schedule/accepted').then(function(response) {
-        var talks = response.data;
-        console.log(talks);
-
-        $scope.agenda.events = function(start, end, timezone, callback) {
-            callback(_.map(talks, function(talk) {
-                return {
-                    title: talk.name,
-                    format: talk.format,
-                    category: talk.event_type,
-                    description: talk.description,
-                    speakers: talk.speakers,
-                    start: talk.event_start,
-                    end: talk.event_end,
-                    color: categoryColors[talk.event_type],
-                    room: rooms[talk.venue]
-                };
-            }));
-        };
-    }.bind(this));
-
-
-
     queryMeter();
 
 });

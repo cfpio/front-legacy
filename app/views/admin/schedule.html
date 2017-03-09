@@ -60,9 +60,66 @@
 
 
         <h2>Current schedule</h2>
-        <div ui-calendar="calendarConfig" class="span8 calendar" ng-model="agenda"></div>
+
+    <script>
+
+        $(function() { // document ready
+
+            var config = {
+                schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+                defaultView: 'agendaDay',
+                editable: false,
+                selectable: false,
+                eventLimit: true, // allow "more" link when too many events
+                header: {
+                    left: 'prev',
+                    right: 'next',
+                    center: 'title'
+                },
+
+
+                //// uncomment this line to hide the all-day slot
+                //allDaySlot: false,
+
+                select: function(start, end, jsEvent, view, resource) {
+                    console.log(
+                        'select',
+                        start.format(),
+                        end.format(),
+                        resource ? resource.id : '(no resource)'
+                    );
+                },
+                dayClick: function(date, jsEvent, view, resource) {
+                    console.log(
+                        'dayClick',
+                        date.format(),
+                        resource ? resource.id : '(no resource)'
+                    );
+                }
+            };
+
+            $.get('https://api.cfp.io/api/application',         // FIXME we allready know this from angularJS code
+                function(data) {
+                    console.log(data);
+                    config.defaultDate = data.date.substring(6)+'-'+data.date.substring(3,5)+'-'+data.date.substring(0,2);
+
+                    $.get('https://api.cfp.io/api/schedule/fullcalendar',
+                        function(data) {
+                            config.events = data.events;
+                            config.resources = data.resources;
+                            $('#calendar').fullCalendar(config);
+                        }
+                    );
+
+                }
+            );
+
+
+
+        });
+
+    </script>
+        <div id="calendar" class="fc fc-unthemed fc-ltr">
         </div>
-
-
     </div>
 </div>
