@@ -84,44 +84,41 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     };
 
 
-    $scope.accept = function(talkId) {
+    $scope.accept = function(talk) {
+        var scope = $scope;
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/accept'
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/accept'
         }).then(function successCallback(response) {
-            var talk = sessions.filter( function( s ) { return s.id == talkId; });
             talk.state = 'ACCEPTED';
         });
 
     };
 
-    $scope.backup = function(talkId) {
+    $scope.backup = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/backup'
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/backup'
         }).then(function successCallback(response) {
-            var talk = sessions.filter( function( s ) { return s.id == talkId; });
             talk.state = 'BACKUP';
         });
 
     };
 
-    $scope.reject = function(talkId) {
+    $scope.reject = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/reject'
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/reject'
         }).then(function successCallback(response) {
-            var talk = sessions.filter( function( s ) { return s.id == talkId; });
             talk.state = 'REFUSED';
         });
     };
 
-    $scope.rectract = function(talkId) {
+    $scope.rectract = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talkId + '/retract'
+            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/retract'
         }).then(function successCallback(response) {
-            var talk = sessions.filter( function( s ) { return s.id == talkId; });
             talk.state = 'CONFIRMED';
         });
     };
