@@ -72,7 +72,7 @@
             var config = {
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 defaultView: 'agendaDay',
-                editable: false,
+                editable: true,
                 selectable: false,
                 eventLimit: true, // allow "more" link when too many events
                 header: {
@@ -80,25 +80,22 @@
                     right: 'next',
                     center: 'title'
                 },
-
-
-                //// uncomment this line to hide the all-day slot
-                //allDaySlot: false,
-
-                select: function(start, end, jsEvent, view, resource) {
-                    console.log(
-                        'select',
-                        start.format(),
-                        end.format(),
-                        resource ? resource.id : '(no resource)'
-                    );
-                },
-                dayClick: function(date, jsEvent, view, resource) {
-                    console.log(
-                        'dayClick',
-                        date.format(),
-                        resource ? resource.id : '(no resource)'
-                    );
+                eventDrop: function(event, delta, revertFunc) {
+                    console.log('event ' +event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
+                    $.ajax({
+                        url: 'https://api.cfp.io/api/schedule/sessions/'+event.id,
+                        type: 'PUT',
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        xhrFields: {
+                            withCredentials: true
+                        },
+                        data: JSON.stringify({
+                            id: event.id,
+                            resourceId: event.resourceId,
+                            start: event.start.format("YYYY-MM-DD[T]HH:mm:SSZ")
+                        })
+                    });
                 }
             };
 
