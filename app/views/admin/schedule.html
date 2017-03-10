@@ -80,13 +80,13 @@
                     right: 'next',
                     center: 'title'
                 },
-                views: {
-                    agendaDays: {
-                        type: 'agenda',
-                        duration: { days: 1 },
-                    }
-                },
                 slotDuration: '00:15:00',
+                snapDuration: '00:5:00',
+                minTime: '08:00:00',
+                maxTime: '21:00:00',
+                eventDurationEditable: false,
+                eventOverlap: false,
+
                 eventDrop: function(event, delta, revertFunc) {
                     console.log('event ' +event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
                     $.ajax({
@@ -108,11 +108,7 @@
 
             $.get('https://api.cfp.io/api/application',         // FIXME we allready know this from angularJS code
                 function(data) {
-                    console.log(data);
                     config.defaultDate = data.date.substring(6)+'-'+data.date.substring(3,5)+'-'+data.date.substring(0,2);
-
-                    config.views.agendaDays.duration.days = data.duration,
-
                     $.get('https://api.cfp.io/api/schedule/fullcalendar',
                         function(data) {
                             config.events = data.events;
