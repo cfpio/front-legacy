@@ -80,6 +80,13 @@
                     right: 'next',
                     center: 'title'
                 },
+                views: {
+                    agendaDays: {
+                        type: 'agenda',
+                        duration: { days: 1 },
+                    }
+                },
+                slotDuration: '00:15:00',
                 eventDrop: function(event, delta, revertFunc) {
                     console.log('event ' +event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
                     $.ajax({
@@ -103,6 +110,8 @@
                 function(data) {
                     console.log(data);
                     config.defaultDate = data.date.substring(6)+'-'+data.date.substring(3,5)+'-'+data.date.substring(0,2);
+
+                    config.views.agendaDays.duration.days = data.duration,
 
                     $.get('https://api.cfp.io/api/schedule/fullcalendar',
                         function(data) {
