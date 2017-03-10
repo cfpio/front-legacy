@@ -52,10 +52,24 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
       });
     };
 
-    $scope.notifySpeakers = function() {
+    $scope.notifyAllSpeakers = function() {
         $http({
             method: 'POST',
             url:  AppConfig.apiBaseUrl + '/schedule/notification'
+        });
+    };
+
+    $scope.notifyRefusedSpeakers = function() {
+        $http({
+            method: 'POST',
+            url:  AppConfig.apiBaseUrl + '/schedule/notification?filter=refused'
+        });
+    };
+
+    $scope.notifyAcceptedSpeakers = function() {
+        $http({
+            method: 'POST',
+            url:  AppConfig.apiBaseUrl + '/schedule/notification?filter=accepted'
         });
     };
 
