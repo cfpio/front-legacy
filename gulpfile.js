@@ -90,6 +90,7 @@ gulp.task('copy', function() {
     return gulp.src([
         yeoman.app + '*.{ico,png,txt}',
         yeoman.app + '{403,404}.html',
+        yeoman.app + 'scheduler.html',
         yeoman.app + 'images/{,*/}*.{gif,webp,png,jpg}',
         yeoman.app + 'lib/**/*'
     ], {base: yeoman.app})
