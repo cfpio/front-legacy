@@ -10,6 +10,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js"></script>
     <script src="./lib/scheduler.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css">
+
     <script>
 
         $(function() {    // document ready
@@ -36,8 +41,13 @@
                 drop: function() {
                     $(this).remove();
                 },
+                eventReceive: function(event) { // called when a proper external event is dropped
+                    if (event.duration == null) {
+                        event.duration = event.end.diff(event.start) / 1000 / 60
+                    }
+                },
                 eventDrop: function(event, delta, revertFunc) {
-                    console.log('event ' +event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
+                    console.log('event ' + event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
                     $.ajax({
                         url: 'https://api.cfp.io/api/schedule/sessions/'+event.id,
                         type: 'PUT',
@@ -52,8 +62,34 @@
                             start: event.start.format("YYYY-MM-DD[T]HH:mm:SSZ")
                         })
                     });
+                },
+                eventClick: function(event) {
+                    createUnscheduledEvent(event);
+                    $('#calendar').fullCalendar('removeEvents', event.id);
                 }
             };
+
+            var createUnscheduledEvent = function(event) {
+                var li = $('<li class="fc-event ui-draggable ui-draggable-handle">' + event.title + '</li>');
+
+                // store data so the calendar knows to render an event upon drop
+                li.data('event', {
+                    id : event.id,
+                    title: event.title,
+                    stick: true, // maintain when user navigates (see docs on the renderEvent method)
+                    duration: moment.duration(event.duration, 'minutes')
+                });
+
+                // make the event draggable using jQuery UI
+                li.draggable({
+                    zIndex: 999,
+                    revert: true,      // will cause the event to go back to its
+                    revertDuration: 0  //  original position after the drag
+                });
+
+                $('#external-events').append(li);
+            }
+
 
             var init = $.get('https://api.cfp.io/api/application',
                 function(data) {
@@ -65,40 +101,22 @@
                 function(data) {
                     config.events = data.events;
                     config.resources = data.resources;
+
+                    $.each(data.resources, function(i, r) {
+                        $('#resourceId-select').append('<option value="'+r.id+'">'+r.title+'</option>')
+                    });
                 }
             );
 
             var unscheduled = $.get('https://api.cfp.io/api/schedule/fullcalendar/unscheduled',
                 function(data) {
-                    console.log(data)
-
-                    $.each(data, function(i, event) {
-                        var li = $('<li class="fc-event ui-draggable ui-draggable-handle">' + event.title + '</li>');
-
-                        // store data so the calendar knows to render an event upon drop
-                        li.data('event', {
-                            id : event.id,
-                            title: event.title,
-                            stick: true, // maintain when user navigates (see docs on the renderEvent method)
-                            duration: moment.duration(event.duration, 'minutes')
-                        });
-
-                        // make the event draggable using jQuery UI
-                        li.draggable({
-                            zIndex: 999,
-                            revert: true,      // will cause the event to go back to its
-                            revertDuration: 0  //  original position after the drag
-                        });
-
-                        $('#external-events').append(li);
-                    });
+                    $.each(data, function(i, event) { createUnscheduledEvent(event); });
                 }
             );
             $.when(init, schedule, unscheduled).done(function(){
                 console.log(config);
                 $('#calendar').fullCalendar(config);
             });
-
         });
 
     </script>
@@ -152,17 +170,53 @@
             width: 900px;
         }
 
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+
+
     </style>
 </head>
 <body >
 
-<div id='wrap'>
-  <ul id="external-events">
-    <h4>Unscheduled talks</h4>
-  </ul>
+    <nav class="navbar navbar-black">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand"><a ui-sref="app.dashboard" href="#/dashboard">
+                    <span >Cfp.io</span> </a></div>
+            </div>
+        </div>
+    </nav>
 
-  <div id="calendar">
-</div>
+    <div id='wrap'>
+
+      <ul id="external-events">
+        <h4>Unscheduled talks</h4>
+      </ul>
+
+      <div id="calendar">
+
+    </div>
+
+    <div style="clear: both;"/>
+
+        <!--  TODO barcode scanner integration
+    <footer class="footer">
+        <form action="#" method="POST" class="container form-group">
+            <span class="ion-ios-barcode-outline"></span> Use barcode scanner
+            <input type="number" name="id" placeholder="Talk ID"/>
+            <input type="datetime" name="start" placeholder="Date time"/>
+            <select id="resourceId-select" name="resourceId">
+            </select>
+            <button type="submit" class="btn btn-primary" name="submit" value="add">Add</button>
+        </form>
+    </footer>
+    -->
 
 
 
