@@ -19,6 +19,27 @@
 
         $(function() {    // document ready
 
+            /**
+             * Record schedule for event on backend server
+             * @param event
+             */
+            function setEventSchedule(event) {
+                $.ajax({
+                    url: 'https://api.cfp.io/api/schedule/sessions/' + event.id,
+                    type: 'PUT',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    data: JSON.stringify({
+                        id: event.id,
+                        resourceId: event.resourceId,
+                        start: event.start.format("YYYY-MM-DD[T]HH:mm:SSZ")
+                    })
+                });
+            }
+
             var config = {
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 defaultView: 'agendaDay',
@@ -45,23 +66,12 @@
                     if (event.duration == null) {
                         event.duration = event.end.diff(event.start) / 1000 / 60
                     }
+                    console.log('event ' + event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
+                    setEventSchedule(event);
                 },
                 eventDrop: function(event, delta, revertFunc) {
                     console.log('event ' + event.id + ' set in room ' + event.resourceId + ' at ' + event.start.format());
-                    $.ajax({
-                        url: 'https://api.cfp.io/api/schedule/sessions/'+event.id,
-                        type: 'PUT',
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        data: JSON.stringify({
-                            id: event.id,
-                            resourceId: event.resourceId,
-                            start: event.start.format("YYYY-MM-DD[T]HH:mm:SSZ")
-                        })
-                    });
+                    setEventSchedule(event);
                 },
                 eventClick: function(event) {
                     createUnscheduledEvent(event);
@@ -69,6 +79,9 @@
                 }
             };
 
+            /**
+             * Create an event as a <li> element in "unscheduled" list
+             */
             var createUnscheduledEvent = function(event) {
                 var li = $('<li class="fc-event ui-draggable ui-draggable-handle">' + event.title + '</li>');
 
@@ -91,12 +104,14 @@
             }
 
 
+            // Retrieve event's configuration
             var init = $.get('https://api.cfp.io/api/application',
                 function(data) {
                     config.defaultDate = data.date.substring(6) + '-' + data.date.substring(3, 5) + '-' + data.date.substring(0, 2);
                 }
             );
 
+            // Retrieve current schedule
             var schedule = $.get('https://api.cfp.io/api/schedule/fullcalendar',
                 function(data) {
                     config.events = data.events;
@@ -108,11 +123,13 @@
                 }
             );
 
+            // Retrieve unscheduled events
             var unscheduled = $.get('https://api.cfp.io/api/schedule/fullcalendar/unscheduled',
                 function(data) {
                     $.each(data, function(i, event) { createUnscheduledEvent(event); });
                 }
             );
+
             $.when(init, schedule, unscheduled).done(function(){
                 console.log(config);
                 $('#calendar').fullCalendar(config);
@@ -184,14 +201,17 @@
 </head>
 <body >
 
-    <nav class="navbar navbar-black">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div class="navbar-brand"><a ui-sref="app.dashboard" href="#/dashboard">
-                    <span >Cfp.io</span> </a></div>
-            </div>
-        </div>
-    </nav>
+    <header class="jumbotron">
+        <p class="container">
+            <h1>CFP.io scheduler</h1>
+            <ul>
+                <li>Drag and drop events into calendar view to define event's program.</li>
+                <li>Move events in calendar to change schedule.</li>
+                <li>Click on an event in calendar to remove it from schedule and get it added to "unschedule event" list,
+                    typically to move it to another day.</li>
+            </ul>
+        </p>
+    </header>
 
     <div id='wrap'>
 
