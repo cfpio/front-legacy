@@ -78,7 +78,7 @@
                         </td>
                         <td>
                             <div class="input-group margin-bottom-sm">
-                                <select ng-model="format.icon" class="form-control" >
+                                <select ng-model="format.icon" class="form-control" ng-blur="saveFormat(format)">
                                     <option value="500px">500px</option>
                                     <option value="address-book">address-book</option>
                                     <option value="address-book-o">address-book-o</option>
