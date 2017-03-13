@@ -28,8 +28,11 @@ angular.module('CallForPaper')
             $scope.formats = Formats.getAll();
             $scope.rooms = Rooms.getAll();
 
+
+            // Tracks
+
             $scope.addTrack = function() {
-                Tracks.add({libelle: 'new name', description: 'new description'}, function(track) {
+                Tracks.add({libelle: 'new name', description: 'new description', color: '#337ab7'}, function(track) {
                     $scope.tracks.push(track);
                 });
             };
@@ -46,8 +49,11 @@ angular.module('CallForPaper')
                 Tracks.update({id: track.id}, track);
             };
 
+
+            // Formats
+
             $scope.addFormat = function() {
-                Formats.add({name: 'new name', duration: 60, description: 'new description'}, function(format) {
+                Formats.add({name: 'new name', duration: 60, description: 'new description', icon: "slideshare"}, function(format) {
                     $scope.formats.push(format);
                 });
             };
@@ -60,10 +66,12 @@ angular.module('CallForPaper')
                 });
             };
 
-
-            $scope.saveRoom = function(room) {
-                Rooms.update({id: room.id}, room);
+            $scope.saveFormat = function(format) {
+                Formats.update({id: format.id}, format);
             };
+
+
+            // Rooms
 
             $scope.addRoom = function() {
                 Rooms.add({name: 'new name'}, function(room) {

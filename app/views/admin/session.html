@@ -28,7 +28,7 @@
 				<span class="mdi-navigation-chevron-left arrow"></span>
 			</a>
 			<h1>
-                {{::talk.name}}
+                <i class="fa fa-{{::talkFormats[talk.format + ''].icon}}"></i> {{::talk.name}}
                 <button ng-if="session.state == 'ACCEPTED'" class="btn btn-success status"><i class="ion-checkmark-circled"></i> Accepted</button>
                 <button ng-if="session.state == 'REFUSED'" class="btn btn-danger status"><i class="ion-checkmark-circled"></i> Rejected</button>
             </h1>
