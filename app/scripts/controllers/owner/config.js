@@ -60,5 +60,15 @@ angular.module('CallForPaper')
                 });
 
             };
+
+            $scope.unlocked = false;
+            $scope.unlock = function() {
+                console.log("unlocked")
+                $scope.unlocked = true;
+            }
+
+            $scope.reset = function() {
+                $http.delete(AppConfig.apiBaseUrl + '/admin/sessions');
+            }
         }
     );

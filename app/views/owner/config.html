@@ -70,3 +70,13 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+    <div class="panel" style="background: red">
+        <div class="panel-body">
+            <h4><i class="ion-ios-flame"></i> Danger zone</h4>
+            <input type="checkbox" value="unlock" id="unlock" ng-change="unlock()" ng-model="unlocked"> <label for="unlock"> I understand what I'm doing</label>
+            <button class="btn btn-block btn-danger" ng-click="reset()" ng-if="unlocked">Reset CFP to initial state</button>
+        </div>
+    </div>
+</div>
