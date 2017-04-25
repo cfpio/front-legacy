@@ -20,6 +20,9 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminMenuCtrl', function() {
+angular.module('CallForPaper').controller('AdminMenuCtrl', function(currentUser) {
+
+    this.isAdmin = currentUser.admin;
+    this.isOwner = currentUser.owner;
 
 });

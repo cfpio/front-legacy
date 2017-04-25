@@ -24,6 +24,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
+    $scope.currentUser = currentUser;
 
     $scope.stats = stats;
 

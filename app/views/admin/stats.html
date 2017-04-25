@@ -26,11 +26,13 @@
         <canvas id="tracks" class="chart chart-bar"
                 chart-data="tracks_data" chart-labels="tracks_labels" chart-options="tracks_options">
         </canvas>
+    </div>
 
+    <div class="col-md-10 col-md-offset-2" ng-if="currentUser.admin">
         <h3>Reviewers</h3>
         <canvas id="rates" class="chart chart-bar"
                 chart-data="rates_data" chart-labels="rates_labels" chart-options="rates_options">
         </canvas>
-
     </div>
+
 </div>

@@ -25,7 +25,7 @@
     <li ui-sref-active="active">
         <a ui-sref="app.profil"><i class="ion-person"></i> {{'header.profil' | translate}}</a>
     </li>
-    <li ui-sref-active="active" ng-if="topMenu.isAdmin">
+    <li ui-sref-active="active" ng-if="topMenu.isReviewer || topMenu.isAdmin">
         <a ui-sref="admin.sessions"><i class="ion-monitor"></i> {{'header.admin' | translate}}</a>
     </li>
     <li ui-sref-active="active" ng-if="topMenu.isOwner">

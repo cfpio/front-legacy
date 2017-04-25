@@ -20,7 +20,10 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $http) {
+angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $http, currentUser) {
+
+    $scope.currentUser = currentUser;
+
 
     $http({
         method: 'GET',

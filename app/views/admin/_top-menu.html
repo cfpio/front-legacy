@@ -25,10 +25,10 @@
     <li ui-sref-active="active">
         <a ui-sref="admin.stats"><i class="ion-stats-bars"></i> Statistics</a>
     </li>
-    <li ui-sref-active="active">
+    <li ui-sref-active="active" ng-if="topMenu.isAdmin">
         <a ui-sref="admin.exports"><i class="ion-share"></i> {{'admin.export' | translate}}</a>
     </li>
-    <li ui-sref-active="active">
+    <li ui-sref-active="active" ng-if="topMenu.isAdmin">
         <a ui-sref="admin.schedule"><i class="ion-calendar"></i> Schedule</a>
     </li>
 

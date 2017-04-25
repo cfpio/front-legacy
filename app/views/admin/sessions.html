@@ -101,12 +101,13 @@
                                             ng-bind="::session.added | date"></td>
                                         <td sortable="'mean'" data-title="'admin.mean' | translate"
                                             filter="{mean: 'number'}"
+                                            ng-if="currentUser.admin"
                                             ng-bind="::session.mean | number:2"></td>
-                                        <td data-title="'admin.votes' | translate" style="min-width: 120px;">
+                                        <td data-title="'admin.votes' | translate" style="min-width: 120px;" ng-if="currentUser.admin">
                                             <img tooltip="{{user}}" ng-repeat="user in session.voteUsersEmail"
                                                  class="pull-left mini-avatar" gravatar-src="user" gravatar-size="20">
                                         </td>
-                                        <td data-title="'status'">
+                                        <td data-title="'status'" ng-if="currentUser.admin">
                                             <button ng-if="session.state == 'ACCEPTED'" class="btn btn-secondary status" ng-click="rectract(session)" title="Revert decision"><i class="ion-checkmark-circled"></i> Accepted</button>
                                             <button ng-if="session.state == 'REFUSED'" class="btn btn-secondary status" ng-click="rectract(session)" title="Revert decision"><i class="ion-close-circled"></i> Rejected</button>
                                             <button ng-if="session.state == 'BACKUP'" class="btn btn-secondary status" ng-click="rectract(session)" title="Revert decision"><i class="ion-checkmark-circled"></i> Backup</button>

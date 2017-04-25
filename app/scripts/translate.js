@@ -48,7 +48,7 @@ angular.module('CallForPaper')
                 'profil': 'Profil',
                 'openUntil': 'Ouvert jusqu\'au ',
                 'decision': 'Délibération le ',
-                'admin': 'Admin'
+                'admin': 'Revue'
             },
             'languageModal': {
                 'choose': 'Choisissez une langue',
@@ -395,7 +395,7 @@ angular.module('CallForPaper')
                 'profil': 'Profil',
                 'openUntil': 'Open until the ',
                 'decision': 'Decision the ',
-                'admin': 'Admin'
+                'admin': 'Review'
             },
             'languageModal': {
                 'choose': 'Choose a langage',
