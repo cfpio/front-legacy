@@ -23,18 +23,18 @@
         <div class="panel-body">
             {{'talkInfo.intro' | translate }}
             <div class="row talk_infos_row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <h4> {{'talkInfo.formats' | translate }} : </h4>
                     <ul ng-repeat="talkFormat in talkFormats">
 
                         <li> <strong>{{talkFormat.name}}</strong> ({{talkFormat.duration}}min) : {{talkFormat.description}} </li>
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <h4> {{'talkInfo.categories' | translate }} :</h4>
                     <ul ng-repeat="track in tracks">
 
-                        <li> {{track.libelle}}</li>
+                        <li> <i class="ion-ios-albums" style="color: {{track.color}}"></i> <strong>{{track.libelle}}</strong> {{track.description}}</li>
                     </ul>
                 </div>
             </div>
