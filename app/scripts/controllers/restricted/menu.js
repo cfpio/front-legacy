@@ -23,7 +23,8 @@
 angular.module('CallForPaper').controller('UserMenuCtrl', function(isProfileComplete, currentUser) {
 
     this.isProfileComplete = isProfileComplete;
+    this.isReviewer = currentUser.reviewer;
     this.isAdmin = currentUser.admin;
     this.isOwner = currentUser.owner;
-    
+
 });
