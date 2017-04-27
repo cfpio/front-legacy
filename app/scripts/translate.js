@@ -152,8 +152,8 @@ angular.module('CallForPaper')
                 'twitter': 'Profil Twitter :',
                 'googleplus': 'Profil Google Plus :',
                 'github': 'Profil Github :',
-                'hintSocial': 'Donnez les liens de vos réseaux sociaux (pour le site web) : Twitter / G+ / Github / Blog.',
-                'gender': 'Sexe t-shirt',
+                'hintSocial': 'Donnez les liens de vos autres réseaux sociaux, blog, etc.',
+                'gender': 'Coupe t-shirt',
                 'tshirtSize': 'Taille t-shirt'
             },
             'step2': {
@@ -497,7 +497,7 @@ angular.module('CallForPaper')
                 'twitter': 'Twitter Profil :',
                 'googleplus': 'Google Plus Profil:',
                 'github': 'Github Profil :',
-                'hintSocial': 'Give us your socials networks data (for the website) : Twitter / G+ / Github / Blog.',
+                'hintSocial': 'Give us your other socials networks link, blog, etc',
                 'gender': 'T-shirt gender',
                 'tshirtSize': 'T-shirt size'
             },

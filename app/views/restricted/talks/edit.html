@@ -65,35 +65,6 @@
                 </div>
             </div>
 
-
-            <div class="form-group"
-                 ng-class="{'has-success': talkForm.referencesInput.$valid && talkForm.referencesInput.$dirty, 'has-error': talkForm.referencesInput.$invalid && (talkForm.referencesInput.$dirty || talkInvalid)}">
-                <label class="control-label">{{'step2.references' | translate}}</label>
-                <div>{{'step2.hintReferences' | translate}}</div>
-                <div>
-                    <div md-preview="talk.references"></div>
-                    <textarea class="form-control" name="referencesInput" ng-model="talk.references"
-                              rows="3"></textarea>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="control-label" for="slides"><i class="ion-android-laptop"></i> &nbsp; slides</label>
-                <div>lien slideshare ou équivalent</div>
-                <div>
-                    <input type="url" id="slides" class="form-control" ng-model="talk.slides">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label" for="video"><i class="ion-videocamera"></i> &nbsp; video</label>
-                <div>lien Youtube ou équivalent</div>
-                <div>
-                    <input type="url" id="video" class="form-control" ng-model="talk.video">
-                </div>
-            </div>
-
             <div class="form-group"
                  ng-class="{'has-success': talkForm.difficultyInput.$valid && talkForm.difficultyInput.$dirty, 'has-error': talkForm.difficultyInput.$invalid && (talkForm.difficultyInput.$dirty || talkInvalid)}">
                 <label class="control-label">{{'step2.difficulty' | translate}}</label>
@@ -119,10 +90,38 @@
                 <div>{{'step2.hintCospeaker' | translate}}</div>
                 <div>
                     <div>
-                       <tags-input id="social" name="social" ng-model="cospeakers"></tags-input>
+                        <tags-input id="social" name="social" ng-model="cospeakers"></tags-input>
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="control-label" for="slides"><i class="ion-android-laptop"></i> &nbsp; slides</label>
+                <div>lien slideshare ou équivalent</div>
+                <div>
+                    <input type="url" id="slides" class="form-control" ng-model="talk.slides">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label" for="video"><i class="ion-videocamera"></i> &nbsp; video</label>
+                <div>lien Youtube ou équivalent</div>
+                <div>
+                    <input type="url" id="video" class="form-control" ng-model="talk.video">
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-success': talkForm.referencesInput.$valid && talkForm.referencesInput.$dirty, 'has-error': talkForm.referencesInput.$invalid && (talkForm.referencesInput.$dirty || talkInvalid)}">
+                <label class="control-label">{{'step2.references' | translate}}</label>
+                <div>{{'step2.hintReferences' | translate}}</div>
+                <div>
+                    <div md-preview="talk.references"></div>
+                    <textarea class="form-control" name="referencesInput" ng-model="talk.references"
+                              rows="3"></textarea>
+                </div>
+            </div>
+
             <p ng-show="sendError" class="col-sm-12 bg-danger alert">{{'step3.sendError' | translate}}</p>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 pull-right">
                 <button ng-click="submit(talk)" class="btn btn-block btn-success" ng-disabled="sending">
