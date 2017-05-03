@@ -1,7 +1,5 @@
 FROM node:6.8.0
 
-MAINTAINER team@breizhcamp.org
-
 WORKDIR /work
 
 ADD package.json /work/
@@ -17,8 +15,15 @@ RUN ls -al node_modules
 RUN ls -al app/bower_components
 RUN /work/node_modules/.bin/gulp build
 
-RUN mkdir /www
-RUN mv /work/dist /www/front-legacy
 
-VOLUME /www/front-legacy
-CMD /bin/true
+### ---
+
+FROM nginx
+LABEL maintainer "team@breizhcamp.org"
+
+COPY nginx.conf /etc/nginx/conf.d/cfpio.conf
+COPY --from=0 /work/dist /www
+
+# Clever cloud require the container to listen on port 8080
+ENV NGINX_PORT=8080
+EXPOSE 8080
