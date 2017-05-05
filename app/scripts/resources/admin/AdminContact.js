@@ -21,16 +21,16 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminContact', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/admin/sessions/:rowId/contacts', {},
+    return $resource(AppConfig.apiBaseUrl + '/proposals/:rowId/comments', {},
         {
             getByRowId: {
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:rowId/contacts',
+                url: AppConfig.apiBaseUrl + '/proposals/:rowId/comments',
                 method: 'GET',
                 isArray: true
             },
             update: {
                 method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:rowId/contacts/:id'
+                url: AppConfig.apiBaseUrl + '/proposals/:rowId/comments/:id'
             }
         });
 });
