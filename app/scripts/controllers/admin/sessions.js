@@ -89,7 +89,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
         var scope = $scope;
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/accept'
+            url: AppConfig.apiBaseUrl + '/proposals/' + talk.id + '/accept'
         }).then(function successCallback(response) {
             talk.state = 'ACCEPTED';
         });
@@ -99,7 +99,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     $scope.backup = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/backup'
+            url: AppConfig.apiBaseUrl + '/proposals/' + talk.id + '/backup'
         }).then(function successCallback(response) {
             talk.state = 'BACKUP';
         });
@@ -109,7 +109,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     $scope.reject = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/reject'
+            url: AppConfig.apiBaseUrl + '/proposals/' + talk.id + '/reject'
         }).then(function successCallback(response) {
             talk.state = 'REFUSED';
         });
@@ -118,7 +118,7 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
     $scope.rectract = function(talk) {
         $http({
             method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/retract'
+            url: AppConfig.apiBaseUrl + '/proposals/' + talk.id + '/retract'
         }).then(function successCallback(response) {
             talk.state = 'CONFIRMED';
         });

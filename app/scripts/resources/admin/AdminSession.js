@@ -21,24 +21,25 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminSession', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/admin/sessions/:id', null,
+    return resourceRetries(AppConfig.apiBaseUrl + '/proposals/:id', null,
         {
             update: {
                 method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:id'
+                url: AppConfig.apiBaseUrl + '/proposals/:id'
             },
             delete: {
                 method: 'DELETE',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:id'
-            },
-            setViewed: {
-                method: 'POST',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/viewed/:id',
-            },
-            changeTrack: {
-                method: 'PUT',
-                url: AppConfig.apiBaseUrl + '/admin/sessions/track/:id'
+                url: AppConfig.apiBaseUrl + '/proposals/:id'
             }
+            // Ca existe ??
+            // setViewed: {
+            //     method: 'POST',
+            //     url: AppConfig.apiBaseUrl + '/admin/sessions/viewed/:id',
+            // },
+            // changeTrack: {
+            //     method: 'PUT',
+            //     url: AppConfig.apiBaseUrl + '/admin/sessions/track/:id'
+            // }
 
 
         });

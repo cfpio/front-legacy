@@ -21,19 +21,19 @@
 'use strict';
 
 angular.module('CallForPaper').factory('AdminComment', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/admin/sessions/:rowId/comments', {},
+    return $resource(AppConfig.apiBaseUrl + '/proposals/:rowId/comments', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             getByRowId: {
-                url: AppConfig.apiBaseUrl + '/admin/sessions/:rowId/comments',
+                url: AppConfig.apiBaseUrl + '/proposals/:rowId/comments',
                 method: 'GET',
                 isArray: true
             },
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/admin/sessions/:rowId/comments/:id'},
-            delete: {method: 'DELETE', url: AppConfig.apiBaseUrl + '/admin/sessions/:rowId/comments/:id'}
+            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/proposals/:rowId/comments/:id'},
+            delete: {method: 'DELETE', url: AppConfig.apiBaseUrl + '/proposals/:rowId/comments/:id'}
 
         });
 });
