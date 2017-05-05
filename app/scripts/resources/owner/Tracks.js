@@ -21,15 +21,15 @@
 'use strict';
 
 angular.module('CallForPaper').factory('Tracks', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/tracks', {},
+    return $resource(AppConfig.apiBaseUrl + '/themes', {},
         {
             getAll: {
                 method: 'GET',
                 isArray: true
             },
             add: {method: 'POST'},
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/tracks/:id'},
-            remove: {method: 'DELETE', url: AppConfig.apiBaseUrl + '/tracks/:id'}
+            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/themes/:id'},
+            remove: {method: 'DELETE', url: AppConfig.apiBaseUrl + '/themes/:id'}
 
         });
 });
