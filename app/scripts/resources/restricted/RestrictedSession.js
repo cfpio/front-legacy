@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper').factory('RestrictedSession', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/proposals/:id', null,
+    return resourceRetries(AppConfig.apiBaseUrl + '/proposals/:id?user=me', null,
         {
             update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/proposals/:id'},
         });

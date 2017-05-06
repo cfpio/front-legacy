@@ -93,7 +93,7 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
         dialogs.confirm(translateFilter('confirmModal.title'), translateFilter('confirmModal.text'), {
             size: 'md'
         }).result.then(function() {
-            talk.state = CONFIRMED;
+            talk.state = 'CONFIRMED';
             save(talk);
         }, processError);
     };
