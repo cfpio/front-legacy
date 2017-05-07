@@ -64,8 +64,10 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                     return $q.reject(response);
                 });
         },
-        getMyProposals: function() {
-            return $http.get(AppConfig.apiBaseUrl + '/users/me/proposals')
+        getMyProposals: function(states) {
+            return $http.get(AppConfig.apiBaseUrl + '/users/me/proposals', {
+                    params: { states: states }
+                })
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
