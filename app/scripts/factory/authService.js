@@ -76,16 +76,23 @@ angular.module('CallForPaper')
          */
         authService.getCurrentUser = function() {
             var promise = $q.defer();
-            AdminUser.getCurrentUser(function(userInfo) {
-                authService.user = userInfo;
-                if (!authService.isAuthenticated()) {
-                    authService.login();
-                }
-                promise.resolve(userInfo);
-            }, function() {
-                promise.reject();
-            });
+            if (authService.user) {
+                return promise.resolve(authService.user);
+            } else {
+                AdminUser.getCurrentUser(function(userInfo) {
+                    authService.user = userInfo;
+                    if (!authService.isAuthenticated()) {
+                        authService.login();
+                    }
+                    promise.resolve(userInfo);
+                }, function() {
+                    promise.reject();
+                });
+            }
+
             return promise.promise;
         };
+
+
         return authService;
     });
