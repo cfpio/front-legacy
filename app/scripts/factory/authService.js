@@ -44,7 +44,7 @@ angular.module('CallForPaper')
          * Verify if the user is currently logged
          */
         authService.isAuthenticated = function() {
-            return authService.user && authService.user.connected;
+            return authService.user;
         };
 
         /**
