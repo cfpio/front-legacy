@@ -38,6 +38,52 @@ angular.module('CallForPaper').factory('Sessions', function(Restangular) {
     return Sessions;
 });
 
+angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfig) {
+    return {
+        save: function(proposal) {
+            return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        update: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id, proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        get: function(id) {
+            return $http.get(AppConfig.apiBaseUrl + '/proposals/'+id)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        getMyProposals: function() {
+            return $http.get(AppConfig.apiBaseUrl + '/users/me/proposals')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        delete: function(id) {
+            return $http.delete(AppConfig.apiBaseUrl + '/proposals/'+id)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        }
+    };
+});
+
+
 
 angular.module('CallForPaper').factory('CoSessions', function(Restangular) {
     var coSessions = Restangular.service('cosessions');
