@@ -21,18 +21,14 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, RestrictedSession, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', function($scope, $filter, RestrictedSession, Proposals, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
-        /**
-         * Get current user sessions
-         * @return {[RestrictedSession]}
-         */
         $scope.sessions = [];
         $scope.sessionsLoaded = false;
         function querySession() {
-            RestrictedSession.query(function(sessionsTmp) {
+            Proposals.getMyProposals().then(function(sessionsTmp) {
                 $scope.sessions = sessionsTmp.map(function(session) {
                     session.fullname = session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];
