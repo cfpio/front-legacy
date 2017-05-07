@@ -23,7 +23,7 @@
 angular.module('CallForPaper').factory('AdminUser', function($resource, AppConfig) {
     return $resource(AppConfig.apiBaseUrl + '/adminUser/:id', null, {
         getCurrentUser: {
-            url: AppConfig.apiBaseUrl + '/adminUser/currentUser',
+            url: AppConfig.apiBaseUrl + '/users/me',
             method: 'GET'
         },
         getLoginUrl: {
