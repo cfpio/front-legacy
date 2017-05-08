@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, RestrictedSession, Proposals, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
