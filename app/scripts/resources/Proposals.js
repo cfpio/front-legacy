@@ -22,33 +22,30 @@
 
 angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfig) {
 
-    var create = function(proposal) {
-        return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
-            .then(function(response) {
-                return response.data;
-            }).catch(function(response) {
-                return $q.reject(response);
-            });
-    };
-    var update = function(proposal) {
-        return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id, proposal)
-            .then(function(response) {
-                return response.data;
-            }).catch(function(response) {
-                return $q.reject(response);
-            });
-    };
-
     return {
         save: function(proposal) {
             if (proposal.id) {
-                return update(proposal);
+                return this.update(proposal);
             } else {
-                return create(proposal);
+                return this.create(proposal);
             }
         },
-        create: create,
-        update: update,
+        create: function(proposal) {
+            return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        update: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id, proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
         get: function(id) {
             return $http.get(AppConfig.apiBaseUrl + '/proposals/'+id)
                 .then(function(response) {
