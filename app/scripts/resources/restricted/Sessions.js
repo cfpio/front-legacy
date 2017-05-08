@@ -81,6 +81,46 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
+        },
+        accept: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/accept', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        backup: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/backup', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        reject: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/reject', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        confirm: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/confirm', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        retract: function(proposal) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/retract', proposal)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
         }
     };
 });
