@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, $http, AppConfig, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, Proposals, stats, $templateCache, currentUser, AdminSession) {
+angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, $http, AppConfig, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, Proposals, stats, $templateCache, currentUser) {
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
