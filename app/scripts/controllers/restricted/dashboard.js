@@ -85,18 +85,14 @@ angular.module('CallForPaper')
             });
         }
 
-        $scope.delete = function(added) {
-            Proposals.delete({
-                id: added
-            }).then(function() {
+        $scope.delete = function(id) {
+            Proposals.delete(id).then(function() {
                 queryDraft();
             });
         };
 
-        $scope.confirm = function(added) {
-            Proposals.confirm({
-                id: added
-            }).then(function() {
+        $scope.confirm = function(id) {
+            Proposals.confirm(id).then(function() {
                 queryDraft();
                 querySession();
             });
