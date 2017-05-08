@@ -58,7 +58,7 @@ angular.module('CallForPaper', [
     }])
     .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
-        //Http Intercpetor to check auth failures for xhr requests
+        //Http Interceptor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
     .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, RestangularProvider, ProfileValidatorProvider, AppConfig) {
@@ -97,9 +97,9 @@ angular.module('CallForPaper', [
                 url: '/admin',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
+                    currentUser: function(AuthService) {
                         return AuthService.getCurrentUser();
-                    }]
+                    }
                 },
                 views: {
                     'side-menu': {
@@ -116,7 +116,9 @@ angular.module('CallForPaper', [
                         templateUrl: 'views/admin/admin.html',
                         controller: 'AdminCtrl',
                         resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
+                            isAutorizedAdmin: function(AuthService) {
+                                return AuthService.getCurrentUser().isAdmin;
+                            }
                         }
                     }
                 }
@@ -126,9 +128,9 @@ angular.module('CallForPaper', [
                 url: '/owner',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
+                    currentUser: function(AuthService) {
                         return AuthService.getCurrentUser();
-                    }]
+                    }
                 },
                 views: {
                     'side-menu': {
@@ -179,9 +181,9 @@ angular.module('CallForPaper', [
                 abstract: true,
                 template: '<ui-view/>',
                 resolve: {
-                    sessionsAll: function(AdminSession) {
-                        return AdminSession.query().$promise.then(function(data) {
-                            return _.map(data, function(session) {
+                    sessionsAll: function(Proposals) {
+                        return Proposals.getAll().then(function(sessions) {
+                            return _.map(sessions, function(session) {
                                 return _.assign(session, { // ugly workaround to be able to filter on speaker fullname
                                     speakerName: [session.speaker.firstname, session.speaker.lastname].join(' ')
                                 });
@@ -194,11 +196,11 @@ angular.module('CallForPaper', [
                 url: '/sessions?{format:\d?}',
                 parent: 'admin.loading',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
-                    },
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
+                    },
+                    tracks: function(TalkService) {
+                        return TalkService.getTracks();
                     },
                     format: function($stateParams, talkformats) {
                         var format = $stateParams.format;
@@ -220,14 +222,14 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/admin/session.html',
                 controller: 'AdminSessionCtrl',
                 resolve: {
-                    sessionsAll: function(AdminSession) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
-                        return AdminSession.query().$promise;
-                    },
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    sessionsAll: function(Proposals) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
+                        return Proposals.getAll();
                     },
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
+                    },
+                    tracks: function(TalkService) {
+                        return TalkService.getTracks();
                     },
                     talkId: function($stateParams) {
                         return $stateParams.id || null;
@@ -292,9 +294,9 @@ angular.module('CallForPaper', [
                 parent: 'main',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
+                    currentUser: function(AuthService) {
                         return AuthService.getCurrentUser();
-                    }],
+                    },
                     user: function(RestrictedUser) {
                         return RestrictedUser.get().$promise;
                     },
@@ -324,11 +326,11 @@ angular.module('CallForPaper', [
             .state('app.dashboard', {
                 url: '/dashboard',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
-                    },
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
+                    },
+                    tracks: function(TalkService) {
+                        return TalkService.getTracks();
                     }
                 },
                 templateUrl: 'views/restricted/dashboard.html',
@@ -343,11 +345,11 @@ angular.module('CallForPaper', [
             .state('app.sessions', {
                 template: '<ui-view/>',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
-                    },
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
+                    },
+                    tracks: function(TalkService) {
+                        return TalkService.getTracks();
                     },
                     isProfileComplete: ProfileValidatorProvider.isValid()
                 }
@@ -417,10 +419,10 @@ angular.module('CallForPaper', [
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
                     },
                     tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                        return TalkService.getTracks();
                     },
                     isCoSession: function() {
                         return false;
@@ -433,10 +435,10 @@ angular.module('CallForPaper', [
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
                     talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                        return TalkService.getFormats();
                     },
                     tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                        return TalkService.getTracks();
                     },
                     isCoSession: function() {
                         return true;

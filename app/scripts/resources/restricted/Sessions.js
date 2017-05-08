@@ -74,6 +74,16 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                     return $q.reject(response);
                 });
         },
+        getAll: function(states) {
+            return $http.get(AppConfig.apiBaseUrl + '/proposals', {
+                    params: { states: states }
+                })
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
         delete: function(id) {
             return $http.delete(AppConfig.apiBaseUrl + '/proposals/'+id)
                 .then(function(response) {

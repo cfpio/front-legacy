@@ -20,28 +20,23 @@
 
 'use strict';
 
-angular.module('CallForPaper').service('TalkService', function(resourceRetries, AppConfig) {
-
-    var tracks = resourceRetries(AppConfig.apiBaseUrl + '/tracks', null,
-        {
-            findAll: {
-                url: AppConfig.apiBaseUrl + '/tracks',
-                method: 'GET',
-                isArray: true
-            }
-        });
-
-    var formats = resourceRetries(AppConfig.apiBaseUrl + '/formats', null,
-        {
-            findAll: {
-                url: AppConfig.apiBaseUrl + '/formats',
-                method: 'GET',
-                isArray: true
-            }
-        });
-
+angular.module('CallForPaper').service('TalkService', function($http, $q, AppConfig) {
     return {
-        tracks: tracks,
-        formats: formats
+        getTracks: function() {
+            return $http.get(AppConfig.apiBaseUrl + '/tracks')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        getFormats: function() {
+            return $http.get(AppConfig.apiBaseUrl + '/formats')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        }
     };
 });
