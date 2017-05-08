@@ -112,12 +112,7 @@ angular.module('CallForPaper', [
                     },
                     '': {
                         templateUrl: 'views/admin/admin.html',
-                        controller: 'AdminCtrl',
-                        resolve: {
-                            isAutorizedAdmin: function(AuthService) {
-                                return AuthService.getCurrentUser().isAdmin;
-                            }
-                        }
+                        controller: 'AdminCtrl'
                     }
                 }
             })
