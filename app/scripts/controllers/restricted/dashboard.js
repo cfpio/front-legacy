@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
@@ -38,10 +38,6 @@ angular.module('CallForPaper')
             });
         }
 
-        /**
-         * Get current user drafts
-         * @return {[RestrictedDraft]}
-         */
         $scope.drafts = [];
         $scope.draftsLoaded = false;
         function queryDraft() {
@@ -69,10 +65,6 @@ angular.module('CallForPaper')
             });
         }
 
-        /**
-         * Get current user cosession
-         * @return {[RestrictedDraft]}
-         */
         $scope.coTalks = [];
         $scope.coTalksLoaded = false;
         function queryCoTalks() {
@@ -93,15 +85,10 @@ angular.module('CallForPaper')
             });
         }
 
-        /**
-         * Delete draft
-         * @param  {number} draft id
-         * @return {void}
-         */
         $scope.delete = function(added) {
-            RestrictedDraft.delete({
+            Proposals.delete({
                 id: added
-            }).$promise.then(function() {
+            }).then(function() {
                 queryDraft();
             });
         };
