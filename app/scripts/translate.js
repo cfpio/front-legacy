@@ -226,7 +226,7 @@ angular.module('CallForPaper')
                 'cancel': 'Annuler'
             },
             'steps': {
-                'saveAsDraft': 'Enregistrer brouillon',
+                'saveAsDraft': 'Enregistrer',
                 'previous': 'Etape précédente',
                 'next': 'Etape suivante',
                 'validate': 'Valider',
@@ -572,7 +572,7 @@ angular.module('CallForPaper')
                 'cancel': 'Cancel'
             },
             'steps': {
-                'saveAsDraft': 'Save as draft',
+                'saveAsDraft': 'Save',
                 'previous': 'Previous step',
                 'next': 'Next step',
                 'validate': 'Submit',

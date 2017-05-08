@@ -124,13 +124,6 @@
 
             <p ng-show="sendError" class="col-sm-12 bg-danger alert">{{'step3.sendError' | translate}}</p>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 pull-right">
-                <button ng-click="submit(talk)" class="btn btn-block btn-success" ng-disabled="sending">
-          <span class="mdi-navigation-check pull-right"
-                ng-class="{'glyphicon-refresh-animate mdi-navigation-refresh': sending, 'mdi-navigation-check': !sending}"></span>
-                    {{'steps.validate' | translate}}
-                </button>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-6 pull-right">
                 <button ng-hide="saveDraftButtonHidden" ng-click="saveDraft(talk)" class="btn btn-block btn-info" ng-disabled="sending">
                 <span class="mdi-content-save pull-right"
                 ng-class="{'glyphicon-refresh-animate mdi-navigation-refresh' : sending, 'mdi-content-save' : !sending}"></span>

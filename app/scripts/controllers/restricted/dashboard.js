@@ -106,6 +106,16 @@ angular.module('CallForPaper')
             });
         };
 
+        $scope.confirm = function(added) {
+            Proposals.confirm({
+                id: added
+            }).then(function() {
+                queryDraft();
+                querySession();
+            });
+        };
+
+
         queryDraft();
         queryCoDrafts();
         querySession();
