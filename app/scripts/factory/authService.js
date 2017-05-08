@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .factory('AuthService', function($q, AdminUser, $window, $location, AppConfig) {
+    .factory('AuthService', function($q, Users, $window, $location, AppConfig) {
 
         var authService = {};
         authService.user = null;
@@ -32,7 +32,7 @@ angular.module('CallForPaper')
          * @return {void}
          */
         authService.init = function() {
-            AdminUser.getCurrentUser(function(userInfo) {
+            Users.getCurrentUser().then(function(userInfo) {
                 authService.user = userInfo;
                 if (!authService.isAuthenticated()) {
                     authService.login();
@@ -59,7 +59,7 @@ angular.module('CallForPaper')
          */
         authService.login = function() {
             if (authService.server) {
-                $window.location = authService.server + '/?target=' + encodeURIComponent($location.absUrl());
+                $window.location.href = authService.server + '/?target=' + encodeURIComponent($location.absUrl());
             }
         };
 
@@ -67,7 +67,8 @@ angular.module('CallForPaper')
          * Logout the user and redirect to the given state
          */
         authService.logout = function() {
-            $window.location = authService.server + '/logout';
+            authService.user = null;
+            $window.location.href = authService.server + '/logout';
         };
 
         /**
@@ -75,22 +76,17 @@ angular.module('CallForPaper')
          * @return { connected : bool, admin : bool, uri : string(login/out url depending on the connected state)}
          */
         authService.getCurrentUser = function() {
-            var promise = $q.defer();
             if (authService.user) {
-                return promise.resolve(authService.user);
+                return authService.user;
             } else {
-                AdminUser.getCurrentUser(function(userInfo) {
+                return Users.getCurrentUser().then(function(userInfo) {
                     authService.user = userInfo;
                     if (!authService.isAuthenticated()) {
                         authService.login();
                     }
-                    promise.resolve(userInfo);
-                }, function() {
-                    promise.reject();
+                    return userInfo;
                 });
             }
-
-            return promise.promise;
         };
 
 
