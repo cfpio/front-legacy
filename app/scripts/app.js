@@ -46,7 +46,6 @@ angular.module('CallForPaper', [
     'LocalStorageModule',
     'cfp.hotkeys',
     'ngAria',
-    'restangular',
     'dialogs.main',
     'ui.gravatar',
     'chart.js',
@@ -61,9 +60,8 @@ angular.module('CallForPaper', [
         //Http Interceptor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
-    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, RestangularProvider, ProfileValidatorProvider, AppConfig) {
+    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, ProfileValidatorProvider, AppConfig) {
 
-        RestangularProvider.setBaseUrl(AppConfig.apiBaseUrl);
 
         $urlRouterProvider
             .when('', '/dashboard')
