@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, AdminSession, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
     $scope.saveDraftButtonHidden = true;
 
@@ -99,7 +99,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         $scope.sending = true;
 
         $scope.changeTrackButtonAnimationDisabled = false;
-        AdminSession.update({id: $stateParams.id}, session).$promise.then(function(sessionTmp) {
+        Proposals.update(session).then(function(sessionTmp) {
             updateComments();
             $scope.sending = false;
             $scope.talk.track = sessionTmp.track;
@@ -335,9 +335,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             controller: 'ModalInstanceCtrl'
         });
         modalInstance.result.then(function() {
-            AdminSession.delete({
-                id: $stateParams.id
-            }, function() {
+            Proposals.delete($stateParams.id).then(function() {
                 $state.go('admin.sessions');
             });
         }, function() {

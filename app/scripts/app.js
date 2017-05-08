@@ -227,11 +227,9 @@ angular.module('CallForPaper', [
                     talkId: function($stateParams) {
                         return $stateParams.id || null;
                     },
-                    talk: function(AdminSession, talkId, $sanitize) {
+                    talk: function(Proposals, talkId, $sanitize) {
                         if (talkId) {
-                            return AdminSession.get({
-                                id: talkId
-                            }).$promise.then(function(session) {
+                            return Proposals.get(talkId).then(function(session) {
                                 session.speaker.bio = $sanitize(session.speaker.bio);
                                 return session;
                             });
