@@ -75,7 +75,6 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
             talk.cospeakers = $scope.cospeakers.map(function(email) {
                 return {email: email.text};
             });
-            talk.state('DRAFT');
             return Proposals.save(talk).then(function(savedTalk) {
                 $scope.talk = savedTalk;
                 $scope.sending = false;
@@ -93,7 +92,6 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
         dialogs.confirm(translateFilter('confirmModal.title'), translateFilter('confirmModal.text'), {
             size: 'md'
         }).result.then(function() {
-            talk.state = 'CONFIRMED';
             save(talk);
         }, processError);
     };

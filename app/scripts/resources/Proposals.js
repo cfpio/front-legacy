@@ -21,6 +21,24 @@
 'use strict';
 
 angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfig) {
+
+    var create = function(proposal) {
+        return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
+            .then(function(response) {
+                return response.data;
+            }).catch(function(response) {
+                return $q.reject(response);
+            });
+    };
+    var update = function(proposal) {
+        return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id, proposal)
+            .then(function(response) {
+                return response.data;
+            }).catch(function(response) {
+                return $q.reject(response);
+            });
+    };
+
     return {
         save: function(proposal) {
             if (proposal.id) {
@@ -29,30 +47,8 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                 return create(proposal);
             }
         },
-        create: function(proposal) {
-            return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
-        update: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id, proposal)
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
-        confirm: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/'+proposal.id+'/confirm')
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
+        create: create,
+        update: update,
         get: function(id) {
             return $http.get(AppConfig.apiBaseUrl + '/proposals/'+id)
                 .then(function(response) {
