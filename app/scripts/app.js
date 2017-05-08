@@ -396,10 +396,10 @@ angular.module('CallForPaper', [
                 url: '/{id:int}/edit',
                 templateUrl: 'views/restricted/talks/edit.html',
                 resolve: {
-                    talk: function(Drafts, $stateParams) {
+                    talk: function(Proposals, $stateParams) {
                         var id = $stateParams.id;
                         if (id) {
-                            return Drafts.get(id);
+                            return Proposals.get(id);
                         } else {
                             return null;
                         }

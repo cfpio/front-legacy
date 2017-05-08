@@ -23,6 +23,13 @@
 angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfig) {
     return {
         save: function(proposal) {
+            if (proposal.id) {
+                return update(proposal);
+            } else {
+                return create(proposal);
+            }
+        },
+        create: function(proposal) {
             return $http.post(AppConfig.apiBaseUrl + '/proposals', proposal)
                 .then(function(response) {
                     return response.data;

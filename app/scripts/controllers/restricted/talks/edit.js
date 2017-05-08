@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, talkformats, $scope, talk, Proposals, Drafts, $state, $q, dialogs, translateFilter, Notification) {
+angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, talkformats, $scope, talk, Proposals, $state, $q, dialogs, translateFilter, Notification) {
 
     $scope.talk = talk;
     $scope.tracks = tracks;
@@ -70,13 +70,13 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
     }
 
     function save(talk, isDraft) {
-        var talkService = isDraft ? Drafts : Proposals;
         if (validate(talk)) {
             $scope.sending = true;
             talk.cospeakers = $scope.cospeakers.map(function(email) {
                 return {email: email.text};
             });
-            return talkService.save(talk).then(function(savedTalk) {
+            talk.state('DRAFT');
+            return Proposals.save(talk).then(function(savedTalk) {
                 $scope.talk = savedTalk;
                 $scope.sending = false;
                 var notifMessage = isDraft ? translateFilter('talk.edit.saveDraft') : translateFilter('talk.edit.saveSession');
