@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, RestrictedSession,RestrictedCoSession, RestrictedContact, $modal, talkformats, isCoSession, tracks) {
+    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, Proposals, RestrictedCoSession, RestrictedContact, $modal, talkformats, isCoSession, tracks) {
         $scope.tab = $stateParams.tab;
 
         $scope.session = null;
@@ -34,10 +34,6 @@ angular.module('CallForPaper')
 
 
 
-        /**
-         * Get talk
-         * @return {RestrictedSession}
-         */
         if(isCoSession)
         {
            RestrictedCoSession.get({
@@ -75,9 +71,9 @@ angular.module('CallForPaper')
 
         }
         else {
-            RestrictedSession.get({
+            Proposals.get({
                 id: $stateParams.id
-            }).$promise.then(function(sessionTmp) {
+            }).then(function(sessionTmp) {
                 $scope.session = sessionTmp;
 
                 // Add link to social
