@@ -581,7 +581,7 @@ button.status {
 
 footer {
     width:100%;
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     text-align: center;
 }
@@ -591,4 +591,8 @@ footer {
     padding: 8px 30px;
     margin: 10px 1px;
     float:right;
+}
+
+.private {
+    background-color: #fff27e;
 }

@@ -177,10 +177,11 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
      * Post current comment in textarea
      * @return {AdminComment} posted comment
      */
-    $scope.postComment = function() {
+    $scope.postComment = function(internal) {
         $scope.commentButtonDisabled = true;
         AdminComment.save({rowId: $stateParams.id}, {
             'comment': $scope.commentMsg,
+            'internal': internal,
             'rowId': $stateParams.id
         }, function() {
             $scope.commentMsg = '';
