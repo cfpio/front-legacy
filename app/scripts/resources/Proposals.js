@@ -82,40 +82,40 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                     return $q.reject(response);
                 });
         },
-        accept: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/accept', proposal)
+        accept: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/accept', proposal)
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
         },
-        backup: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/backup', proposal)
+        backup: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/backup', proposal)
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
         },
-        reject: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/reject', proposal)
+        reject: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/reject', proposal)
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
         },
-        confirm: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/confirm', proposal)
+        confirm: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/confirm', proposal)
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
         },
-        retract: function(proposal) {
-            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposal.id + '/retract', proposal)
+        retract: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/retract', proposal)
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {

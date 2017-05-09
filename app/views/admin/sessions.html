@@ -108,12 +108,12 @@
                                                  class="pull-left mini-avatar" gravatar-src="user" gravatar-size="20">
                                         </td>
                                         <td data-title="'status'" ng-if="currentUser.admin">
-                                            <button ng-if="session.state == 'ACCEPTED'" class="btn btn-secondary status" ng-click="retract(session)" title="Revert decision"><i class="ion-checkmark-circled"></i> Accepted</button>
-                                            <button ng-if="session.state == 'REFUSED'" class="btn btn-secondary status" ng-click="retract(session)" title="Revert decision"><i class="ion-close-circled"></i> Rejected</button>
-                                            <button ng-if="session.state == 'BACKUP'" class="btn btn-secondary status" ng-click="retract(session)" title="Revert decision"><i class="ion-checkmark-circled"></i> Backup</button>
-                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="accept(session)" class="btn btn-success status" title="Accept"><i class="ion-checkmark-circled"></i></button>
-                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="backup(session)" class="btn btn-warning status" title="Backup"><i class="ion-checkmark-circled"></i></button>
-                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="reject(session)" class="btn btn-danger status" title="Reject"><i class="ion-close-circled"></i></button>
+                                            <button ng-if="session.state == 'ACCEPTED'" class="btn btn-secondary status" ng-click="retract(session.id)" title="Revert decision"><i class="ion-checkmark-circled"></i> Accepted</button>
+                                            <button ng-if="session.state == 'REFUSED'" class="btn btn-secondary status" ng-click="retract(session.id)" title="Revert decision"><i class="ion-close-circled"></i> Rejected</button>
+                                            <button ng-if="session.state == 'BACKUP'" class="btn btn-secondary status" ng-click="retract(session.id)" title="Revert decision"><i class="ion-checkmark-circled"></i> Backup</button>
+                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="accept(session.id)" class="btn btn-success status" title="Accept"><i class="ion-checkmark-circled"></i></button>
+                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="backup(session.id)" class="btn btn-warning status" title="Backup"><i class="ion-checkmark-circled"></i></button>
+                                            <button ng-if="session.state != 'ACCEPTED' && session.state != 'REFUSED' && session.state != 'BACKUP'" ng-click="reject(session.id)" class="btn btn-danger status" title="Reject"><i class="ion-close-circled"></i></button>
                                         </td>
                                     </tr>
                                 </table>
