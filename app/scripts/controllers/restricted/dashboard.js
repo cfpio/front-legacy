@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedCoDraft, AuthService, Stats, talkformats, tracks, AppConfig) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
@@ -80,7 +80,7 @@ angular.module('CallForPaper')
         }
 
         function queryMeter() {
-            RestrictedStats.me().then(function(statsTmp) {
+            Stats.me().then(function(statsTmp) {
                 $scope.stats = statsTmp;
             });
         }

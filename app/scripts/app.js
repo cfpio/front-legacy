@@ -203,8 +203,8 @@ angular.module('CallForPaper', [
                     sessions: function(sessionsAll, format) {
                         return format ? _.filter(sessionsAll, {format: format}) : sessionsAll;
                     },
-                    stats: function(AdminStats) {
-                        return AdminStats.meter().$promise;
+                    stats: function(Stats) {
+                        return Stats.event();
                     }
                 },
                 templateUrl: 'views/admin/sessions.html',
@@ -274,8 +274,8 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/admin/schedule.html',
                 controller: 'AdminScheduleCtrl',
                 resolve: {
-                    stats: function(AdminStats) {
-                        return AdminStats.meter().$promise;
+                    stats: function(Stats) {
+                        return Stats.event();
                     }
                 }
             })

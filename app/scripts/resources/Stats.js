@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedStats', function($http, $q, AppConfig) {
+angular.module('CallForPaper').factory('Stats', function($http, $q, AppConfig) {
     return {
         me: function () {
             return $http.get(AppConfig.apiBaseUrl + '/stats/me')

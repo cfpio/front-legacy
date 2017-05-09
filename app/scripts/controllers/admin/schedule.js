@@ -20,12 +20,12 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, AdminStats, Upload, $http) {
+angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, Stats, Upload, $http) {
 
     $scope.submission = AppConfig.open;
 
     function queryMeter() {
-        AdminStats.meter().$promise.then(function(statsTmp) {
+        Stats.event().then(function(statsTmp) {
             $scope.stats = statsTmp;
         });
     }
