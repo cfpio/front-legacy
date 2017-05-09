@@ -28,7 +28,7 @@ angular.module('CallForPaper')
         $scope.sessions = [];
         $scope.sessionsLoaded = false;
         function querySession() {
-            Proposals.getMyProposals('CONFIRMED').then(function(sessionsTmp) {
+            Proposals.getMyProposals('CONFIRMED,ACCEPTED,REFUSED,BACKUP').then(function(sessionsTmp) {
                 $scope.sessions = sessionsTmp.map(function(session) {
                     session.fullname = session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];

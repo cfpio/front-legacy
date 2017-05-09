@@ -585,3 +585,10 @@ footer {
     bottom: 10px;
     text-align: center;
 }
+
+
+.flag {
+    padding: 8px 30px;
+    margin: 10px 1px;
+    float:right;
+}

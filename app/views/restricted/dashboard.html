@@ -90,8 +90,11 @@
               </thead>
               <tbody>
                 <tr ng-repeat="session in sessions">
-                  <td ui-sref='app.session({id: session.id})'>
-                    {{session.name}}, {{'dashboard.postedAt' | translate}} {{session.added | date:"dd/MM/yyyy, HH:mm:ss"}}
+                  <td ui-sref='app.session({id: session.id})' width="100%">
+                    {{session.name}} {{'dashboard.postedAt' | translate}} {{session.added | date:"dd/MM/yyyy"}}
+                      <span ng-if="session.state == 'ACCEPTED'" class="flag btn-success status" ><i class="ion-checkmark-circled"></i> Accepted</span>
+                      <span ng-if="session.state == 'REFUSED'" class="flag btn-danger" ><i class="ion-close-circled"></i> Rejected</span>
+                      <span ng-if="session.state == 'BACKUP'" class="flag btn-warning status" ><i class="ion-checkmark-circled"></i> Backup</span>
                   </td>
                 </tr>
                 <tr ng-show="sessions.length === 0 && sessionsLoaded">
