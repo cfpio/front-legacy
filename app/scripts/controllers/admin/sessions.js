@@ -86,27 +86,27 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
 
 
     $scope.accept = function(talk) {
-        Proposals.accept(talk).then(function successCallback(response) {
+        Proposals.accept(talk.id).then(function successCallback(response) {
             talk.state = 'ACCEPTED';
         });
 
     };
 
     $scope.backup = function(talk) {
-        Proposals.backup(talk).then(function successCallback(response) {
+        Proposals.backup(talk.id).then(function successCallback(response) {
             talk.state = 'BACKUP';
         });
 
     };
 
     $scope.reject = function(talk) {
-        Proposals.reject(talk).then(function successCallback(response) {
+        Proposals.reject(talk.id).then(function successCallback(response) {
             talk.state = 'REFUSED';
         });
     };
 
     $scope.retract = function(talk) {
-        Proposals.retract(talk).then(function successCallback(response) {
+        Proposals.retract(talk.id).then(function successCallback(response) {
             talk.state = 'CONFIRMED';
         });
     };
