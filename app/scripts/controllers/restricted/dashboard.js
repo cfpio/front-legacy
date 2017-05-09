@@ -80,7 +80,7 @@ angular.module('CallForPaper')
         }
 
         function queryMeter() {
-            RestrictedStats.meter().$promise.then(function(statsTmp) {
+            RestrictedStats.me().then(function(statsTmp) {
                 $scope.stats = statsTmp;
             });
         }
@@ -92,6 +92,7 @@ angular.module('CallForPaper')
         };
 
         $scope.confirm = function(id) {
+            console.log('confirm ' + id);
             Proposals.confirm(id).then(function() {
                 queryDraft();
                 querySession();

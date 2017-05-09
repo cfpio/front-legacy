@@ -20,13 +20,23 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('RestrictedStats', function(resourceRetries, AppConfig) {
-    return resourceRetries(AppConfig.apiBaseUrl + '/stats', null,
-        {
-            meter: {
-                url: AppConfig.apiBaseUrl + '/stats/meter',
-                method: 'GET',
-                isArray: false
-            },
-        });
+angular.module('CallForPaper').factory('RestrictedStats', function($http, $q, AppConfig) {
+    return {
+        me: function () {
+            return $http.get(AppConfig.apiBaseUrl + '/stats/me')
+                .then(function (response) {
+                    return response.data;
+                }).catch(function (response) {
+                    return $q.reject(response);
+                });
+        },
+        event: function () {
+            return $http.get(AppConfig.apiBaseUrl + '/stats/event')
+                .then(function (response) {
+                    return response.data;
+                }).catch(function (response) {
+                    return $q.reject(response);
+                });
+        }
+    }
 });
