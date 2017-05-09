@@ -22,7 +22,6 @@
 
 angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
-    $scope.saveDraftButtonHidden = true;
 
     $scope.nextToRate = nextToRate;
 
@@ -118,7 +117,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         });
     };
 
-    function save(talk) {
+    $scope.save = function(talk) {
         if (validate(talk)) {
             $scope.sending = true;
             talk.cospeakers = $scope.cospeakers.map(function(email) {
@@ -129,12 +128,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             $scope.talkInvalid = true;
             return $q.reject();
         }
-    }
-
-    $scope.submit = function submit(talk) {
-        save(talk);
     };
-
 
     // For gravatar
     $scope.adminEmail = AuthService.user.email;
