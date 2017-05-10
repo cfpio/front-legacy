@@ -153,7 +153,7 @@ gulp.task('watch', ['fonts', 'less'], function() {
     gulp.watch([yeoman.app + '**/*.js', excludedGlob], ['lint']).on('change', livereload.changed);
     gulp.watch([yeoman.app + '**/*.html', excludedGlob]).on('change', livereload.changed);
     gulp.watch([yeoman.app + '**/*.less', excludedGlob], ['less']);
-    gulp.watch([yeoman.dist + 'styles/*.css']).on('change', livereload.changed);
+    gulp.watch([yeoman.app + 'styles/*.css']).on('change', livereload.changed);
 });
 
 gulp.task('watch:spring', ['fonts', 'less'], function() {
