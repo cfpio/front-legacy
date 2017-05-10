@@ -24,10 +24,25 @@ angular.module('CallForPaper')
     .controller('OwnerTracksAndFormatsCtrl', ['$scope', 'dialogs', 'translateFilter', 'Tracks', 'Formats', 'Rooms',
         function($scope, dialogs, translateFilter, Tracks, Formats, Rooms) {
 
-            $scope.tracks = Tracks.getAll();
-            $scope.formats = Formats.getAll();
-            $scope.rooms = Rooms.getAll();
+            $scope.tracks = [];
+            $scope.formats = [];
+            $scope.rooms = [];
 
+            Tracks.getAll().then(function(tracks) {
+                tracks.forEach(function (track) {
+                    $scope.tracks.push(track);
+                });
+            });
+            Formats.getAll().then(function(formats) {
+                formats.forEach(function (format) {
+                    $scope.formats.push(format);
+                });
+            });
+            Rooms.getAll().then(function(rooms) {
+                rooms.forEach(function (room) {
+                    $scope.rooms.push(room);
+                });
+            });
 
             // Tracks
 
@@ -41,7 +56,7 @@ angular.module('CallForPaper')
                 var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteTrack'));
                 dlg.result.then(function() {
                     var track = $scope.tracks.splice(index, 1)[0];
-                    Tracks.remove(track.id);
+                    Tracks.delete(track.id);
                 });
             };
 
@@ -62,7 +77,7 @@ angular.module('CallForPaper')
                 var dlg = dialogs.confirm(translateFilter('confirmModal.confirmDelete'), translateFilter('confirmModal.textDeleteFormat'));
                 dlg.result.then(function() {
                     var format = $scope.formats.splice(index, 1)[0];
-                    Formats.remove(format.id);
+                    Formats.delete(format.id);
                 });
             };
 
