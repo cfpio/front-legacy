@@ -95,8 +95,8 @@ angular.module('CallForPaper', [
                 url: '/admin',
                 abstract: true,
                 resolve: {
-                    currentUser: function(AuthService) {
-                        return AuthService.getCurrentUser();
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
                     }
                 },
                 views: {
@@ -121,8 +121,8 @@ angular.module('CallForPaper', [
                 url: '/owner',
                 abstract: true,
                 resolve: {
-                    currentUser: function(AuthService) {
-                        return AuthService.getCurrentUser();
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
                     }
                 },
                 views: {
@@ -138,10 +138,7 @@ angular.module('CallForPaper', [
                     },
                     '': {
                         templateUrl: 'views/owner/owner.html',
-                        controller: 'OwnerCtrl',
-                        resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
-                        }
+                        controller: 'OwnerCtrl'
                     }
                 }
             })
@@ -237,8 +234,8 @@ angular.module('CallForPaper', [
                             return null;
                         }
                     },
-                    nextToRate: function(sessionsAll, AuthService, talkId) {
-                        var email = AuthService.user.email;
+                    nextToRate: function(sessionsAll, Users, talkId) {
+                        var email = Users.getCurrentUser().email;
 
                         function isUnratedByConnectedUser(session) {
                             return !_.contains(session.voteUsersEmail, email);
@@ -285,8 +282,8 @@ angular.module('CallForPaper', [
                 parent: 'main',
                 abstract: true,
                 resolve: {
-                    currentUser: function(AuthService) {
-                        return AuthService.getCurrentUser();
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
                     },
                     user: function(RestrictedUser) {
                         return RestrictedUser.get().$promise;

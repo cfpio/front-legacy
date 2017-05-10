@@ -50,8 +50,7 @@ angular.module('CallForPaper')
                     noInternet();
                 } else if (rejection.status === 401) {
                     // we should use AuthService.login() here, but AuthService is a mess and circular dependency error occurs
-                    $window.location = AppConfig.authServer + '/?target=' + encodeURIComponent($location.absUrl());
-                    return; // keep this!
+                    $window.location.href = AppConfig.authServer + '/?target=' + encodeURIComponent($location.absUrl());
                 } else if (rejection.status === 403) {
                     $injector.get('$state').go('403');
                 } else if (rejection.status === 404) {

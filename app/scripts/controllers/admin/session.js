@@ -131,7 +131,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     };
 
     // For gravatar
-    $scope.adminEmail = AuthService.user.email;
+    $scope.adminEmail = currentUser.email;
 
     /**
      * Get next/previous session ID according to previous filter
