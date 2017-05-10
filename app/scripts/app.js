@@ -186,11 +186,11 @@ angular.module('CallForPaper', [
                 url: '/sessions?{format:\d?}',
                 parent: 'admin.loading',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     format: function($stateParams, talkformats) {
                         var format = $stateParams.format;
@@ -215,11 +215,11 @@ angular.module('CallForPaper', [
                     sessionsAll: function(Proposals) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
                         return Proposals.getAll();
                     },
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     talkId: function($stateParams) {
                         return $stateParams.id || null;
@@ -314,11 +314,11 @@ angular.module('CallForPaper', [
             .state('app.dashboard', {
                 url: '/dashboard',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     }
                 },
                 templateUrl: 'views/restricted/dashboard.html',
@@ -333,11 +333,11 @@ angular.module('CallForPaper', [
             .state('app.sessions', {
                 template: '<ui-view/>',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isProfileComplete: ProfileValidatorProvider.isValid()
                 }
@@ -406,11 +406,11 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/session.html',
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isCoSession: function() {
                         return false;
@@ -422,11 +422,11 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/session.html',
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.getFormats();
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.getTracks();
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isCoSession: function() {
                         return true;
