@@ -71,9 +71,7 @@ angular.module('CallForPaper')
 
         }
         else {
-            Proposals.get({
-                id: $stateParams.id
-            }).then(function(sessionTmp) {
+            Proposals.get($stateParams.id).then(function(sessionTmp) {
                 $scope.session = sessionTmp;
 
                 // Add link to social
