@@ -28,5 +28,5 @@ COPY --from=build /work/dist /www
 ENV NGINX_PORT=8080
 EXPOSE 8080
 
-RN ln -s  /www /www/front-legacy
+RUN ln -s  /www /www/front-legacy
 VOLUME /www/front-legacy
