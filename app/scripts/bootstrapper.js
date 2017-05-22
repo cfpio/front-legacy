@@ -33,7 +33,9 @@ No ng-app attribute in index.html. Config is retrieved from backend then Angular
         resolve: {
             AppConfig: ['$http', function($http) {
                 return $http.get(config.apiBaseUrl + '/application').then(function(response) {
-                    return Object.assign(response.data, config);
+                    response.data.apiBaseUrl = config.apiBaseUrl;
+                    response.data.authServer = config.authServer;
+                    return response.data;
                 });
             }]
         }
