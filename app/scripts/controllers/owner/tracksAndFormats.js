@@ -68,7 +68,7 @@ angular.module('CallForPaper')
             // Formats
 
             $scope.addFormat = function() {
-                Formats.create({name: 'new name', duration: 60, description: 'new description', icon: "slideshare"}).then(function(format) {
+                Formats.create({name: 'new name', duration: 60, description: 'new description', icon: 'slideshare'}).then(function(format) {
                     $scope.formats.push(format);
                 });
             };
