@@ -76,6 +76,14 @@ angular.module('CallForPaper').service('Tracks', function($http, $q, AppConfig) 
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
+        },
+        stats: function() {
+            return $http.get(AppConfig.apiBaseUrl + '/themes/stats')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
         }
     };
 });

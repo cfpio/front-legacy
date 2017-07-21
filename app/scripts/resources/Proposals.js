@@ -121,6 +121,39 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
+        },
+        addRate: function(proposalId, rate) {
+            return $http.post(AppConfig.apiBaseUrl + '/proposals/' + proposalId + '/rates', rate)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        updateRate: function(proposalId, rate) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + proposalId + '/rates/' + rate.id, rate)
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        getRates: function(proposalId) {
+            return $http.get(AppConfig.apiBaseUrl + '/proposals/' + proposalId + '/rates')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
+        getMyRate: function(proposalId) {
+            return $http.get(AppConfig.apiBaseUrl + '/proposals/' + proposalId + '/rates/me')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
         }
+
     };
 });
