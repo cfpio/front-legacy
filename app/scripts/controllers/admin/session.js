@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminRate, AdminComment, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
 
     $scope.nextToRate = nextToRate;
@@ -232,9 +232,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
      * @return {[AdminRate]}
      */
     var updateRates = function() {
-        AdminRate.getByRowId({
-            'rowId': $stateParams.id
-        }, function(ratesTmp) {
+        Proposals.getRates($stateParams.id).then(function(ratesTmp) {
             // number of votes
             var votedCount = ratesTmp.reduce(function(x, y) {
                 var i = y.rate !== 0 ? 1 : 0;
@@ -266,9 +264,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
      * @param  {long : rowId}
      * @return {AdminRate}
      */
-    AdminRate.getByRowIdAndUserId({
-        'rowId': $stateParams.id,
-    }, function(rateTmp) {
+    Proposals.getMyRate($stateParams.id).then(function(rateTmp) {
         if (rateTmp.id !== undefined) {
             $scope.yourRate = rateTmp;
             if ($scope.yourRate.rate === 0) {
@@ -290,25 +286,22 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     $scope.postRate = function() {
         $scope.rateButtonDisabled = true;
         if ($scope.yourRate.id === undefined) {
-            AdminRate.save({
+            Proposals.addRate($stateParams.id, {
                 'rate': $scope.yourRate.rate,
                 'hate': $scope.yourRate.hate,
-                'love': $scope.yourRate.love,
-                'talkId': $stateParams.id
-            }, function(c) {
+                'love': $scope.yourRate.love
+            }).then(function(c) {
                 $scope.yourRate.id = c.id;
                 $scope.rateButtonDisabled = false;
                 updateRates();
             });
         } else {
-            AdminRate.update({
-                'id': $scope.yourRate.id
-            }, {
+            Proposals.updateRate($stateParams.id, {
+                'id': $scope.yourRate.id,
                 'rate': $scope.yourRate.rate,
                 'hate': $scope.yourRate.hate,
-                'love': $scope.yourRate.love,
-                'rowId': $stateParams.id
-            }, function() {
+                'love': $scope.yourRate.love
+            }).then(function() {
                 $scope.rateButtonDisabled = false;
                 updateRates();
             });

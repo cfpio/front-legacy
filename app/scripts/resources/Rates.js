@@ -20,18 +20,17 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('AdminRate', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/v0/rates', null,
-        {
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/v0/rates/:id'},
-            getByRowIdAndUserId: {
-                method: 'GET',
-                url: AppConfig.apiBaseUrl + '/v0/rates/proposals/:rowId/me'
-            },
-            getByRowId: {
-                method: 'GET',
-                url: AppConfig.apiBaseUrl + '/v0/rates/proposals/:rowId',
-                isArray: true
-            }
-        });
+angular.module('CallForPaper').factory('Rates', function ($http, $q, AppConfig) {
+    return {
+
+        stats: function () {
+            return $http.get(AppConfig.apiBaseUrl + '/rates/stats')
+                .then(function (response) {
+                    return response.data;
+                }).catch(function (response) {
+                    return $q.reject(response);
+                });
+        }
+
+    }
 });

@@ -20,20 +20,17 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $http, currentUser) {
+angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $http, currentUser, Rates, Tracks) {
 
     $scope.currentUser = currentUser;
 
 
-    $http({
-        method: 'GET',
-        url: 'https://api.cfp.io/api/rates/stats'
-    }).then(function successCallback(response) {
+    Rates.stats().then(function successCallback(response) {
 
-        var users = []
-        var rated = []
+        var users = [];
+        var rated = [];
         Object.keys(response.data).forEach(function(key) {
-            users.push(key)
+            users.push(key);
             rated.push(response.data[key])
         });
 
@@ -43,15 +40,12 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
     });
 
 
-    $http({
-        method: 'GET',
-        url: 'https://api.cfp.io/api/tracks/stats'
-    }).then(function successCallback(response) {
+    Tracks.stats().then(function successCallback(response) {
 
-        var tracks = []
-        var counts = []
+        var tracks = [];
+        var counts = [];
         Object.keys(response.data).forEach(function(key) {
-            tracks.push(key)
+            tracks.push(key);
             counts.push(response.data[key])
         });
 
