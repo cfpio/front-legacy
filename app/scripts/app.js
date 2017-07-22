@@ -285,11 +285,8 @@ angular.module('CallForPaper', [
                     currentUser: function(Users) {
                         return Users.getCurrentUser();
                     },
-                    user: function(RestrictedUser) {
-                        return RestrictedUser.get().$promise;
-                    },
-                    isProfileComplete: function(user, ProfileValidator) {
-                        return ProfileValidator.isValid(user);
+                    isProfileComplete: function(currentUser, ProfileValidator) {
+                        return ProfileValidator.isValid(currentUser);
                     }
                 },
                 views: {
