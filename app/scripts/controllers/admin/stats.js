@@ -25,13 +25,13 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
     $scope.currentUser = currentUser;
 
 
-    Rates.stats().then(function successCallback(response) {
+    Rates.stats().then(function successCallback(stats) {
 
         var users = [];
         var rated = [];
-        Object.keys(response.data).forEach(function(key) {
+        Object.keys(stats).forEach(function(key) {
             users.push(key);
-            rated.push(response.data[key])
+            rated.push(stats[key])
         });
 
         $scope.rates_labels = users;
@@ -40,13 +40,13 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
     });
 
 
-    Tracks.stats().then(function successCallback(response) {
+    Tracks.stats().then(function successCallback(stats) {
 
         var tracks = [];
         var counts = [];
-        Object.keys(response.data).forEach(function(key) {
+        Object.keys(stats).forEach(function(key) {
             tracks.push(key);
-            counts.push(response.data[key])
+            counts.push(stats[key])
         });
 
         $scope.tracks_labels = tracks;
