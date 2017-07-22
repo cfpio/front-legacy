@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, Comments, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
 
     $scope.nextToRate = nextToRate;
@@ -66,12 +66,10 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
 
     /**
      * get comments of the session
-     * @return {[AdminComment]}
+     * @return {[Comment]}
      */
     var updateComments = function() {
-        AdminComment.getByRowId({
-            rowId: $stateParams.id
-        }, function(comments) {
+        Comments.getAll($stateParams.id).then(function(comments) {
             //TODO quel route ? setTimeout(setViewed, 1000);
             $scope.comments = _.map(comments, function(comment) {
                 comment.comment = $sanitize(comment.comment);
@@ -175,38 +173,37 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
 
     /**
      * Post current comment in textarea
-     * @return {AdminComment} posted comment
+     * @return {Comment} posted comment
      */
     $scope.postComment = function(internal) {
         $scope.commentButtonDisabled = true;
-        AdminComment.save({rowId: $stateParams.id}, {
+        Comments.save($stateParams.id, {
             'comment': $scope.commentMsg,
             'internal': internal,
             'rowId': $stateParams.id
-        }, function() {
+        }).then(function() {
             $scope.commentMsg = '';
             $scope.commentButtonDisabled = false;
             updateComments();
-        }, function() {
+        }).catch(function() {
             $scope.commentButtonDisabled = false;
         });
     };
 
     /**
      * Delete comment
-     * @param  {AdminComment} comment to edit
-     * @return {AdminComment} blank comment
+     * @param  {Comment} comment to edit
+     * @return {Comment} blank comment
      */
     var deleteComment = function(comment) {
-        AdminComment.delete({rowId: $stateParams.id, id: comment.id}, function() {
+        Comments.delete($stateParams.id, comment.id).then(function() {
             updateComments();
-        }, function() {
         });
     };
 
     /**
      * Open confirmation modal
-     * @param  {AdminComment} comment to edit
+     * @param  {Comment} comment to edit
      * @return  {void}
      */
     $scope.deleteComment = function(localComment) {
@@ -332,7 +329,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     };
 
     /**
-     * Handle checkbox/ratiung states
+     * Handle checkbox/rating states
      */
     const NO_VOTE = 1;
     const LOVE = 2;
