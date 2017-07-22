@@ -306,8 +306,9 @@ angular.module('CallForPaper')
             'owner': {
                 'admins': 'Admins',
                 'config': 'Configuration',
-                'hintAdmins': 'Ajouter les emails des admins',
+                'hintAdmins': 'Ajouter les emails des reviewers',
                 'adminsSuccess': 'La liste des admins a été mise à jour',
+                'reviewersSuccess': 'La liste des reviewers a été mise à jour',
                 'tracksAndFormats': 'Thèmes et formats',
                 'tracks': 'Thèmes',
                 'trackName': 'Libellé',
