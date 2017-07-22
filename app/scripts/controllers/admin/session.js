@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminRate, AdminComment, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
 
     $scope.nextToRate = nextToRate;
@@ -229,7 +229,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
 
     /**
      * get rates of the session
-     * @return {[AdminRate]}
+     * @return {[Rate]}
      */
     var updateRates = function() {
         Proposals.getRates($stateParams.id).then(function(ratesTmp) {
@@ -262,7 +262,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     /**
      * Obtain current user rate
      * @param  {long : rowId}
-     * @return {AdminRate}
+     * @return {Rate}
      */
     Proposals.getMyRate($stateParams.id).then(function(rateTmp) {
         if (rateTmp.id !== undefined) {
