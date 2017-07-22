@@ -20,24 +20,24 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('ProfilCtrl', function($scope, RestrictedUser, translateFilter, Notification, $state) {
-    $scope.formData = {};
-    $scope.formData.phone = '';
-    $scope.formData.imageProfilKey = null;
+angular.module('CallForPaper').controller('ProfilCtrl', function($scope, Users, translateFilter, Notification, $state) {
+    $scope.profil = {};
+    $scope.profil.phone = '';
+    $scope.profil.imageProfilKey = null;
 
     $scope.$watch(function() {
         return $scope.form && $scope.form.lastname.$valid && $scope.form.firstname.$valid && ($scope.form.phone.$valid || $scope.formData.phone === '') && $scope.form.company.$valid && $scope.form.bio.$valid && $scope.form.social.$valid && $scope.form.twitter.$valid && $scope.form.googleplus.$valid && $scope.form.github.$valid && $scope.form.gender.$valid && $scope.form.tshirtSize.$valid;
     }, function(isValid) {
-        $scope.formData.isValid = isValid;
+        $scope.profil.isValid = isValid;
     });
 
     $scope.$watch(function() {
-        if ($scope.formData.socialArray !== undefined) {
-            return $scope.formData.socialArray.length;
+        if ($scope.profil.socialArray !== undefined) {
+            return $scope.profil.socialArray.length;
         }
     }, function() {
-        if ($scope.formData.socialArray !== undefined) {
-            $scope.formData.social = $scope.formData.socialArray.map(function(elem) {
+        if ($scope.profil.socialArray !== undefined) {
+            $scope.profil.social = $scope.profil.socialArray.map(function(elem) {
                 return elem.text;
             }).join(', ');
         }
@@ -45,90 +45,17 @@ angular.module('CallForPaper').controller('ProfilCtrl', function($scope, Restric
 
     /**
      * Get current user profil
-     * @return {RestrictedUser}
+     * @return {User}
      */
-    RestrictedUser.get(function(profil) {
+    Users.getCurrentUser().then(function(profil) {
         if (profil !== undefined) {
-            // Parse for view model
-            for (var key in profil) {
-                if (profil.hasOwnProperty(key)) {
-                    switch (key) {
-                        case 'bio':
-                            if (profil[key] !== null) {
-                                $scope.formData.bio = profil[key];
-                            }
-                            break;
-                        case 'company':
-                            if (profil[key] !== null) {
-                                $scope.formData.company = profil[key];
-                            }
-                            break;
-                        case 'firstname':
-                            if (profil[key] !== null) {
-                                $scope.formData.firstname = profil[key];
-                            }
-                            break;
-                        case 'lastname':
-                            if (profil[key] !== null) {
-                                $scope.formData.lastname = profil[key];
-                            }
-                            break;
-                        case 'language':
-                            if (profil[key] !== null) {
-                                $scope.formData.language = profil[key];
-                            }
-                            break;
-                        case 'phone':
-                            if (profil[key] !== null) {
-                                $scope.formData.phone = profil[key];
-                            }
-                            break;
-                        case 'imageProfilKey':
-                            if (profil[key] !== undefined) {
-                                $scope.formData.imageProfilKey = profil[key];
-                            }
-                            break;
-                        case 'imageProfilURL':
-                            if (profil[key] !== undefined) {
-                                $scope.formData.imageProfilURL = profil[key];
-                            }
-                            break;
-                        case 'social':
-                            if (profil[key] !== null && profil[key] !== '') {
-                                $scope.formData.socialArray = profil[key].split(', ').map(function(value) {
-                                    return {
-                                        text: value
-                                    };
-                                });
-                            }
-                            break;
-                        case 'twitter':
-                            if (profil[key] !== null) {
-                                $scope.formData.twitter = profil[key];
-                            }
-                            break;
-                        case 'googleplus':
-                            if (profil[key] !== null) {
-                                $scope.formData.googleplus = profil[key];
-                            }
-                            break;
-                        case 'github':
-                            if (profil[key] !== null) {
-                                $scope.formData.github = profil[key];
-                            }
-                            break;
-                        case 'gender':
-                            if (profil[key] !== null) {
-                                $scope.formData.gender = profil[key];
-                            }
-                            break;
-                        case 'tshirtSize':
-                            if (profil[key] !== null) {
-                                $scope.formData.tshirtSize = profil[key];
-                            }
-                            break;
-                    }
-                }
+            $scope.profil = profil;
+            if (profil.social !== undefined) {
+                $scope.profil.socialArray = profil.social.split(', ').map(function (value) {
+                    return {
+                        text: value
+                    };
+                });
             }
         }
     });
@@ -141,11 +68,11 @@ angular.module('CallForPaper').controller('ProfilCtrl', function($scope, Restric
     $scope.sendSuccess = false;
     $scope.sending = false;
     $scope.update = function() {
-        if ($scope.formData.isValid) {
-            RestrictedUser.update({}, $scope.formData, function() {
+        if ($scope.profil.isValid) {
+            Users.save($scope.profil).then(function() {
                 Notification.success(translateFilter('profil.success'));
                 $state.go('app.dashboard', {}, {reload: true});
-            }, function() {
+            }).catch(function() {
                 $scope.sendSuccess = false;
                 $scope.sendError = true;
                 $scope.sending = false;
@@ -161,17 +88,17 @@ angular.module('CallForPaper').controller('ProfilCtrl', function($scope, Restric
     $scope.removeImage = function() {
         if ($scope.files && $scope.files.length) {
             $scope.files = [];
-        } else if ($scope.formData.imageProfilKey) {
-            $scope.formData.imageProfilKey = null;
-        } else if ($scope.formData.socialProfilImageUrl) {
-            $scope.formData.socialProfilImageUrl = null;
+        } else if ($scope.profil.imageProfilKey) {
+            $scope.profil.imageProfilKey = null;
+        } else if ($scope.profil.imageProfilURL) {
+            $scope.profil.imageProfilURL = null;
         }
     };
 
     $scope.verify = false;
     $scope.doVerify = function() {
         $scope.verify = true;
-        if ($scope.formData.isValid) {
+        if ($scope.profil.isValid) {
             $scope.sendError = false;
             $scope.sendSuccess = false;
             $scope.sending = true;

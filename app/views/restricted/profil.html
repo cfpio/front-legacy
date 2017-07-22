@@ -29,19 +29,19 @@
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="lastname">{{'step1.lastname' | translate}}</label>
                             <div>
-                                <input required type="text" name="lastname" ng-class="{'ng-verify' : verify}" class="form-control" id="lastname" ng-model="formData.lastname">
+                                <input required type="text" name="lastname" ng-class="{'ng-verify' : verify}" class="form-control" id="lastname" ng-model="profil.lastname">
                             </div>
                         </div>
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="firstname">{{'step1.firstname' | translate}}</label>
                             <div>
-                                <input required type="text" class="form-control" id="firstname" name="firstname" ng-model="formData.firstname">
+                                <input required type="text" class="form-control" id="firstname" name="firstname" ng-model="profil.firstname">
                             </div>
                         </div>
                         <div class="form-group" bs-has >
                             <label class="control-label" for="language">{{'step1.language' | translate}}</label>
                             <div>
-                                <select name="language" class="form-control" id="language" ng-model="formData.language">
+                                <select name="language" class="form-control" id="language" ng-model="profil.language">
                                     <option value="fr">Français</option>
                                     <option value="en">English</option>
                                 </select>
@@ -50,21 +50,21 @@
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="phone">{{'step1.phone' | translate}}</label>
                             <div>
-                                <input type="tel" class="form-control" name="phone" id="phone" preferred-countries="fr, de, gb, us" international-phone-number ng-model="formData.phone">
+                                <input type="tel" class="form-control" name="phone" id="phone" preferred-countries="fr, de, gb, us" international-phone-number ng-model="profil.phone">
                                 <span ng-show="!form.phone.$valid" class="alert">{{'step1.errorPhone' | translate}}</span>
                             </div>
                         </div>
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="company">{{'step1.company' | translate}}</label>
                             <div>
-                                <input type="text" class="form-control" name="company" id="company" ng-model="formData.company">
+                                <input type="text" class="form-control" name="company" id="company" ng-model="profil.company">
                             </div>
                         </div>
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="bio">{{'step1.bio' | translate}}</label>
                             <div>
                                 <div md-preview="formData.bio"></div>
-                                <textarea required class="form-control" name="bio" id="bio" ng-model="formData.bio"  rows="3"></textarea>
+                                <textarea required class="form-control" name="bio" id="bio" ng-model="profil.bio" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                             <i class="ion-social-twitter"></i>
                             <label class="control-label" for="twitter">{{'step1.twitter' | translate}}</label>
                             <div>
-                                <input type="text" class="form-control" name="twitter" id="twitter" ng-model="formData.twitter">
+                                <input type="text" class="form-control" name="twitter" id="twitter" ng-model="profil.twitter">
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                             <i class="ion-social-googleplus"></i>
                             <label class="control-label" for="googleplus">{{'step1.googleplus' | translate}}</label>
                             <div>
-                                <input type="text" class="form-control" name="googleplus" id="googleplus" ng-model="formData.googleplus">
+                                <input type="text" class="form-control" name="googleplus" id="googleplus" ng-model="profil.googleplus">
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             <i class="ion-social-github"></i>
                             <label class="control-label" for="github">{{'step1.github' | translate}}</label>
                             <div>
-                                <input type="text" class="form-control" name="github" id="github" ng-model="formData.github">
+                                <input type="text" class="form-control" name="github" id="github" ng-model="profil.github">
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                             <label class="control-label" for="social">{{'step1.social' | translate}}</label>
                             <div>{{'step1.hintSocial' | translate}}</div>
                             <div>
-                                <tags-input id="social" name="social" ng-model="formData.socialArray"></tags-input>
+                                <tags-input id="social" name="social" ng-model="profil.socialArray"></tags-input>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="gender">{{'step1.gender' | translate}}</label>
                             <div>
-                                <select name="gender" class="form-control" id="gender" ng-model="formData.gender">
+                                <select name="gender" class="form-control" id="gender" ng-model="profil.gender">
                                     <option value="MALE">Men</option>
                                     <option value="FEMALE">Women</option>
                                 </select>
@@ -125,7 +125,7 @@
                         <div class="form-group" bs-has verify="verify">
                             <label class="control-label" for="tshirtSize">{{'step1.tshirtSize' | translate}}</label>
                             <div>
-                                <select name="tshirtSize" class="form-control" id="tshirtSize" ng-model="formData.tshirtSize">
+                                <select name="tshirtSize" class="form-control" id="tshirtSize" ng-model="profil.tshirtSize">
                                     <option value="XS">XS</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
@@ -141,13 +141,13 @@
                         <div class="form-group">
                             <label class="control-label" for="social">{{'profil.avatar' | translate}}</label>
                             <div>
-                                <input type="text" class="form-control" name="avatar" id="avatar" ng-model="formData.imageProfilURL" ng-attr-placeholder="{{'profil.hintAvatar' | translate}}">
+                                <input type="text" class="form-control" name="avatar" id="avatar" ng-model="profil.imageProfilURL" ng-attr-placeholder="{{'profil.hintAvatar' | translate}}">
                             </div>
                             <div>
                                 <div class="col-s-12 col-md-6">
                                     <span>
-                                        <img ng-if="formData.imageProfilURL" class="avatar" ng-src="{{formData.imageProfilURL}}" alt="avatar">
-                                        <img ng-if="!formData.imageProfilURL" class="avatar" ng-src="/lib/images/placeholder.png" alt="avatar">
+                                        <img ng-if="profil.imageProfilURL" class="avatar" ng-src="{{profil.imageProfilURL}}" alt="avatar">
+                                        <img ng-if="!profil.imageProfilURL" class="avatar" ng-src="/lib/images/placeholder.png" alt="avatar">
                                     </span>
                                 </div>
                             </div>
