@@ -21,13 +21,13 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('OwnerAdminsCtrl', ['$scope', 'OwnerAdmins', 'translateFilter', 'Notification',
-        function($scope, OwnerAdmins, translateFilter, Notification) {
+    .controller('OwnerAdminsCtrl', ['$scope', 'Admins', 'translateFilter', 'Notification',
+        function($scope, Admins, translateFilter, Notification) {
 
     		$scope.emails = [];
     		$scope.admins = [];
 
-    		OwnerAdmins.getAll(function(emails) {
+            Admins.getAll().then(function(emails) {
     			$scope.emails = emails;
     			$scope.admins = emails.map(function(email) { return {text: email}; });
     		});
@@ -37,12 +37,12 @@ angular.module('CallForPaper')
 
             	// added emails
             	angular.forEach($(emails).not($scope.emails), function(email) {
-            		OwnerAdmins.add(email);
+                    Admins.add(email);
             	});
 
             	// removed emails
             	angular.forEach($($scope.emails).not(emails), function(email) {
-            		OwnerAdmins.remove({email: email});
+            		Admins.delete(email);
             	});
 
             	Notification.success(translateFilter('owner.adminsSuccess'));
