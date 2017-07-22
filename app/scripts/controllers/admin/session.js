@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, Comments, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, Comments, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
 
     $scope.nextToRate = nextToRate;
@@ -77,6 +77,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             });
         });
     };
+
 
     function processError(error) {
         $scope.sending = false;
@@ -431,60 +432,19 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
      */
 
     /**
-     * get contacts of the session
-     * @return {[AdminContact]}
-     */
-    var updateContacts = function() {
-        AdminContact.getByRowId({
-            rowId: $stateParams.id
-        }, function(contacts) {
-            //TODO quel route ? setTimeout(setViewed, 1000);
-            $scope.contacts = _.map(contacts, function(contact) {
-                contact.comment = $sanitize(contact.comment);
-                return contact;
-            });
-        });
-    };
-    updateContacts();
-
-    $scope.contactButtonDisabled = false;
-
-    /**
-     * Post current contact in textarea
-     * @return {AdminContact} posted contact
-     */
-    $scope.postContact = function() {
-        $scope.contactButtonDisabled = true;
-        AdminContact.save({rowId: $stateParams.id}, {
-            'comment': $scope.contactMsg,
-            'rowId': $stateParams.id
-        }, function() {
-            $scope.contactMsg = '';
-            $scope.contactButtonDisabled = false;
-            updateContacts();
-        }, function() {
-            $scope.contactButtonDisabled = false;
-        });
-    };
-
-    /**
      * PUT contact on server
-     * @return {AdminContact} edited contact
+     * @return {Comment} edited contact
      */
     var putContact = function(contact) {
-        AdminContact.update({
-            rowId: $stateParams.id,
-            id: contact.id
-        }, contact, function() {
-            updateContacts();
-        }, function() {
+        Comments.update($stateParams.id, contact.id, contact).then(function() {
+            updateComments();
         });
     };
 
     /**
      * Open modal for editing
-     * @param  {AdminContact} contact to edit
-     * @return {AdminContact} edited contact text
+     * @param  {Comment} comment to edit
+     * @return {Comment} edited contact text
      */
     $scope.editContact = function(localContact) {
         var modalInstance = $modal.open({

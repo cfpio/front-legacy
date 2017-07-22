@@ -21,7 +21,7 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, Proposals, RestrictedCoSession, RestrictedContact, $modal, talkformats, isCoSession, tracks) {
+    .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, Proposals, RestrictedCoSession, Comments, $modal, talkformats, isCoSession, tracks) {
         $scope.tab = $stateParams.tab;
 
         $scope.session = null;
@@ -106,60 +106,54 @@ angular.module('CallForPaper')
 
 
         /**
-         * CONTACT
+         * Comments
          */
 
         /**
          * get contacts of the session
-         * @return {[RestrictedContact]}
+         * @return {[Comment]}
          */
-        var updateContacts = function() {
-            RestrictedContact.getByRowId({
-                rowId: $stateParams.id
-            }, function(contactsTmp) {
-                $scope.contacts = contactsTmp;
+        var refreshComments = function() {
+            Comments.getAll($stateParams.id).then(function(contacts) {
+                $scope.contacts = contacts;
             });
         };
-        updateContacts();
+        refreshComments();
 
         $scope.contactButtonDisabled = false;
         /**
          * Post current contact in textarea
-         * @return {RestrictedContact} posted contact
+         * @return {Comment} posted comment
          */
-        $scope.postContact = function() {
+        $scope.postComment = function() {
             $scope.contactButtonDisabled = true;
-            RestrictedContact.save({rowId: $stateParams.id}, {
+            Comments.save($stateParams.id, {
                 'comment': $scope.contactMsg
-            }, function() {
+            }).then(function() {
                 $scope.contactMsg = '';
                 $scope.contactButtonDisabled = false;
-                updateContacts();
-            }, function() {
+                refreshComments();
+            }).catch(function() {
                 $scope.contactButtonDisabled = false;
             });
         };
 
         /**
-         * PUT contact on server
-         * @return {RestrictedContact} edited contact
+         * PUT comment on server
+         * @return {Comment} edited contact
          */
-        var putContact = function(contact) {
-            RestrictedContact.update({
-                rowId: $stateParams.id,
-                id: contact.id
-            }, contact, function() {
-                updateContacts();
-            }, function() {
+        var putComment = function(comment) {
+            Comments.save($stateParams.id, comment).then(function() {
+                refreshComments();
             });
         };
 
         /**
          * Open modal for editing
-         * @param  {RestrictedContact} contact to edit
-         * @return {RestrictedContact} edited contact text
+         * @param  {Comment} comment to edit
+         * @return {Comment} edited comment text
          */
-        $scope.editContact = function(localContact) {
+        $scope.editComment = function(localContact) {
             var modalInstance = $modal.open({
                 animation: true,
                 templateUrl: 'views/admin/editModal.html',
@@ -171,8 +165,7 @@ angular.module('CallForPaper')
                 }
             });
             modalInstance.result.then(function(comment) {
-                localContact.comment = comment;
-                putContact(localContact);
+                putComment(comment);
             }, function() {
                 // cancel
             });
