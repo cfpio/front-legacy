@@ -28,7 +28,6 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     /*
      SESSION
      */
-    //$scope.session = talk;
     $scope.adminEmail = null;
     $scope.session = talk;
     $scope.talk = talk;
@@ -426,44 +425,6 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         $scope.changed = false;
     });
 
-
-    /**
-     * CONTACT
-     */
-
-    /**
-     * PUT contact on server
-     * @return {Comment} edited contact
-     */
-    var putContact = function(contact) {
-        Comments.update($stateParams.id, contact.id, contact).then(function() {
-            updateComments();
-        });
-    };
-
-    /**
-     * Open modal for editing
-     * @param  {Comment} comment to edit
-     * @return {Comment} edited contact text
-     */
-    $scope.editContact = function(localContact) {
-        var modalInstance = $modal.open({
-            animation: true,
-            templateUrl: 'views/admin/editModal.html',
-            controller: 'EditModalInstanceCtrl',
-            resolve: {
-                comment: function() {
-                    return localContact.comment;
-                }
-            }
-        });
-        modalInstance.result.then(function(comment) {
-            localContact.comment = comment;
-            putContact(localContact);
-        }, function() {
-            // cancel
-        });
-    };
 
     $scope.socialURL = function(social, base) {
         if (/https?:\/\//.test(social)) {
