@@ -22,7 +22,7 @@
 
 angular.module('CallForPaper')
     .controller('OwnerConfigCtrl',
-        function($scope, $filter, $http, AppConfig) {
+        function($scope, $filter, Config, AppConfig, Proposals) {
 
             $scope.toDate = function(stringDate) {
                 var datePartials = stringDate.split('/');
@@ -42,10 +42,8 @@ angular.module('CallForPaper')
              * @return {void}
              */
             $scope.toggleSubmit = function(value) {
-                $http.post(AppConfig.apiBaseUrl + '/config/enableSubmissions', {
-                    key: value
-                }).then(function() {
-                }, function() {
+                Config.toggleSubmit(value).then(function() {
+                }).catch(function() {
                     $scope.submission = !value;
                 });
             };
@@ -55,20 +53,17 @@ angular.module('CallForPaper')
                 $scope.config.date = $filter('date')($scope.config.start, 'dd/MM/yyyy');
                 $scope.config.releaseDate = $filter('date')($scope.config.release, 'dd/MM/yyyy');
                 $scope.config.decisionDate = $filter('date')($scope.config.decision, 'dd/MM/yyyy');
-                $http.post(AppConfig.apiBaseUrl + '/application', $scope.config).then(function() {
-                }, function() {
-                });
-
+                Config.save($scope.config);
             };
 
             $scope.unlocked = false;
             $scope.unlock = function() {
-                console.log("unlocked")
+                console.log("unlocked");
                 $scope.unlocked = true;
-            }
+            };
 
             $scope.reset = function() {
-                $http.delete(AppConfig.apiBaseUrl + '/admin/sessions');
+                Proposals.deleteAll();
             }
         }
     );
