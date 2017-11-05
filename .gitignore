@@ -1,0 +1,9 @@
+.gradle/
+.idea/
+app/
+build/
+dist/
+gradle/
+gradlew.bat
+gradlew
+node_modules/
