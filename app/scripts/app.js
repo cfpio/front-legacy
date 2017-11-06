@@ -46,7 +46,6 @@ angular.module('CallForPaper', [
     'LocalStorageModule',
     'cfp.hotkeys',
     'ngAria',
-    'restangular',
     'dialogs.main',
     'ui.gravatar',
     'chart.js',
@@ -58,12 +57,11 @@ angular.module('CallForPaper', [
     }])
     .config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.withCredentials = true;
-        //Http Intercpetor to check auth failures for xhr requests
+        //Http Interceptor to check auth failures for xhr requests
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }])
-    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, RestangularProvider, ProfileValidatorProvider, AppConfig) {
+    .config(function($stateProvider, $urlRouterProvider, AuthServiceProvider, ProfileValidatorProvider, AppConfig) {
 
-        RestangularProvider.setBaseUrl(AppConfig.apiBaseUrl);
 
         $urlRouterProvider
             .when('', '/dashboard')
@@ -97,9 +95,9 @@ angular.module('CallForPaper', [
                 url: '/admin',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
-                        return AuthService.getCurrentUser();
-                    }]
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
+                    }
                 },
                 views: {
                     'side-menu': {
@@ -114,10 +112,7 @@ angular.module('CallForPaper', [
                     },
                     '': {
                         templateUrl: 'views/admin/admin.html',
-                        controller: 'AdminCtrl',
-                        resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
-                        }
+                        controller: 'AdminCtrl'
                     }
                 }
             })
@@ -126,9 +121,9 @@ angular.module('CallForPaper', [
                 url: '/owner',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
-                        return AuthService.getCurrentUser();
-                    }]
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
+                    }
                 },
                 views: {
                     'side-menu': {
@@ -143,10 +138,7 @@ angular.module('CallForPaper', [
                     },
                     '': {
                         templateUrl: 'views/owner/owner.html',
-                        controller: 'OwnerCtrl',
-                        resolve: {
-                            isAutorizedAdmin: AuthServiceProvider.$get().isAdmin
-                        }
+                        controller: 'OwnerCtrl'
                     }
                 }
             })
@@ -179,9 +171,9 @@ angular.module('CallForPaper', [
                 abstract: true,
                 template: '<ui-view/>',
                 resolve: {
-                    sessionsAll: function(AdminSession) {
-                        return AdminSession.query().$promise.then(function(data) {
-                            return _.map(data, function(session) {
+                    sessionsAll: function(Proposals) {
+                        return Proposals.getAll().then(function(sessions) {
+                            return _.map(sessions, function(session) {
                                 return _.assign(session, { // ugly workaround to be able to filter on speaker fullname
                                     speakerName: [session.speaker.firstname, session.speaker.lastname].join(' ')
                                 });
@@ -194,11 +186,11 @@ angular.module('CallForPaper', [
                 url: '/sessions?{format:\d?}',
                 parent: 'admin.loading',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     format: function($stateParams, talkformats) {
                         var format = $stateParams.format;
@@ -208,8 +200,8 @@ angular.module('CallForPaper', [
                     sessions: function(sessionsAll, format) {
                         return format ? _.filter(sessionsAll, {format: format}) : sessionsAll;
                     },
-                    stats: function(AdminStats) {
-                        return AdminStats.meter().$promise;
+                    stats: function(Stats) {
+                        return Stats.event();
                     }
                 },
                 templateUrl: 'views/admin/sessions.html',
@@ -220,23 +212,21 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/admin/session.html',
                 controller: 'AdminSessionCtrl',
                 resolve: {
-                    sessionsAll: function(AdminSession) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
-                        return AdminSession.query().$promise;
+                    sessionsAll: function(Proposals) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
+                        return Proposals.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     talkId: function($stateParams) {
                         return $stateParams.id || null;
                     },
-                    talk: function(AdminSession, talkId, $sanitize) {
+                    talk: function(Proposals, talkId, $sanitize) {
                         if (talkId) {
-                            return AdminSession.get({
-                                id: talkId
-                            }).$promise.then(function(session) {
+                            return Proposals.get(talkId).then(function(session) {
                                 session.speaker.bio = $sanitize(session.speaker.bio);
                                 return session;
                             });
@@ -244,8 +234,8 @@ angular.module('CallForPaper', [
                             return null;
                         }
                     },
-                    nextToRate: function(sessionsAll, AuthService, talkId) {
-                        var email = AuthService.user.email;
+                    nextToRate: function(sessionsAll, Users, talkId) {
+                        var email = Users.getCurrentUser().email;
 
                         function isUnratedByConnectedUser(session) {
                             return !_.contains(session.voteUsersEmail, email);
@@ -281,8 +271,8 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/admin/schedule.html',
                 controller: 'AdminScheduleCtrl',
                 resolve: {
-                    stats: function(AdminStats) {
-                        return AdminStats.meter().$promise;
+                    stats: function(Stats) {
+                        return Stats.event();
                     }
                 }
             })
@@ -292,9 +282,9 @@ angular.module('CallForPaper', [
                 parent: 'main',
                 abstract: true,
                 resolve: {
-                    currentUser: ['AuthService', function(AuthService) {
-                        return AuthService.getCurrentUser();
-                    }],
+                    currentUser: function(Users) {
+                        return Users.getCurrentUser();
+                    },
                     user: function(RestrictedUser) {
                         return RestrictedUser.get().$promise;
                     },
@@ -324,11 +314,11 @@ angular.module('CallForPaper', [
             .state('app.dashboard', {
                 url: '/dashboard',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     }
                 },
                 templateUrl: 'views/restricted/dashboard.html',
@@ -343,11 +333,11 @@ angular.module('CallForPaper', [
             .state('app.sessions', {
                 template: '<ui-view/>',
                 resolve: {
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isProfileComplete: ProfileValidatorProvider.isValid()
                 }
@@ -394,10 +384,10 @@ angular.module('CallForPaper', [
                 url: '/{id:int}/edit',
                 templateUrl: 'views/restricted/talks/edit.html',
                 resolve: {
-                    talk: function(Drafts, $stateParams) {
+                    talk: function(Proposals, $stateParams) {
                         var id = $stateParams.id;
                         if (id) {
-                            return Drafts.get(id);
+                            return Proposals.get(id);
                         } else {
                             return null;
                         }
@@ -416,11 +406,11 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/session.html',
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isCoSession: function() {
                         return false;
@@ -432,11 +422,11 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/restricted/session.html',
                 controller: 'RestrictedSessionCtrl',
                 resolve: {
-                    talkformats: function(TalkService) {
-                        return TalkService.formats.findAll().$promise;
+                    talkformats: function(Formats) {
+                        return Formats.getAll();
                     },
-                    tracks: function(TalkService) {
-                        return TalkService.tracks.findAll().$promise;
+                    tracks: function(Tracks) {
+                        return Tracks.getAll();
                     },
                     isCoSession: function() {
                         return true;

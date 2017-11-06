@@ -20,9 +20,8 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, AdminSession, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
+angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, talkformats, talk, $scope, $stateParams, $filter, $translate, Proposals, AdminComment, AdminRate, $modal, $state, AuthService, NextPreviousSessionService, translateFilter, hotkeys, AdminContact, Notification, $q, $sanitize, nextToRate, Rooms, currentUser) {
     $scope.tab = $stateParams.tab;
-    $scope.saveDraftButtonHidden = true;
 
     $scope.nextToRate = nextToRate;
 
@@ -99,7 +98,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         $scope.sending = true;
 
         $scope.changeTrackButtonAnimationDisabled = false;
-        AdminSession.update({id: $stateParams.id}, session).$promise.then(function(sessionTmp) {
+        Proposals.update(session).then(function(sessionTmp) {
             updateComments();
             $scope.sending = false;
             $scope.talk.track = sessionTmp.track;
@@ -118,7 +117,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
         });
     };
 
-    function save(talk) {
+    $scope.save = function(talk) {
         if (validate(talk)) {
             $scope.sending = true;
             talk.cospeakers = $scope.cospeakers.map(function(email) {
@@ -129,15 +128,10 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             $scope.talkInvalid = true;
             return $q.reject();
         }
-    }
-
-    $scope.submit = function submit(talk) {
-        save(talk);
     };
 
-
     // For gravatar
-    $scope.adminEmail = AuthService.user.email;
+    $scope.adminEmail = currentUser.email;
 
     /**
      * Get next/previous session ID according to previous filter
@@ -183,10 +177,11 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
      * Post current comment in textarea
      * @return {AdminComment} posted comment
      */
-    $scope.postComment = function() {
+    $scope.postComment = function(internal) {
         $scope.commentButtonDisabled = true;
         AdminComment.save({rowId: $stateParams.id}, {
             'comment': $scope.commentMsg,
+            'internal': internal,
             'rowId': $stateParams.id
         }, function() {
             $scope.commentMsg = '';
@@ -335,9 +330,7 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
             controller: 'ModalInstanceCtrl'
         });
         modalInstance.result.then(function() {
-            AdminSession.delete({
-                id: $stateParams.id
-            }, function() {
+            Proposals.delete($stateParams.id).then(function() {
                 $state.go('admin.sessions');
             });
         }, function() {

@@ -226,7 +226,7 @@ angular.module('CallForPaper')
                 'cancel': 'Annuler'
             },
             'steps': {
-                'saveAsDraft': 'Enregistrer brouillon',
+                'saveAsDraft': 'Enregistrer',
                 'previous': 'Etape précédente',
                 'next': 'Etape suivante',
                 'validate': 'Valider',
@@ -337,7 +337,7 @@ angular.module('CallForPaper')
             },
             'error': {
                 'backendcommunication': 'Désolé, il y a eu un problème avec le serveur distant',
-                'noInternet': 'Désolé, il y a eu une problème de connexion, êtes vous connecté à internet ?'
+                'noInternet': 'Désolé, il y a eu un problème de connexion, êtes-vous connecté à internet ?'
             },
             'just_now': 'à l\'instant',
             'seconds_ago': 'il y a {{time}} secondes',
@@ -572,7 +572,7 @@ angular.module('CallForPaper')
                 'cancel': 'Cancel'
             },
             'steps': {
-                'saveAsDraft': 'Save as draft',
+                'saveAsDraft': 'Save',
                 'previous': 'Previous step',
                 'next': 'Next step',
                 'validate': 'Submit',

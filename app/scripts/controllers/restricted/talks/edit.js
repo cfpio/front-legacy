@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, talkformats, $scope, talk, Sessions, Drafts, $state, $q, dialogs, translateFilter, Notification) {
+angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, talkformats, $scope, talk, Proposals, $state, $q, dialogs, translateFilter, Notification) {
 
     $scope.talk = talk;
     $scope.tracks = tracks;
@@ -69,17 +69,16 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
         $scope.sendError = true;
     }
 
-    function save(talk, isDraft) {
-        var talkService = isDraft ? Drafts : Sessions;
+    $scope.save = function(talk) {
         if (validate(talk)) {
             $scope.sending = true;
             talk.cospeakers = $scope.cospeakers.map(function(email) {
                 return {email: email.text};
             });
-            return talkService.save(talk).then(function(savedTalk) {
+            return Proposals.save(talk).then(function(savedTalk) {
                 $scope.talk = savedTalk;
                 $scope.sending = false;
-                var notifMessage = isDraft ? translateFilter('talk.edit.saveDraft') : translateFilter('talk.edit.saveSession');
+                var notifMessage = translateFilter('talk.edit.saveDraft');
                 Notification.success(notifMessage);
                 $state.go('app.dashboard');
             }, processError);
@@ -87,7 +86,7 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
             $scope.talkInvalid = true;
             return $q.reject();
         }
-    }
+    };
 
     $scope.submit = function submit(talk) {
         dialogs.confirm(translateFilter('confirmModal.title'), translateFilter('confirmModal.text'), {
@@ -97,7 +96,4 @@ angular.module('CallForPaper').controller('AppTalksEditCtrl', function(tracks, t
         }, processError);
     };
 
-    $scope.saveDraft = function saveDraft(talk) {
-        save(talk, true);
-    };
 });

@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, $http, AppConfig, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, stats, $templateCache, currentUser, AdminSession) {
+angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, $http, AppConfig, translateFilter, NgTableParams, $q, format, talkformats, tracks, sessions, Proposals, stats, $templateCache, currentUser) {
 
     $scope.talkFormats = talkformats;
     $scope.format = format;
@@ -86,40 +86,27 @@ angular.module('CallForPaper').controller('AdminSessionsCtrl', function($scope, 
 
 
     $scope.accept = function(talk) {
-        var scope = $scope;
-        $http({
-            method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/accept'
-        }).then(function successCallback(response) {
+        Proposals.accept(talk.id).then(function successCallback(response) {
             talk.state = 'ACCEPTED';
         });
 
     };
 
     $scope.backup = function(talk) {
-        $http({
-            method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/backup'
-        }).then(function successCallback(response) {
+        Proposals.backup(talk.id).then(function successCallback(response) {
             talk.state = 'BACKUP';
         });
 
     };
 
     $scope.reject = function(talk) {
-        $http({
-            method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/reject'
-        }).then(function successCallback(response) {
+        Proposals.reject(talk.id).then(function successCallback(response) {
             talk.state = 'REFUSED';
         });
     };
 
-    $scope.rectract = function(talk) {
-        $http({
-            method: 'PUT',
-            url: AppConfig.apiBaseUrl + '/admin/sessions/' + talk.id + '/retract'
-        }).then(function successCallback(response) {
+    $scope.retract = function(talk) {
+        Proposals.retract(talk.id).then(function successCallback(response) {
             talk.state = 'CONFIRMED';
         });
     };

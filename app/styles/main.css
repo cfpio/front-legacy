@@ -578,3 +578,24 @@ button.status {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+footer {
+    width:100%;
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+}
+
+
+.flag {
+    padding: 8px 30px;
+    margin: 10px 1px;
+    float:right;
+}
+
+.private {
+    background-color: #fff27e;
+    background-image: url('/images/Incognito_logo.png');
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}

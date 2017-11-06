@@ -21,18 +21,14 @@
 'use strict';
 
 angular.module('CallForPaper')
-    .controller('DashboardCtrl', function($scope, $filter, RestrictedSession, RestrictedCoSession, RestrictedDraft, RestrictedCoDraft, AuthService, RestrictedStats, talkformats, tracks, AppConfig) {
+    .controller('DashboardCtrl', function($scope, $filter, Proposals, RestrictedCoSession, RestrictedCoDraft, AuthService, Stats, talkformats, tracks, AppConfig) {
         $scope.realDifficulty = [$filter('translate')('step2.beginner'), $filter('translate')('step2.confirmed'), $filter('translate')('step2.expert')];
         $scope.tracks = tracks;
         $scope.talkFormats = talkformats;
-        /**
-         * Get current user sessions
-         * @return {[RestrictedSession]}
-         */
         $scope.sessions = [];
         $scope.sessionsLoaded = false;
         function querySession() {
-            RestrictedSession.query(function(sessionsTmp) {
+            Proposals.getMyProposals('CONFIRMED,ACCEPTED,REFUSED,BACKUP').then(function(sessionsTmp) {
                 $scope.sessions = sessionsTmp.map(function(session) {
                     session.fullname = session.firstname;
                     session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[session.difficulty - 1];
@@ -42,14 +38,10 @@ angular.module('CallForPaper')
             });
         }
 
-        /**
-         * Get current user drafts
-         * @return {[RestrictedDraft]}
-         */
         $scope.drafts = [];
         $scope.draftsLoaded = false;
         function queryDraft() {
-            RestrictedDraft.query().$promise.then(function(draftsTmp) {
+            Proposals.getMyProposals('DRAFT').then(function(draftsTmp) {
                 $scope.drafts = draftsTmp;
                 $scope.draftsLoaded = true;
             });
@@ -73,10 +65,6 @@ angular.module('CallForPaper')
             });
         }
 
-        /**
-         * Get current user cosession
-         * @return {[RestrictedDraft]}
-         */
         $scope.coTalks = [];
         $scope.coTalksLoaded = false;
         function queryCoTalks() {
@@ -92,23 +80,25 @@ angular.module('CallForPaper')
         }
 
         function queryMeter() {
-            RestrictedStats.meter().$promise.then(function(statsTmp) {
+            Stats.me().then(function(statsTmp) {
                 $scope.stats = statsTmp;
             });
         }
 
-        /**
-         * Delete draft
-         * @param  {number} draft id
-         * @return {void}
-         */
-        $scope.delete = function(added) {
-            RestrictedDraft.delete({
-                id: added
-            }).$promise.then(function() {
+        $scope.delete = function(id) {
+            Proposals.delete(id).then(function() {
                 queryDraft();
             });
         };
+
+        $scope.confirm = function(id) {
+            console.log('confirm ' + id);
+            Proposals.confirm(id).then(function() {
+                queryDraft();
+                querySession();
+            });
+        };
+
 
         queryDraft();
         queryCoDrafts();

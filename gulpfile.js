@@ -134,7 +134,7 @@ gulp.task('serve', ['watch', 'tdd', 'lint'], function() {
 
 gulp.task('serveLocal', ['watch', 'tdd', 'lint'], function() {
     gulp.src(yeoman.app + 'scripts/bootstrapper.js')
-        .pipe(replace("apiBaseUrl: 'https://api.cfp.io/v0'", "apiBaseUrl: 'http://localhost:8080/v0'"))
+        .pipe(replace("apiBaseUrl: 'http://api.cfp.one/api'", "apiBaseUrl: 'http://localhost:8080/api'"))
         .pipe(gulp.dest(yeoman.dist + 'scripts'));
 
     connect.server({
@@ -153,7 +153,7 @@ gulp.task('watch', ['fonts', 'less'], function() {
     gulp.watch([yeoman.app + '**/*.js', excludedGlob], ['lint']).on('change', livereload.changed);
     gulp.watch([yeoman.app + '**/*.html', excludedGlob]).on('change', livereload.changed);
     gulp.watch([yeoman.app + '**/*.less', excludedGlob], ['less']);
-    gulp.watch([yeoman.dist + 'styles/*.css']).on('change', livereload.changed);
+    gulp.watch([yeoman.app + 'styles/*.css']).on('change', livereload.changed);
 });
 
 gulp.task('watch:spring', ['fonts', 'less'], function() {

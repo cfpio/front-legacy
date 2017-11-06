@@ -24,24 +24,24 @@
 			<h1>{{::session.name}}</h1>
 			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 				<ul id="tab" class="nav nav-tabs" role="tablist">
-					<li role="presentation" ng-class="{active : tab !== 'contact'}"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
-					<li role="presentation" class=""><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
+					<li role="presentation" ><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab !== 'contact'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
 					<li role="presentation" ng-class="{active : tab === 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false">{{'admin.contact' | translate}}</button></li>
 				</ul>
 				<div id="tabContent" class="tab-content tile">
 					<br>
-					<div role="tabpanel" ng-class="{active : tab !== 'contact', in : tab !== 'contact'}" class="tab-pane fade" id="speaker" aria-labelledby="speaker-tab">
+					<div role="tabpanel" class="tab-pane fade" id="speaker" aria-labelledby="speaker-tab">
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
 									<label class="control-label">{{'profil.avatar' | translate}}</label>
 									<div ng-if="session !== null">
-										<a ng-if="session.speaker.profilImageUrl !== undefined" target="_blank" ng-href="{{session.speaker.profilImageUrl}}">
-											<img class="avatar" ng-src="{{session.speaker.profilImageUrl}}" alt="avatar">
+										<a ng-if="session.speaker.imageProfilURL !== undefined" target="_blank" ng-href="{{session.speaker.imageProfilURL}}">
+											<img class="avatar" ng-src="{{session.speaker.imageProfilURL}}" alt="avatar">
 										</a>
 									</div>
 									<div ng-if="session !== null">
-										<img ng-if="session.speaker.profilImageUrl === undefined" class="avatar" src="/lib/images/placeholder.png" alt="avatar">
+										<img ng-if="session.speaker.imageProfilURL === undefined" class="avatar" src="/lib/images/placeholder.png" alt="avatar">
 									</div>
 								</div>
 
@@ -96,7 +96,7 @@
 							</div>
 						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane fade" id="session" aria-labelledby="session-tab">
+					<div role="tabpanel" ng-class="{active : tab !== 'contact', in : tab !== 'contact'}" class="tab-pane fade" id="session" aria-labelledby="session-tab">
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">

@@ -15,7 +15,6 @@ RUN ls -al node_modules
 RUN ls -al app/bower_components
 RUN /work/node_modules/.bin/gulp build
 
-
 ### ---
 
 FROM nginx:alpine
@@ -23,6 +22,10 @@ LABEL maintainer "team@breizhcamp.org"
 
 COPY nginx.conf /etc/nginx/conf.d/cfpio.conf
 COPY --from=build /work/dist /www
+
+
+ARG GIT_COMMIT
+RUN echo $GIT_COMMIT > /www/sha1
 
 # Clever cloud require the container to listen on port 8080
 ENV NGINX_PORT=8080

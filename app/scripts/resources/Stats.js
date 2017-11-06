@@ -20,16 +20,23 @@
 
 'use strict';
 
-angular.module('CallForPaper').factory('Formats', function($resource, AppConfig) {
-    return $resource(AppConfig.apiBaseUrl + '/formats', {},
-        {
-            getAll: {
-                method: 'GET',
-                isArray: true
-            },
-            add: {method: 'POST'},
-            update: {method: 'PUT', url: AppConfig.apiBaseUrl + '/formats/:id'},
-            remove: {method: 'DELETE', url: AppConfig.apiBaseUrl + '/formats/:id'}
-
-        });
+angular.module('CallForPaper').factory('Stats', function($http, $q, AppConfig) {
+    return {
+        me: function () {
+            return $http.get(AppConfig.apiBaseUrl + '/stats/me')
+                .then(function (response) {
+                    return response.data;
+                }).catch(function (response) {
+                    return $q.reject(response);
+                });
+        },
+        event: function () {
+            return $http.get(AppConfig.apiBaseUrl + '/stats/event')
+                .then(function (response) {
+                    return response.data;
+                }).catch(function (response) {
+                    return $q.reject(response);
+                });
+        }
+    }
 });
