@@ -459,6 +459,7 @@ angular.module('CallForPaper', [
     }])
     .config(['$translateProvider', function($translateProvider) {
         $translateProvider.useCookieStorage();
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
     }])
     .config(function(NotificationProvider) {
         NotificationProvider.setOptions({
