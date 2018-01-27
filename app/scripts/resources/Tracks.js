@@ -53,14 +53,6 @@ angular.module('CallForPaper').service('Tracks', function($http, $q, AppConfig) 
                     return $q.reject(response);
                 });
         },
-        getStats: function() {
-            return $http.get(AppConfig.apiBaseUrl + '/themes/stats')
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
         getAll: function() {
             return $http.get(AppConfig.apiBaseUrl + '/themes')
                 .then(function(response) {
