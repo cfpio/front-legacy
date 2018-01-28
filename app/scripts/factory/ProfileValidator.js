@@ -33,8 +33,8 @@ angular.module('CallForPaper').provider('ProfileValidator', function() {
             };
         },
         isValid: function() {
-            return /*@ngInject*/ function(user, $q) {
-                return isValid(user) ? $q.when(true) : $q.reject('profile.incomplete');
+            return /*@ngInject*/ function(currentUser, $q) {
+                return isValid(currentUser) ? $q.when(true) : $q.reject('profile.incomplete');
             };
         }
     };
