@@ -197,8 +197,16 @@ angular.module('CallForPaper', [
                         format = format ? parseInt(format, 10) : null;
                         return format && _.find(talkformats, {id: format}) ? format : null;
                     },
-                    sessions: function(sessionsAll, format) {
-                        return format ? _.filter(sessionsAll, {format: format}) : sessionsAll;
+                    sessions: function(sessionsAll, format, currentUser) {
+                        var sessions = format ? _.filter(sessionsAll, {format: format}) : sessionsAll;
+
+                        // FIXME un beurk de plus...
+                        sessions.map(function(session) {
+                            session.reviewed = (session.voteUsersEmail && session.voteUsersEmail.includes(currentUser.email));
+                            return session;
+                        });
+
+                        return sessions;
                     },
                     stats: function(Stats) {
                         return Stats.event();
