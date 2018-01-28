@@ -134,8 +134,8 @@ gulp.task('serve', ['watch', 'tdd', 'lint'], function() {
 
 gulp.task('serveLocal', ['watch', 'tdd', 'lint'], function() {
     gulp.src(yeoman.app + 'scripts/bootstrapper.js')
-        .pipe(replace("apiBaseUrl: 'http://api.cfp.one/api'", "apiBaseUrl: 'http://localhost:8080/api'"))
-        .pipe(replace("authServer: 'http://auth.cfp.one'", "authServer: 'http://localhost:46001'"))
+        .pipe(replace("apiBaseUrl: 'https://api.cfp.io/api'", "apiBaseUrl: 'http://localhost:8080/api'"))
+        .pipe(replace("authServer: 'https://auth.cfp.io'", "authServer: 'http://localhost:46001'"))
         .pipe(gulp.dest(yeoman.dist + 'scripts'));
 
     connect.server({
