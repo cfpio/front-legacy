@@ -221,7 +221,7 @@ angular.module('CallForPaper')
             },
             'deleteModal': {
                 'title': 'Confirmation',
-                'text': 'Êtes-vous sûr de vouloir suprimer ce commentaire ?',
+                'text': 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
                 'confirm': 'Supprimer',
                 'cancel': 'Annuler'
             },
@@ -301,7 +301,8 @@ angular.module('CallForPaper')
                 'duration': 'Durée (en jours)',
                 'configCfp': 'Configuration du CFP',
                 'btn.save': 'Sauvegarder',
-                showAllSessions: 'Tous'
+                showAllSessions: 'Tous',
+                'ratesDone': 'Vous avez noté toutes les soumissions.'
             },
             'owner': {
                 'admins': 'Admins',
@@ -639,7 +640,8 @@ angular.module('CallForPaper')
                 'allType': 'All',
                 'newMessages': 'New messages',
                 nextToRate: 'Next talk to rate',
-                showAllSessions: 'All'
+                showAllSessions: 'All',
+                'ratesDone': 'You have rated all the talks.'
             },
             'owner': {
                 'admins': 'Admins',
