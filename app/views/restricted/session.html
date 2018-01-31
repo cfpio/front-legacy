@@ -179,7 +179,7 @@
 											<textarea required row="3" class="form-control" ng-init="contactMsg = ''" ng-model="contactMsg">
 											</textarea>
 											<br>
-											<button type="button" ng-click="postContact()" ng-disabled="contactForm.$invalid || contactButtonDisabled || (contactMsg == '' || contactMsg == null)" class="btn btn-success pull-right"><span class="mdi-navigation-refresh glyphicon-refresh-animate pull-right" ng-show="contactButtonDisabled"></span>{{'contact.validate' | translate}}&nbsp;
+											<button type="button" ng-click="postComment()" ng-disabled="contactForm.$invalid || contactButtonDisabled || (contactMsg == '' || contactMsg == null)" class="btn btn-success pull-right"><span class="mdi-navigation-refresh glyphicon-refresh-animate pull-right" ng-show="contactButtonDisabled"></span>{{'contact.validate' | translate}}&nbsp;
 											</button>
 										</form>
 									</div>
