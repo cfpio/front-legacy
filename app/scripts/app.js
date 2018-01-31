@@ -242,11 +242,10 @@ angular.module('CallForPaper', [
                             return null;
                         }
                     },
-                    nextToRate: function(sessionsAll, Users, talkId) {
-                        var email = Users.getCurrentUser().email;
+                    nextToRate: function(sessionsAll, currentUser, talkId) {
 
                         function isUnratedByConnectedUser(session) {
-                            return !_.contains(session.voteUsersEmail, email);
+                            return !_.contains(session.voteUsersEmail, currentUser.email);
                         }
 
                         return _.find(sessionsAll, function(session) { // first look for the next not rated
