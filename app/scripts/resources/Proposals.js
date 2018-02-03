@@ -114,6 +114,14 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                     return $q.reject(response);
                 });
         },
+        rejectOthers: function() {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/rejectOthers')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
         confirm: function(id) {
             return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/confirm')
                 .then(function(response) {

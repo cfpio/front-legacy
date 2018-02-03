@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, Stats, Upload, $http) {
+angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, Stats, Upload, Proposals, $http) {
 
     $scope.submission = AppConfig.open;
 
@@ -46,10 +46,7 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
     };
 
     $scope.rejectOthers = function() {
-      $http({
-          method: 'PUT',
-          url:  AppConfig.apiBaseUrl + '/admin/sessions/rejectOthers'
-      });
+      Proposals.rejectOthers();
     };
 
     $scope.notifyAllSpeakers = function() {
