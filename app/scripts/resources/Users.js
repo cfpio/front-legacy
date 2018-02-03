@@ -62,24 +62,8 @@ angular.module('CallForPaper').factory('Users', function($q, $http, AppConfig) {
                     return $q.reject(response);
                 });
         },
-        getLoginUrl: function() {
-            return $http.post(AppConfig.apiBaseUrl + '/adminUser/login')
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
         delete: function(id) {
             return $http.delete(AppConfig.apiBaseUrl + '/users/'+id)
-                .then(function(response) {
-                    return response.data;
-                }).catch(function(response) {
-                    return $q.reject(response);
-                });
-        },
-        getLogoutUrl: function() {
-            return $http.post(AppConfig.apiBaseUrl + '/adminUser/logout')
                 .then(function(response) {
                     return response.data;
                 }).catch(function(response) {
