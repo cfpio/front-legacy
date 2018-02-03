@@ -123,6 +123,11 @@ angular.module('CallForPaper', [
                 resolve: {
                     currentUser: function(Users) {
                         return Users.getCurrentUser();
+                    },
+                    needOwner: function(currentUser, $q) {
+                        if (!currentUser.owner) {
+                            return $q.reject('forbidden')
+                        }
                     }
                 },
                 views: {
@@ -505,6 +510,9 @@ angular.module('CallForPaper', [
             var rules = {
                 'profile.incomplete': function() {
                     $state.transitionTo('app.profil');
+                },
+                'forbidden': function() {
+                    $state.transitionTo('403');
                 }
             };
 
