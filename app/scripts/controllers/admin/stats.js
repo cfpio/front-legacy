@@ -50,21 +50,21 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
 
         $scope.tracks_labels = tracks;
         $scope.tracks_series = ['Tracks'];
-        $scope.tracks_data = [counts];
-    });
+        $scope.tracks_all_data = [counts];
+    }).then(function() {
+        return Tracks.stats("ACCEPTED");
+    }).then(function successCallback(stats) {
 
-    Tracks.stats('ACCEPTED').then(function successCallback(stats) {
+            var tracks = [];
+            var counts = [];
+            Object.keys(stats).forEach(function(key) {
+                tracks.push(key);
+                counts.push(stats[key])
+            });
 
-        var tracks = [];
-        var counts = [];
-        Object.keys(stats).forEach(function(key) {
-            tracks.push(key);
-            counts.push(stats[key])
-        });
-
-        $scope.tracks_data.push(counts);
-    });
-
-
+            $scope.tracks_data = [];
+            $scope.tracks_data.push($scope.tracks_all_data);
+            $scope.tracks_data.push(counts);
+      });
 
 });
