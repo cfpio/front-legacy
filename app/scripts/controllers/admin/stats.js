@@ -39,7 +39,6 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
         $scope.rates_data = [rated];
     });
 
-
     Tracks.stats().then(function successCallback(stats) {
 
         var tracks = [];
@@ -52,6 +51,18 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
         $scope.tracks_labels = tracks;
         $scope.tracks_series = ['Tracks'];
         $scope.tracks_data = [counts];
+    });
+
+    Tracks.stats('ACCEPTED').then(function successCallback(stats) {
+
+        var tracks = [];
+        var counts = [];
+        Object.keys(stats).forEach(function(key) {
+            tracks.push(key);
+            counts.push(stats[key])
+        });
+
+        $scope.tracks_data.push(counts);
     });
 
 
