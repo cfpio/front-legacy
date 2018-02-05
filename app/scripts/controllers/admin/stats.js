@@ -50,7 +50,7 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
 
         $scope.tracks_labels = tracks;
         $scope.tracks_series = ['Tracks'];
-        $scope.tracks_all_data = [counts];
+        $scope.tracks_all_data = counts;
     }).then(function() {
         return Tracks.stats("ACCEPTED");
     }).then(function successCallback(stats) {
