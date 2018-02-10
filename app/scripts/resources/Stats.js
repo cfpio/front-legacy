@@ -38,5 +38,5 @@ angular.module('CallForPaper').factory('Stats', function($http, $q, AppConfig) {
                     return $q.reject(response);
                 });
         }
-    }
+    };
 });

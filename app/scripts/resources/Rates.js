@@ -32,5 +32,5 @@ angular.module('CallForPaper').factory('Rates', function ($http, $q, AppConfig) 
                 });
         }
 
-    }
+    };
 });

@@ -126,7 +126,7 @@ angular.module('CallForPaper', [
                     },
                     needOwner: function(currentUser, $q) {
                         if (!currentUser.owner) {
-                            return $q.reject('forbidden')
+                            return $q.reject('forbidden');
                         }
                     }
                 },

@@ -31,7 +31,7 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
         var rated = [];
         Object.keys(stats).forEach(function(key) {
             users.push(key);
-            rated.push(stats[key])
+            rated.push(stats[key]);
         });
 
         $scope.rates_labels = users;
@@ -45,21 +45,21 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
         var counts = [];
         Object.keys(stats).forEach(function(key) {
             tracks.push(key);
-            counts.push(stats[key])
+            counts.push(stats[key]);
         });
 
         $scope.tracks_labels = tracks;
         $scope.tracks_series = ['Tracks'];
         $scope.tracks_all_data = counts;
     }).then(function() {
-        return Tracks.stats("ACCEPTED");
+        return Tracks.stats('ACCEPTED');
     }).then(function successCallback(stats) {
 
             var tracks = [];
             var counts = [];
             Object.keys(stats).forEach(function(key) {
                 tracks.push(key);
-                counts.push(stats[key])
+                counts.push(stats[key]);
             });
 
             $scope.tracks_data = [];

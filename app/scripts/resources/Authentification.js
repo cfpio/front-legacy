@@ -31,7 +31,8 @@ angular.module('CallForPaper').factory('AuthService', function (Users, $window, 
      */
     authService.init = function () {
         return Users.getCurrentUser().then(function (userInfo) {
-            return authService.user = userInfo;
+            authService.user = userInfo;
+            return authService.user;
         });
     };
 
