@@ -20,7 +20,7 @@
 
 'use strict';
 
-angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, Stats, Upload, Proposals, $http) {
+angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, AppConfig, Stats, Upload, Proposals, Notifications) {
 
     $scope.submission = AppConfig.open;
 
@@ -49,25 +49,31 @@ angular.module('CallForPaper').controller('AdminScheduleCtrl', function($scope, 
       Proposals.rejectOthers();
     };
 
+    $scope.refusedIds = '';
+    $scope.acceptedIds = '';
+
     $scope.notifyAllSpeakers = function() {
-        $http({
-            method: 'POST',
-            url:  AppConfig.apiBaseUrl + '/schedule/notification'
-        });
+        Notifications.notify([]);
     };
 
-    $scope.notifyRefusedSpeakers = function() {
-        $http({
-            method: 'POST',
-            url:  AppConfig.apiBaseUrl + '/schedule/notification?filter=refused'
-        });
+    $scope.notifyRefusedSpeakers = function(ids) {
+        var filtedIds = [];
+        if (ids) {
+            filtedIds = _.map(ids.split(','), function (id) {
+                return parseInt(id);
+            });
+        }
+        Notifications.notify(filtedIds, 'refused');
     };
 
-    $scope.notifyAcceptedSpeakers = function() {
-        $http({
-            method: 'POST',
-            url:  AppConfig.apiBaseUrl + '/schedule/notification?filter=accepted'
-        });
+    $scope.notifyAcceptedSpeakers = function(ids) {
+        var filtedIds = [];
+        if (ids) {
+            filtedIds = _.map(ids.split(','), function (id) {
+                return parseInt(id);
+            });
+        }
+        Notifications.notify(filtedIds, 'accepted');
     };
 
     queryMeter();

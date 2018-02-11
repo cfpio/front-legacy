@@ -32,7 +32,7 @@ angular.module('CallForPaper')
         $scope.cospeakers = [];
 
 
-        getProposal($stateParams.id);
+
 
         function getProposal(id) {
             if (isCoSession) {
@@ -99,6 +99,8 @@ angular.module('CallForPaper')
                 });
             }
         }
+
+        getProposal($stateParams.id);
 
         /**
          * Comments
@@ -182,7 +184,7 @@ angular.module('CallForPaper')
 
         $scope.isAccepted = function() {
             return ($scope.session && ($scope.session.state === 'ACCEPTED' || $scope.session.state === 'PRESENT'));
-        }
+        };
 
 
     });

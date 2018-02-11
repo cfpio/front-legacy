@@ -59,9 +59,9 @@
         <br/>
         <button ng-click="notifyAllSpeakers()" class="btn btn-primary">Send status e-mail to all speakers</button>
         <br/>
-        <button ng-click="notifyRefusedSpeakers()" class="btn btn-primary">Send status e-mail to refused speakers</button>
+        <button ng-click="notifyRefusedSpeakers(refusedIds)" class="btn btn-primary">Send status e-mail to refused speakers</button>&nbsp;&nbsp;Talk Ids to send : <input type="text" ng-model="refusedIds" placeholder="ex : 1,2,3 or no input to send to all" size="30"/>
         <br/>
-        <button ng-click="notifyAcceptedSpeakers()" class="btn btn-primary">Send status e-mail to accepted speakers</button>
+        <button ng-click="notifyAcceptedSpeakers(acceptedIds)" class="btn btn-primary">Send status e-mail to accepted speakers</button>&nbsp;&nbsp;Talk Ids to send : <input type="text" ng-model="acceptedIds" placeholder="ex : 1,2,3 or no input to send to all" size="30"/>
 
         <h2>Current schedule</h2>
 
