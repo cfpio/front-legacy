@@ -248,6 +248,11 @@ angular.module('CallForPaper')
                 'edit': 'Editer',
                 'hint': 'Un oubli, une question ? Postez votre message ici, un administrateur vous répondra dès que possible.'
             },
+            'schedule': {
+                'message': 'Confirmer votre présence en tant que Speaker',
+                'validate': 'Confirmer',
+                'confirmed': 'Vous avez confirmé votre présence.'
+            },
             'admin': {
                 'logout': 'Se déconnecter',
                 'allowSubmissions': 'Autoriser les utilisateurs à poster de nouveaux talks ?',
@@ -302,7 +307,8 @@ angular.module('CallForPaper')
                 'configCfp': 'Configuration du CFP',
                 'btn.save': 'Sauvegarder',
                 showAllSessions: 'Tous',
-                'ratesDone': 'Vous avez noté toutes les soumissions.'
+                'ratesDone': 'Vous avez noté toutes les soumissions.',
+                'schedule': 'Programme'
             },
             'owner': {
                 'admins': 'Admins',
@@ -596,6 +602,11 @@ angular.module('CallForPaper')
                 'edit': 'Edit',
                 'hint': 'A question ? A mistake ? Submit your question here, an administrator will answer as soon as possible.'
             },
+            'schedule': {
+                'message': 'Confirm that you will attend the conference as a speaker',
+                'validate': 'Confirm',
+                'confirmed': 'You have confirmed your presence as a speaker.'
+            },
             'admin': {
                 'logout': 'Logout',
                 'allowSubmissions': 'Allow users to submit new talks ?',
@@ -641,7 +652,8 @@ angular.module('CallForPaper')
                 'newMessages': 'New messages',
                 nextToRate: 'Next talk to rate',
                 showAllSessions: 'All',
-                'ratesDone': 'You have rated all the talks.'
+                'ratesDone': 'You have rated all the talks.',
+                'schedule': 'Schedule'
             },
             'owner': {
                 'admins': 'Admins',
