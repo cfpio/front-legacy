@@ -95,6 +95,7 @@
                       <span ng-if="session.state == 'ACCEPTED'" class="flag btn-success status" ><i class="ion-checkmark-circled"></i> Accepted</span>
                       <span ng-if="session.state == 'REFUSED'" class="flag btn-danger" ><i class="ion-close-circled"></i> Rejected</span>
                       <span ng-if="session.state == 'BACKUP'" class="flag btn-warning status" ><i class="ion-checkmark-circled"></i> Backup</span>
+                      <span ng-if="session.state == 'PRESENT'" class="flag btn-info status" ><i class="ion-checkmark-circled"></i> Present</span>
                   </td>
                 </tr>
                 <tr ng-show="sessions.length === 0 && sessionsLoaded">
