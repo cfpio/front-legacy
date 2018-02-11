@@ -32,78 +32,73 @@ angular.module('CallForPaper')
         $scope.cospeakers = [];
 
 
+        getProposal($stateParams.id);
+
+        function getProposal(id) {
+            if (isCoSession) {
+                RestrictedCoSession.get({
+                    id: id
+                }).$promise.then(function (sessionTmp) {
+                    $scope.session = sessionTmp;
+
+                    // Add link to social
+                    $scope.session.socialLinks = [];
+                    if (sessionTmp.speaker.social !== null) {
+                        var links = sessionTmp.speaker.social.split(',').map(function (value) {
+                            return $filter('createLinks')(value);
+                        });
+                        $scope.session.socialLinks = links;
+                    }
+                    if (sessionTmp.speaker.twitter !== null) {
+                        $scope.session.speaker.twitter = $filter('createLinks')(sessionTmp.speaker.twitter);
+                    }
+                    if (sessionTmp.speaker.googleplus !== null) {
+                        $scope.session.speaker.googleplus = $filter('createLinks')(sessionTmp.speaker.googleplus);
+                    }
+                    if (sessionTmp.speaker.github !== null) {
+                        $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
+                    }
+                    $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
 
 
-        if(isCoSession)
-        {
-           RestrictedCoSession.get({
-                id: $stateParams.id
-            }).$promise.then(function(sessionTmp) {
-                $scope.session = sessionTmp;
+                    $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
 
-                // Add link to social
-                $scope.session.socialLinks = [];
-                if (sessionTmp.speaker.social !== null) {
-                    var links = sessionTmp.speaker.social.split(',').map(function(value) {
-                        return $filter('createLinks')(value);
+                    $scope.cospeakers = $scope.session.cospeakers.map(function (speaker) {
+                        return speaker.email;
                     });
-                    $scope.session.socialLinks = links;
-                }
-                if (sessionTmp.speaker.twitter !== null) {
-                    $scope.session.speaker.twitter = $filter('createLinks')(sessionTmp.speaker.twitter);
-                }
-                if (sessionTmp.speaker.googleplus !== null) {
-                    $scope.session.speaker.googleplus = $filter('createLinks')(sessionTmp.speaker.googleplus);
-                }
-                if (sessionTmp.speaker.github !== null) {
-                    $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
-                }
-                $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
-
-
-                $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
-
-                $scope.cospeakers = $scope.session.cospeakers.map(function(speaker) {
-                    return speaker.email;
                 });
-          });
+            } else {
+                Proposals.get(id).then(function (sessionTmp) {
+                    $scope.session = sessionTmp;
+
+                    // Add link to social
+                    $scope.session.socialLinks = [];
+                    if (sessionTmp.speaker.social !== null) {
+                        var links = sessionTmp.speaker.social.split(',').map(function (value) {
+                            return $filter('createLinks')(value);
+                        });
+                        $scope.session.socialLinks = links;
+                    }
+                    if (sessionTmp.speaker.twitter !== null) {
+                        $scope.session.speaker.twitter = $filter('createLinks')(sessionTmp.speaker.twitter);
+                    }
+                    if (sessionTmp.speaker.googleplus !== null) {
+                        $scope.session.speaker.googleplus = $filter('createLinks')(sessionTmp.speaker.googleplus);
+                    }
+                    if (sessionTmp.speaker.github !== null) {
+                        $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
+                    }
+                    $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
 
 
-        }
-        else {
-            Proposals.get($stateParams.id).then(function(sessionTmp) {
-                $scope.session = sessionTmp;
+                    $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
 
-                // Add link to social
-                $scope.session.socialLinks = [];
-                if (sessionTmp.speaker.social !== null) {
-                    var links = sessionTmp.speaker.social.split(',').map(function(value) {
-                        return $filter('createLinks')(value);
+                    $scope.cospeakers = $scope.session.cospeakers.map(function (speaker) {
+                        return speaker.email;
                     });
-                    $scope.session.socialLinks = links;
-                }
-                if (sessionTmp.speaker.twitter !== null) {
-                    $scope.session.speaker.twitter = $filter('createLinks')(sessionTmp.speaker.twitter);
-                }
-                if (sessionTmp.speaker.googleplus !== null) {
-                    $scope.session.speaker.googleplus = $filter('createLinks')(sessionTmp.speaker.googleplus);
-                }
-                if (sessionTmp.speaker.github !== null) {
-                    $scope.session.speaker.github = $filter('createLinks')(sessionTmp.speaker.github);
-                }
-                $scope.session.keyDifficulty = (['beginner', 'confirmed', 'expert'])[sessionTmp.difficulty - 1];
-
-
-                $scope.session.speaker.profilImageUrl = $scope.session.speaker.socialProfilImageUrl;
-
-                $scope.cospeakers = $scope.session.cospeakers.map(function(speaker) {
-                    return speaker.email;
                 });
-            });
-
-
+            }
         }
-
 
         /**
          * Comments
@@ -170,5 +165,24 @@ angular.module('CallForPaper')
                 // cancel
             });
         };
+
+        $scope.hasToConfirmPresence = function() {
+            return ($scope.session && $scope.session.state === 'ACCEPTED');
+        };
+
+        $scope.hasConfirmedPresence = function() {
+            return ($scope.session && $scope.session.state === 'PRESENT');
+        };
+
+        $scope.confirmPresence = function() {
+            Proposals.confirmPresence($stateParams.id).then(function () {
+              return getProposal($stateParams.id);
+            });
+        };
+
+        $scope.isAccepted = function() {
+            return ($scope.session && ($scope.session.state === 'ACCEPTED' || $scope.session.state === 'PRESENT'));
+        }
+
 
     });

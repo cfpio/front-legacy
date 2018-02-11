@@ -23,10 +23,11 @@
 		<div class="panel-body">
 			<h1>{{::session.name}}</h1>
 			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-				<ul id="tab" class="nav nav-tabs" role="tablist">
-					<li role="presentation" ><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab !== 'contact'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
+				<ul id="tab" class="nav nav-tabs" role="tablist" ng-init="tab = 'session'">
+					<li role="presentation" ng-class="{active : tab === 'speaker'}"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab === 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
 					<li role="presentation" ng-class="{active : tab === 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false">{{'admin.contact' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab === 'shedule'}" ng-show="isAccepted()"><button href="#schedule" role="tab" id="schedule-tab" data-toggle="tab" aria-controls="schedule" aria-expanded="false">{{'admin.schedule' | translate}}</button></li>
 				</ul>
 				<div id="tabContent" class="tab-content tile">
 					<br>
@@ -96,7 +97,7 @@
 							</div>
 						</div>
 					</div>
-					<div role="tabpanel" ng-class="{active : tab !== 'contact', in : tab !== 'contact'}" class="tab-pane fade" id="session" aria-labelledby="session-tab">
+					<div role="tabpanel" ng-class="{active : tab === 'session', in : tab === 'session'}" class="tab-pane fade" id="session" aria-labelledby="session-tab">
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">
@@ -197,6 +198,29 @@
 										</div>
 									</div>
 									<div class="col-xs-12"><hr></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                    <div role="tabpanel" ng-class="{active : tab === 'schedule', in : tab === 'schedule'}" ng-show="isAccepted()" class="tab-pane fade" id="schedule" aria-labelledby="schedule-tab">
+						<div class="row" ng-show="hasToConfirmPresence()">
+							<div class="col-md-8 col-md-offset-2 noPadding">
+								<div class="col-xs-12 noPadding">
+									<div class="col-md-3">
+										<strong>{{'schedule.message' | translate}}&nbsp;:</strong>
+									</div>
+									<div class="col-md-9" bs-has>
+                                        <button type="button" ng-click="confirmPresence()" class="btn btn-success pull-right">&nbsp;{{'schedule.validate' | translate}}&nbsp;</button>
+									</div>
+								</div>
+							</div>
+						</div>
+                        <div class="row" ng-show="hasConfirmedPresence()">
+							<div class="col-md-8 col-md-offset-2 noPadding">
+								<div class="col-xs-12 noPadding">
+									<div class="col-md-3">
+										<strong>{{'schedule.confirmed' | translate}}</strong>
+									</div>
 								</div>
 							</div>
 						</div>
