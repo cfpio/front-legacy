@@ -22,7 +22,11 @@
 
 angular.module('CallForPaper')
     .controller('RestrictedSessionCtrl', function($scope, $stateParams, $filter, Proposals, RestrictedCoSession, Comments, $modal, talkformats, isCoSession, tracks) {
-        $scope.tab = $stateParams.tab;
+        if ($stateParams.tab) {
+            $scope.tab = $stateParams.tab;
+        } else {
+            $scope.tab = 'session';
+        }
 
         $scope.session = null;
 
@@ -30,9 +34,6 @@ angular.module('CallForPaper')
         $scope.tracks = _.indexBy(tracks, 'id');
 
         $scope.cospeakers = [];
-
-
-
 
         function getProposal(id) {
             if (isCoSession) {

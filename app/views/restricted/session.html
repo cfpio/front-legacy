@@ -23,15 +23,15 @@
 		<div class="panel-body">
 			<h1>{{::session.name}}</h1>
 			<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-				<ul id="tab" class="nav nav-tabs" role="tablist" ng-init="tab = 'session'">
-					<li role="presentation" ng-class="{active : tab === 'speaker'}"><button href="#speaker" id="speaker-tab" role="tab" data-toggle="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab === 'session'}"><button href="#session" role="tab" id="session-tab" data-toggle="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab === 'contact'}"><button href="#contact" role="tab" id="contact-tab" data-toggle="tab" aria-controls="contact" aria-expanded="false">{{'admin.contact' | translate}}</button></li>
-					<li role="presentation" ng-class="{active : tab === 'shedule'}" ng-show="isAccepted()"><button href="#schedule" role="tab" id="schedule-tab" data-toggle="tab" aria-controls="schedule" aria-expanded="false">{{'admin.schedule' | translate}}</button></li>
+				<ul id="tab" class="nav nav-tabs" role="tablist">
+					<li role="presentation" ng-class="{active : tab === 'speaker'}"><button ui-sref="app.session({ id: session.id, tab: 'speaker' })" id="speaker-tab" role="tab" aria-controls="speaker" aria-expanded="true">{{'admin.speaker' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab === 'session'}"><button ui-sref="app.session({ id: session.id, tab: 'session' })" id="session-tab" role="tab" aria-controls="session" aria-expanded="false">{{'admin.session' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab === 'contact'}"><button ui-sref="app.session({ id: session.id, tab: 'contact' })" id="contact-tab" role="tab" aria-controls="contact" aria-expanded="false">{{'admin.contact' | translate}}</button></li>
+					<li role="presentation" ng-class="{active : tab === 'schedule'}" ng-show="isAccepted()"><button ui-sref="app.session({ tab: 'schedule' })" id="schedule-tab" role="tab" aria-controls="schedule" aria-expanded="false">{{'admin.schedule' | translate}}</button></li>
 				</ul>
 				<div id="tabContent" class="tab-content tile">
 					<br>
-					<div role="tabpanel" class="tab-pane fade" id="speaker" aria-labelledby="speaker-tab">
+					<div role="tabpanel" ng-class="{active : tab === 'speaker', in : tab === 'speaker'}" class="tab-pane fade" id="speaker" aria-labelledby="speaker-tab">
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group">

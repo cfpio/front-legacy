@@ -90,7 +90,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="session in sessions">
-                  <td ui-sref='app.session({id: session.id})' width="100%">
+                  <td ui-sref="app.session({id: session.id, tab: 'session'})" width="100%">
                     {{session.name}} {{'dashboard.postedAt' | translate}} {{session.added | date:"dd/MM/yyyy"}}
                       <span ng-if="session.state == 'ACCEPTED'" class="flag btn-success status" ><i class="ion-checkmark-circled"></i> Accepted</span>
                       <span ng-if="session.state == 'REFUSED'" class="flag btn-danger" ><i class="ion-close-circled"></i> Rejected</span>
