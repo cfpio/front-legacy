@@ -401,8 +401,8 @@ angular.module('CallForPaper')
                 'logout': 'Logout',
                 'dashboard': 'Dashboard',
                 'profil': 'Profil',
-                'openUntil': 'Open until the ',
-                'decision': 'Decision the ',
+                'openUntil': 'Open until ',
+                'decision': 'Decision on ',
                 'admin': 'Review'
             },
             'languageModal': {
@@ -420,9 +420,9 @@ angular.module('CallForPaper')
                 'editionCoTalks': 'Cospeaker Talks available for editing',
                 'noEditionTalks': 'You don\'t have any draft',
                 'sendedTalks': 'Submitted talks',
-                'draftModifiedAt': 'Draft modified the ',
-                'modifiedAt': 'modified the ',
-                'postedAt': 'submited the ',
+                'draftModifiedAt': 'Draft modified on ',
+                'modifiedAt': 'modified on ',
+                'postedAt': 'submitted on ',
                 'noSendedTalks': 'You don\'t have submitted any talk yet',
                 'verification': 'Verification',
                 'verificationNeeded': 'An email has been sent to your address, click the link in it to confirm your account.',
@@ -433,7 +433,7 @@ angular.module('CallForPaper')
                 'save': 'Save',
                 'success': 'Profil saved',
                 'error': 'Error saving the profil',
-                'avatar': 'Profil picture :',
+                'avatar': 'Profil picture:',
                 'hintAvatar': 'Select the URL of a picture for the website (at least 360x360 and 5MB max)',
                 'dropImage': 'Drop image here',
                 'selectImage': 'Browse'
@@ -472,7 +472,7 @@ angular.module('CallForPaper')
                 'notVerified': 'Errror during verification'
             },
             'talkInfo': {
-                'intro': 'Here some information on talk\'s format and talk\'s categories :',
+                'intro': 'Here are some details on the format and categories of the talks:',
                 'formats': 'Formats',
                 'categories': 'Categories'
             },
@@ -492,7 +492,7 @@ angular.module('CallForPaper')
                 }
             },
             'step1': {
-                'warning': 'Warning ! The informations given during this step will also be used for the talks already submitted.',
+                'warning': 'Warning! The informations given during this step will also be used for the talks already submitted.',
                 'email': 'Email *:',
                 'lastname': 'Name *:',
                 'firstname': 'Firstname *:',
@@ -500,12 +500,12 @@ angular.module('CallForPaper')
                 'errorPhone': 'Please enter a correct phone number',
                 'company': 'Company:',
                 'bio': 'Bio *:',
-                'hintBio': 'Describe yourself with a few words. This description will be use to fill the website.',
-                'social': 'Other URLs (Blog, Linkedin, ...) :',
-                'twitter': 'Twitter Profil :',
-                'googleplus': 'Google Plus Profil:',
-                'github': 'Github Profil :',
-                'hintSocial': 'Give us your other socials networks link, blog, etc',
+                'hintBio': 'Describe yourself in a few words. This description will be used to fill the website.',
+                'social': 'Other URLs (Blog, Linkedin, ...):',
+                'twitter': 'Twitter Profile:',
+                'googleplus': 'Google Plus Profile:',
+                'github': 'Github Profile:',
+                'hintSocial': 'Give us your other social networks link, blog, etc',
                 'gender': 'T-shirt gender',
                 'tshirtSize': 'T-shirt size'
             },
@@ -513,13 +513,13 @@ angular.module('CallForPaper')
                 'name': 'Session name *',
                 'description': 'Description *:',
                 'hintDescription': 'Give a description of your talk. This description will be used to fill the website.',
-                'references': 'References or complement informations :',
-                'hintReferences': 'Is there any conferences where you have already spoken ? If you could give a link to the presentation, it\'s better.',
+                'references': 'References or additional information:',
+                'hintReferences': 'Have you already spoken at other conferences? A link to the presentation might help us.',
                 'complement': 'Recommendation and additional information:',
                 'difficulty': 'Difficulty * (Beginner, Confirmed, Expert):',
                 'track': 'Track *:',
                 'cospeaker': 'Co-speaker:',
-                'hintCospeaker': 'If you are not alone on stage, give the co-speaker email. WARNING : cospeakers must have create an account with this email before.',
+                'hintCospeaker': 'If you are not alone on stage, give the co-speaker email. WARNING: cospeakers must have created an account with this email before.',
                 'cospeakerNotFound': 'The cospeaker with email {{value}} doesn\'t exist.',
                 'beginner': 'Beginner',
                 'confirmed': 'Confirmed',
@@ -539,22 +539,22 @@ angular.module('CallForPaper')
                 'hintTrack': 'Choose the track where you think your talk will be place.'
             },
             'step3': {
-                'header1': 'Here is all the informations relatives to your venue. The following informations will be carefuly study for our decision. So please select Yes, only if needed.',
-                'header2': 'Breakfast and lunch is offered the days of the event.',
-                'financial': 'Do you need financial help ? *:',
+                'header1': 'Here are all the information related to your venue. The following information will be carefully checked for our decision. So please select Yes, only if needed.',
+                'header2': 'Breakfast and lunch is offered on the days of the event.',
+                'financial': 'Do you need financial help? *:',
                 'labelTravel': 'Travel',
                 'travel': 'I need financial help for the trip.',
-                'date': 'For whitch date(s) ?:',
+                'date': 'For which date(s)?:',
                 'labelHotel': 'Housing',
                 'hotel': 'I need financial help for the hotel.',
-                'place': 'Where are you coming from ?:',
+                'place': 'Where are you coming from?:',
                 'sendError': 'An error occurred during the submission, please retry.',
-                'sryClosedSince': 'Sorry, submissions are closed since the '
+                'sryClosedSince': 'Sorry, submissions are closed since '
             },
             'confirmModal': {
                 'title': 'Confirmation',
-                'text': 'Do you really want to submit this talk ? Once sent you will not be able to edit it.',
-                'textDelete': 'Do you really want to delete this session ? Once done you will not be able to recover it.',
+                'text': 'Do you really want to submit this talk? Once submitted, you will not be able to edit it.',
+                'textDelete': 'Do you really want to delete this session? Once deleted, you will not be able to recover it.',
                 'confirm': 'OK',
                 'confirmDelete': 'Delete',
                 'cancel': 'Cancel',
@@ -575,7 +575,7 @@ angular.module('CallForPaper')
             },
             'deleteModal': {
                 'title': 'Confirmation',
-                'text': 'Do you really want to delete this comment ?',
+                'text': 'Do you really want to delete this comment?',
                 'confirm': 'Delete',
                 'cancel': 'Cancel'
             },
@@ -588,11 +588,11 @@ angular.module('CallForPaper')
                 'yes': 'Yes',
                 'no': 'No',
                 'step': 'Step',
-                'done': 'Done !',
+                'done': 'Done!',
                 'required': '* Required field.'
             },
             'result': {
-                'success': 'Well done !',
+                'success': 'Well done!',
                 'successMessage': 'Your talk has been send. You will soon receive a confirmation email. We will contact you as soon as we will make our decision.',
                 'goToHome': 'Back to main page'
             },
@@ -600,7 +600,7 @@ angular.module('CallForPaper')
                 'message': 'Message',
                 'validate': 'Submit',
                 'edit': 'Edit',
-                'hint': 'A question ? A mistake ? Submit your question here, an administrator will answer as soon as possible.'
+                'hint': 'A question? A mistake? Submit your question here, an administrator will respond as soon as possible.'
             },
             'schedule': {
                 'message': 'Confirm that you will attend the conference as a speaker',
@@ -609,7 +609,7 @@ angular.module('CallForPaper')
             },
             'admin': {
                 'logout': 'Logout',
-                'allowSubmissions': 'Allow users to submit new talks ?',
+                'allowSubmissions': 'Allow users to submit new talks?',
                 'session': 'Talk',
                 'sessions': 'Talks',
                 'administration': 'Administration',
@@ -680,8 +680,8 @@ angular.module('CallForPaper')
                 'configureLink': 'Configure the application'
             },
             'error': {
-                'backendcommunication': 'Sorry, a problem occure with the server',
-                'noInternet': 'Sorry, it seems that your are not connected to internet'
+                'backendcommunication': 'Sorry, a problem occurred on the server',
+                'noInternet': 'Sorry, it seems that your are not connected to the internet'
             },
             'just_now': 'just now',
             'seconds_ago': '{{time}} seconds ago',
