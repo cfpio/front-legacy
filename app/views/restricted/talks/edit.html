@@ -37,6 +37,7 @@
                             ng-options="format.id as (format.name +' ('+format.duration+' min)') for (formatId, format) in talkFormats">
                     </select>
                 </div>
+                <span><i class="fa fa-fw fa-warning"></i>{{'step2.hintType' | translate}}</span>
             </div>
             <div class="form-group"
                  ng-class="{'has-success': talkForm.nameInput.$valid && talkForm.nameInput.$dirty, 'has-error': talkForm.nameInput.$invalid && (talkForm.nameInput.$dirty || talkInvalid)}">

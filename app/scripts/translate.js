@@ -178,7 +178,7 @@ angular.module('CallForPaper')
                     'discovery': 'Découverte'
                 },
                 'type': 'Type * :',
-                'hintType': 'Une conférence doit durer environ 45 minutes et un codelab 2 heures.',
+                'hintType': 'Merci de ne pas soumettre plusieurs propositions pour un même talk en changeant uniquement le format. En plus de votre format préféré indiqué ci-dessus, saisissez simplement les formats alternatifs possibles dans les « remarques complémentaires », en bas de cet écran.',
                 'types': {
                     'conference': 'Conférence',
                     'codelab': 'Codelab'
