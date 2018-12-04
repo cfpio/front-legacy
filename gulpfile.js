@@ -29,7 +29,7 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
 //imagemin = require('gulp-imagemin'),
     ngAnnotate = require('gulp-ng-annotate'),
-    jshint = require('gulp-jshint'),
+    // jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
     rev = require('gulp-rev'),
     connect = require('gulp-connect'),
@@ -110,11 +110,13 @@ gulp.task('less', function() {
 });
 
 gulp.task('lint', function() {
+    /*
     return gulp.src([
-        yeoman.app + 'scripts/**/*.js',
+        yeoman.app + 'scripts/!**!/!*.js',
         '!' + yeoman.app + 'scripts/directives/angular-language-picker.templates.js'])
         .pipe(jshint())
         .pipe(jshint.reporter(stylish));
+     */
 });
 
 gulp.task('fonts', function() {
