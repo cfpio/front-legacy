@@ -130,6 +130,14 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                     return $q.reject(response);
                 });
         },
+        backToEdit: function(id) {
+            return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/back-to-edit')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
+        },
         confirmPresence: function(id) {
             return $http.put(AppConfig.apiBaseUrl + '/proposals/' + id + '/confirmPresence')
                 .then(function(response) {

@@ -333,6 +333,25 @@ angular.module('CallForPaper').controller('AdminSessionCtrl', function(tracks, t
     };
 
     /**
+     * Set current session back to draft mode
+     * @return {void}
+     */
+    $scope.backToEdit = function() {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'views/admin/confirmBackToEdit.html',
+            controller: 'ModalInstanceCtrl'
+        });
+        modalInstance.result.then(function() {
+            Proposals.backToEdit($stateParams.id).then(function() {
+                $state.go('admin.sessions');
+            });
+        }, function() {
+            // cancel
+        });
+    };
+
+    /**
      * Handle checkbox/rating states
      */
     const NO_VOTE = 1;
