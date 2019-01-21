@@ -63,7 +63,7 @@ var middlewareDef = function() {
     }
 
     return [
-        configureProxy('/v0'),
+        configureProxy('/api'),
         configureProxy('/auth'),
         configureProxy('/_ah')
     ];
