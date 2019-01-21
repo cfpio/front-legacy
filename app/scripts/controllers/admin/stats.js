@@ -29,7 +29,11 @@ angular.module('CallForPaper').controller('AdminStatsCtrl', function($scope, $ht
 
         var users = [];
         var rated = [];
-        Object.keys(stats).forEach(function(key) {
+        Object.keys(stats)
+        .sort(function(a, b) {
+            return stats[b] - stats[a];
+        })
+        .forEach(function(key) {
             users.push(key);
             rated.push(stats[key]);
         });
