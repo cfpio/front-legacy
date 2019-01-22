@@ -225,9 +225,9 @@ angular.module('CallForPaper', [
                 templateUrl: 'views/admin/session.html',
                 controller: 'AdminSessionCtrl',
                 resolve: {
-                    sessionsAll: function(Proposals) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
-                        return Proposals.getAll();
-                    },
+                    // sessionsAll: function(Proposals) { // TODO Dirty but hard to factorize in a parent state because of the difficulty to keep it up to date
+                    //     return Proposals.getAll();
+                    // },
                     talkformats: function(Formats) {
                         return Formats.getAll();
                     },
@@ -247,18 +247,24 @@ angular.module('CallForPaper', [
                             return null;
                         }
                     },
-                    nextToRate: function(sessionsAll, currentUser, talkId) {
-
-                        function isUnratedByConnectedUser(session) {
-                            return !_.contains(session.voteUsersEmail, currentUser.email);
-                        }
-
-                        return _.find(sessionsAll, function(session) { // first look for the next not rated
-                                return session.id > talkId && isUnratedByConnectedUser(session);
-                            }) || _.find(sessionsAll, function(session) { // then start again from the beginning
-                                return session.id !== talkId && isUnratedByConnectedUser(session);
-                            });
+                    nextToRate: function(Proposals) {
+                        return Proposals.getNextToRate().catch(function() {
+                            $state.go('admin.sessions');
+                        });
                     }
+                    // ,
+                    // nextToRate: function(sessionsAll, currentUser, talkId) {
+                    //
+                    //     function isUnratedByConnectedUser(session) {
+                    //         return !_.contains(session.voteUsersEmail, currentUser.email);
+                    //     }
+                    //
+                    //     return _.find(sessionsAll, function(session) { // first look for the next not rated
+                    //             return session.id > talkId && isUnratedByConnectedUser(session);
+                    //         }) || _.find(sessionsAll, function(session) { // then start again from the beginning
+                    //             return session.id !== talkId && isUnratedByConnectedUser(session);
+                    //         });
+                    // }
                 },
                 onEnter: function($state, talkId) {
                     if (!talkId) {

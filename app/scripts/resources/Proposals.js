@@ -185,6 +185,14 @@ angular.module('CallForPaper').factory('Proposals', function($q, $http, AppConfi
                 }).catch(function(response) {
                     return $q.reject(response);
                 });
+        },
+        getNextToRate: function() {
+            return $http.get(AppConfig.apiBaseUrl + '/proposals/nextToRate')
+                .then(function(response) {
+                    return response.data;
+                }).catch(function(response) {
+                    return $q.reject(response);
+                });
         }
 
     };
