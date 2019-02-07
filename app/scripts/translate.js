@@ -252,7 +252,7 @@ angular.module('CallForPaper')
                 'message': 'Confirmer votre présence en tant que Speaker',
                 'validate': 'Confirmer',
                 'confirmed': 'Vous avez confirmé votre présence.',
-                'description': 'En confirmant, je valide que j\'ai lu et que j\'accepte le',
+                'description': 'En confirmant, je valide que j\'ai lu et que j\'accepte la',
                 'codeOfConduct': 'Convention orateur/oratrice du Breizhcamp'
             },
             'admin': {
