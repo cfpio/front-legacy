@@ -253,7 +253,7 @@ angular.module('CallForPaper')
                 'validate': 'Confirmer',
                 'confirmed': 'Vous avez confirmé votre présence.',
                 'description': 'En confirmant, je valide que j\'ai lu et que j\'accepte le',
-                'codeOfConduct': 'Code Of Conduct du Breizhcamp'
+                'codeOfConduct': 'Convention orateur/oratrice du Breizhcamp'
             },
             'admin': {
                 'logout': 'Se déconnecter',
@@ -609,7 +609,7 @@ angular.module('CallForPaper')
                 'validate': 'Confirm',
                 'confirmed': 'You have confirmed your presence as a speaker.',
                 'description': 'I confirm that I have read and that I accept the',
-                'codeOfConduct': 'Breizhcamp\'s Code Of Conduct'
+                'codeOfConduct': 'Breizhcamp\'s speaker convention'
             },
             'admin': {
                 'logout': 'Logout',
