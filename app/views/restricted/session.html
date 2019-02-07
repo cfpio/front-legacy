@@ -205,11 +205,14 @@
                     <div role="tabpanel" ng-class="{active : tab === 'schedule', in : tab === 'schedule'}" ng-show="isAccepted()" class="tab-pane fade" id="schedule" aria-labelledby="schedule-tab">
 						<div class="row" ng-show="hasToConfirmPresence()">
 							<div class="col-md-8 col-md-offset-2 noPadding">
-								<div class="col-xs-12 noPadding">
-									<div class="col-md-3">
-										<strong>{{'schedule.message' | translate}}&nbsp;:</strong>
-									</div>
-									<div class="col-md-9" bs-has>
+                                <div class="col-xs-12 noPadding">
+                                    <h3>{{'schedule.message' | translate}}&nbsp;:</h3>
+                                </div>
+                                <div class="col-xs-12 noPadding">
+                                    <div class="col-md-10" bs-has>
+                                        <span>{{'schedule.description' | translate}} <a href="https://docs.google.com/document/d/1apw2GOsk3Tq3p_MVMNxu7ryg48f44UBq2jXOYkl9sOQ/edit?usp=sharing" target="_blank">{{'schedule.codeOfConduct' | translate}}</a>&nbsp;:</span>
+                                    </div>
+                                    <div class="col-md-2" bs-has>
                                         <button type="button" ng-click="confirmPresence()" class="btn btn-success pull-right">&nbsp;{{'schedule.validate' | translate}}&nbsp;</button>
 									</div>
 								</div>

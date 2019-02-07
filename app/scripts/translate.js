@@ -251,7 +251,9 @@ angular.module('CallForPaper')
             'schedule': {
                 'message': 'Confirmer votre présence en tant que Speaker',
                 'validate': 'Confirmer',
-                'confirmed': 'Vous avez confirmé votre présence.'
+                'confirmed': 'Vous avez confirmé votre présence.',
+                'description': 'En confirmant, je valide que j\'ai lu et que j\'accepte le',
+                'codeOfConduct': 'Code Of Conduct du Breizhcamp'
             },
             'admin': {
                 'logout': 'Se déconnecter',
@@ -605,7 +607,9 @@ angular.module('CallForPaper')
             'schedule': {
                 'message': 'Confirm that you will attend the conference as a speaker',
                 'validate': 'Confirm',
-                'confirmed': 'You have confirmed your presence as a speaker.'
+                'confirmed': 'You have confirmed your presence as a speaker.',
+                'description': 'I confirm that I have read and that I accept the',
+                'codeOfConduct': 'Breizhcamp\'s Code Of Conduct'
             },
             'admin': {
                 'logout': 'Logout',
