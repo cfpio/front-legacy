@@ -24,8 +24,8 @@ COPY nginx.conf /etc/nginx/conf.d/cfpio.conf
 COPY --from=build /work/dist /www
 
 
-ARG GIT_COMMIT
-RUN echo $GIT_COMMIT > /www/sha1
+ARG COMMIT_ID
+RUN echo "$COMMIT_ID" > /www/sha1
 
 # Clever cloud require the container to listen on port 8080
 ENV NGINX_PORT=8080
