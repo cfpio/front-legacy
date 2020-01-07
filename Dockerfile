@@ -22,3 +22,5 @@ ENV NGINX_PORT=8080
 EXPOSE 8080
 
 RUN ln -s  /www /www/front-legacy
+
+CMD ["nginx", "-g", "daemon off;"]
