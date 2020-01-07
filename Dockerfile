@@ -1,19 +1,13 @@
 FROM node:10  as build
+ARG COMMIT_ID
 
 WORKDIR /work
-
-ADD package.json /work/
-RUN npm install
-
-ADD .bowerrc /work/
-ADD bower.json /work/
-RUN /work/node_modules/.bin/bower --allow-root install
-
 ADD / /work
 
-RUN ls -al node_modules
-RUN ls -al app/bower_components
-RUN /work/node_modules/.bin/gulp build
+RUN npm install && \
+    /work/node_modules/.bin/bower --allow-root install && \
+    /work/node_modules/.bin/gulp build && \
+    echo "${COMMIT_ID}" > /work/dist/sha1
 
 ### ---
 
@@ -22,10 +16,6 @@ LABEL maintainer "team@breizhcamp.org"
 
 COPY nginx.conf /etc/nginx/conf.d/cfpio.conf
 COPY --from=build /work/dist /www
-
-
-ARG COMMIT_ID
-RUN echo "$COMMIT_ID" > /www/sha1
 
 # Clever cloud require the container to listen on port 8080
 ENV NGINX_PORT=8080
